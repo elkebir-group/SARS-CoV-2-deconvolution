@@ -25,7 +25,7 @@ int main(int argc, char** argv)
     ("strains,k", po::value<int>(), "number of strains")
     ("restarts,N", po::value<int>()->default_value(50), "number of restarts")
     ("threads,T", po::value<int>()->default_value(1), "number of threads")
-    ("time-limit,tl", po::value<int>()->default_value(-1), "time limit in seconds (-1 is unlimited)")
+    ("time-limit,l", po::value<int>()->default_value(-1), "time limit in seconds (-1 is unlimited)")
     ("breakpoints,B", po::value<int>()->default_value(50), "number of breakpoints")
     ("seed,s", po::value<int>()->default_value(0), "random number generator seed")
     ("input", po::value<StringVector>(), "input files (ref and alt read counts)")
@@ -99,37 +99,55 @@ int main(int argc, char** argv)
       int deltaSamples = newToOldSamples.size() - oldToNewSamples.size();
       if (deltaMuts == 0 && deltaSamples == 0) break;
     }
-
-    std::ofstream outTmp("filtered.tsv");
-    outTmp << filteredInput;
-    outTmp.close();
-
+    
     int seed = vm["seed"].as<int>();
     g_rng = std::mt19937(seed);
 
-    Solver* pSolve = nullptr;
-    if (vm.count("ca"))
-    {
-      pSolve = new SolverCa(filteredInput, nrStrains, nrRestarts, nrThreads, true, true);
-    }
-    else
-    {
-      pSolve = new SolverMilpL1(filteredInput, nrStrains, nrThreads, timeLimit);
-//      pSolve = new SolverMilpBinom(filteredInput, nrStrains, nrThreads, timeLimit, nrBreakpoints);
-    }
-    pSolve->solve();
 
-    std::ofstream outF(outputPrefix + "_F.tsv");
-    pSolve->writeSolF(outF);
-    outF.close();
+    std::ofstream outFilteredInput(outputPrefix + "_filtered.tsv");
+    outFilteredInput << filteredInput;
+    outFilteredInput.close();
     
-    std::ofstream outU(outputPrefix + "_U.tsv");
-    pSolve->writeSolU(outU);
-    outU.close();
+    std::ofstream outLog(outputPrefix + "_log.tsv");
+    outLog << "k\tLB\tUB" << std::endl;
     
-    std::ofstream outB(outputPrefix + "_B.tsv");
-    pSolve->writeSolB(outB);
-    outB.close();
+    for (int k = 1; k <= nrStrains; ++k)
+    {
+      Solver* pSolve = nullptr;
+      if (vm.count("ca"))
+      {
+        pSolve = new SolverCa(filteredInput, nrStrains, nrRestarts, nrThreads, true, true);
+      }
+      else
+      {
+        pSolve = new SolverMilpL1(filteredInput, k, nrThreads, timeLimit);
+  //      pSolve = new SolverMilpBinom(filteredInput, nrStrains, nrThreads, timeLimit, nrBreakpoints);
+      }
+      if (pSolve->solve())
+      {
+        outLog << k << "\t" << pSolve->getObjectiveValueLB() << "\t" << pSolve->getObjectiveValue() << std::endl;
+        
+        std::ofstream outF(outputPrefix + "_k" + std::to_string(k) + "_F.tsv");
+        pSolve->writeSolF(outF);
+        outF.close();
+        
+        std::ofstream outU(outputPrefix + "_k" + std::to_string(k) + "_U.tsv");
+        pSolve->writeSolU(outU);
+        outU.close();
+        
+        std::ofstream outB(outputPrefix + "_k" + std::to_string(k) + "_B.tsv");
+        pSolve->writeSolB(outB);
+        outB.close();
+      }
+      else
+      {
+        outLog << k << "\t" << "-" << "\t" << "-" << std::endl;
+      }
+      outLog.flush();
+      delete pSolve;
+    }
+    
+    outLog.close();
   }
   catch (const boost::program_options::error& error)
   {

@@ -16,6 +16,7 @@ Solver::Solver(const InputInstance& input,
   , _nrStrains(nrStrains)
   , _nrThreads(nrThreads)
   , _objectiveValue(-std::numeric_limits<double>::max())
+  , _objectiveValueLB(-std::numeric_limits<double>::max())
   , _B(input.getNrMutations(), BoolVector(_nrStrains, false))
   , _U(_nrStrains, DoubleVector(input.getNrSamples(), 0.))
   , _F(input.getNrMutations(), DoubleVector(input.getNrSamples(), 0.))

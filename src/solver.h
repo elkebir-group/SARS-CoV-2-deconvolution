@@ -36,6 +36,12 @@ public:
     return _objectiveValue;
   }
   
+  /// Return objective value lower bound
+  double getObjectiveValueLB() const
+  {
+    return _objectiveValueLB;
+  }
+  
   /// Return genotype matrix B
   const BoolMatrix& getB() const
   {
@@ -67,8 +73,10 @@ protected:
   const int _nrStrains;
   /// Number of threads
   const int _nrThreads;
-  /// Objective Value
+  /// Objective balue
   double _objectiveValue;
+  /// Objective value lower bound
+  double _objectiveValueLB;
   /// Genotype matrix (mutations by strains)
   BoolMatrix _B;
   /// Mixture matrix (strains by samples)

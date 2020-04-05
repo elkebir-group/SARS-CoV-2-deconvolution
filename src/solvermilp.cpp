@@ -69,6 +69,7 @@ bool SolverMilp::solve()
   }
   
   _objectiveValue = _model.getObjective().getValue();
+  _objectiveValueLB = _model.get(GRB_DoubleAttr_ObjBound);
   
   return true;
 }
@@ -164,6 +165,8 @@ void SolverMilp::initConstraints()
       sum.clear();
     }
   }
+  
+  _model.update();
 
 //  GRBLinExpr sum2;
 //  GRBLinExpr newSum;
