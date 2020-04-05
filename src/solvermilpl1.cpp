@@ -24,16 +24,16 @@ void SolverMilpL1::initVariables()
   
   char buf[1024];
   
-  _varG = VarMatrix(nrMutations);
-  for (int i = 0; i < nrMutations; ++i)
-  {
-    _varG[i] = VarArray(nrSamples);
-    for (int p = 0; p < nrSamples; ++p)
-    {
-      snprintf(buf, 1024, "g:%d:%d", i, p);
-      _varG[i][p] = _model.addVar(0, 1, 0, GRB_CONTINUOUS, buf);
-    }
-  }
+//  _varG = VarMatrix(nrMutations);
+//  for (int i = 0; i < nrMutations; ++i)
+//  {
+//    _varG[i] = VarArray(nrSamples);
+//    for (int p = 0; p < nrSamples; ++p)
+//    {
+//      snprintf(buf, 1024, "g:%d:%d", i, p);
+//      _varG[i][p] = _model.addVar(0, 1, 0, GRB_CONTINUOUS, buf);
+//    }
+//  }
   
   _model.update();
 }
