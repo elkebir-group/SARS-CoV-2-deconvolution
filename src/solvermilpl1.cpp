@@ -53,6 +53,15 @@ void SolverMilpL1::initConstraints()
       {
         _model.addConstr(_varG[i][p] >= obs_f_ip - _varF[i][p]);
         _model.addConstr(_varG[i][p] >= _varF[i][p] -  obs_f_ip);
+        
+        if (_input.getMutationStatus(i, p) == InputInstance::MutAbsent)
+        {
+          _model.addConstr(_varF[i][p] == 0);
+        }
+        else if (_input.getMutationStatus(i, p) == InputInstance::MutClonal)
+        {
+          _model.addConstr(_varF[i][p] == 1);
+        }
       }
     }
   }
