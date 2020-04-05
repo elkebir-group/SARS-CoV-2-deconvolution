@@ -18,6 +18,7 @@ set( deconvolve_src
   src/solvercau.cpp
   src/solvermilp.cpp
   src/solvermilpl1.cpp
+  src/solvermilpbinom.cpp
 )
 
 set( deconvolve_hdr
@@ -31,6 +32,7 @@ set( deconvolve_hdr
   src/solvercau.h
   src/solvermilp.h
   src/solvermilpl1.h
+  src/solvermilpbinom.h
 )
 
 # first we can indicate the documentation build as an option and set it to OFF by default

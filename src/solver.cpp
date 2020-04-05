@@ -114,7 +114,7 @@ void Solver::writeSolB(std::ostream& out) const
   
   for (int j = 0; j < _nrStrains; ++j)
   {
-    out << ",strain" << j;
+    out << "\tstrain" << j;
   }
   out << std::endl;
   

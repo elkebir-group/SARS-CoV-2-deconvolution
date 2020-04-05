@@ -9,8 +9,9 @@
 
 SolverMilpL1::SolverMilpL1(const InputInstance& input,
                            int nrStrains,
-                           int nrThreads)
-  : SolverMilp(input, nrStrains, nrThreads)
+                           int nrThreads,
+                           int timeLimit)
+  : SolverMilp(input, nrStrains, nrThreads, timeLimit)
 {
 }
 
@@ -51,16 +52,18 @@ void SolverMilpL1::initConstraints()
       double obs_f_ip = _input.getVaf(i, p);
       if (!std::isnan(obs_f_ip))
       {
-        _model.addConstr(_varG[i][p] >= obs_f_ip - _varF[i][p]);
-        _model.addConstr(_varG[i][p] >= _varF[i][p] -  obs_f_ip);
+//        _model.addConstr(_varG[i][p] >= obs_f_ip - _varF[i][p]);
+//        _model.addConstr(_varG[i][p] >= _varF[i][p] -  obs_f_ip);
         
         if (_input.getMutationStatus(i, p) == InputInstance::MutAbsent)
         {
           _model.addConstr(_varF[i][p] == 0);
+//          _model.addConstr(_varG[i][p] == obs_f_ip);
         }
         else if (_input.getMutationStatus(i, p) == InputInstance::MutClonal)
         {
           _model.addConstr(_varF[i][p] == 1);
+//          _model.addConstr(_varG[i][p] == 1 - obs_f_ip);
         }
       }
     }
@@ -75,12 +78,16 @@ void SolverMilpL1::initObjective()
   const int nrMutations = _input.getNrMutations();
   const int nrSamples = _input.getNrSamples();
   
-  GRBLinExpr obj;
+  GRBQuadExpr obj;
   for (int i = 0; i < nrMutations; ++i)
   {
     for (int p = 0; p < nrSamples; ++p)
     {
-      obj += _varG[i][p];
+      double obs_f_ip = _input.getVaf(i, p);
+      if (!std::isnan(obs_f_ip))
+      {
+        obj += (obs_f_ip - _varF[i][p]) * (obs_f_ip - _varF[i][p]);
+      }
     }
   }
   

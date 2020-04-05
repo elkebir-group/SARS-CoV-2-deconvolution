@@ -17,9 +17,11 @@ public:
   /// @param input Input instance
   /// @param nrStrains Number of strains
   /// @param nrThreads Number of threads
+  /// @param timeLimit Time limit in seconds
   SolverMilpL1(const InputInstance& input,
                int nrStrains,
-               int nrThreads);
+               int nrThreads,
+               int timeLimit);
   
 protected:
   /// Initialize variables

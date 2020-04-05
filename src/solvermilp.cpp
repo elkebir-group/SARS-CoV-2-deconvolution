@@ -9,8 +9,10 @@
 
 SolverMilp::SolverMilp(const InputInstance& input,
                        int nrStrains,
-                       int nrThreads)
+                       int nrThreads,
+                       int timeLimit)
   : Solver(input, nrStrains, nrThreads)
+  , _timeLimit(timeLimit)
   , _model(_env)
   , _varF()
   , _varB()
@@ -29,6 +31,10 @@ bool SolverMilp::solve()
   if (_nrThreads != -1)
   {
     _model.getEnv().set(GRB_IntParam_Threads, _nrThreads);
+  }
+  if (_timeLimit > 0)
+  {
+    _model.getEnv().set(GRB_DoubleParam_TimeLimit, _timeLimit);
   }
   _model.optimize();
 
@@ -138,35 +144,40 @@ void SolverMilp::initConstraints()
   const int nrSamples = _input.getNrSamples();
   
   GRBLinExpr sum;
-  
+//  GRBQuadExpr sum;
   for (int i = 0; i < nrMutations; ++i)
   {
     for (int p = 0; p < nrSamples; ++p)
     {
       for (int j = 0; j < _nrStrains; ++j)
       {
-        _model.addConstr(_varBU[i][p][j] <= _varB[i][j]);
-        _model.addConstr(_varBU[i][p][j] <= _varU[j][p]);
-        _model.addConstr(_varBU[i][p][j] >= _varB[i][j] + _varU[j][p] - 1);
+        _model.addQConstr(_varBU[i][p][j] == _varB[i][j] * _varU[j][p]);
+//        sum += _varB[i][j] * _varU[j][p];
+//        _model.addConstr(_varBU[i][p][j] <= _varB[i][j]);
+//        _model.addConstr(_varBU[i][p][j] <= _varU[j][p]);
+//        _model.addConstr(_varBU[i][p][j] >= _varB[i][j] + _varU[j][p] - 1);
         sum += _varBU[i][p][j];
+        
       }
+//      _model.addQConstr(_varF[i][p] == sum);
       _model.addConstr(_varF[i][p] == sum);
       sum.clear();
     }
   }
 
+//  GRBLinExpr sum2;
 //  GRBLinExpr newSum;
 //  for (int j = 0; j < _nrStrains; ++j)
 //  {
-//    sum.clear();
+//    sum2.clear();
 //    for (int i = 0; i < nrMutations; ++i)
 //    {
-//      sum += _varB[i][j];
+//      sum2 += _varB[i][j];
 //    }
 //    if (j > 0)
 //    {
-//      _model.addConstr(newSum >= sum);
+//      _model.addConstr(newSum >= sum2);
 //    }
-//    newSum = sum;
+//    newSum = sum2;
 //  }
 }

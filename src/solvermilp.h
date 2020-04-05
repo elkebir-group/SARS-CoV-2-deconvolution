@@ -17,9 +17,11 @@ public:
   /// @param input Input instance
   /// @param nrStrains Number of strains
   /// @param nrThreads Number of threads
+  /// @param timeLimit Time limit in seconds
   SolverMilp(const InputInstance& input,
              int nrStrains,
-             int nrThreads);
+             int nrThreads,
+             int timeLimit);
   
   /// Solve
   virtual bool solve();
@@ -45,6 +47,8 @@ protected:
   virtual void initObjective() = 0;
   
 protected:
+  /// Time limit (seconds)
+  const int _timeLimit;
   /// Gurobi model
   GRBModel _model;
   /// _varF[i][p] is the inferred frequency of mutation i in sample p

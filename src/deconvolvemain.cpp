@@ -9,6 +9,7 @@
 #include "inputinstance.h"
 #include "solverca.h"
 #include "solvermilpl1.h"
+#include "solvermilpbinom.h"
 #include <fstream>
 #include <boost/program_options.hpp>
 
@@ -24,6 +25,8 @@ int main(int argc, char** argv)
     ("strains,k", po::value<int>(), "number of strains")
     ("restarts,N", po::value<int>()->default_value(50), "number of restarts")
     ("threads,T", po::value<int>()->default_value(1), "number of threads")
+    ("time-limit,tl", po::value<int>()->default_value(-1), "time limit in seconds (-1 is unlimited)")
+    ("breakpoints,B", po::value<int>()->default_value(50), "number of breakpoints")
     ("seed,s", po::value<int>()->default_value(0), "random number generator seed")
     ("input", po::value<StringVector>(), "input files (ref and alt read counts)")
     ("output,o", po::value<std::string>()->default_value("out"), "output prefix");
@@ -46,6 +49,8 @@ int main(int argc, char** argv)
     int nrStrains = vm["strains"].as<int>();
     int nrRestarts = vm["restarts"].as<int>();
     int nrThreads = vm["threads"].as<int>();
+    int timeLimit = vm["time-limit"].as<int>();
+    int nrBreakpoints = vm["breakpoints"].as<int>();
     std::string inputFilenameRef = vm["input"].as<StringVector>()[0];
     std::string inputFilenameAlt = vm["input"].as<StringVector>()[1];
     std::string outputPrefix = vm["output"].as<std::string>();
@@ -109,19 +114,20 @@ int main(int argc, char** argv)
     }
     else
     {
-      pSolve = new SolverMilpL1(filteredInput, nrStrains, nrThreads);
+      pSolve = new SolverMilpL1(filteredInput, nrStrains, nrThreads, timeLimit);
+//      pSolve = new SolverMilpBinom(filteredInput, nrStrains, nrThreads, timeLimit, nrBreakpoints);
     }
     pSolve->solve();
     
-    std::ofstream outF(outputPrefix + "_F.csv");
+    std::ofstream outF(outputPrefix + "_F.tsv");
     pSolve->writeSolF(outF);
     outF.close();
     
-    std::ofstream outU(outputPrefix + "_U.csv");
+    std::ofstream outU(outputPrefix + "_U.tsv");
     pSolve->writeSolU(outU);
     outU.close();
     
-    std::ofstream outB(outputPrefix + "_B.csv");
+    std::ofstream outB(outputPrefix + "_B.tsv");
     pSolve->writeSolB(outB);
     outB.close();
   }
