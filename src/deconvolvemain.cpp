@@ -25,10 +25,11 @@ int main(int argc, char** argv)
     ("strains,k", po::value<int>(), "number of strains")
     ("restarts,N", po::value<int>()->default_value(50), "number of restarts")
     ("threads,T", po::value<int>()->default_value(1), "number of threads")
-    ("time-limit,l", po::value<int>()->default_value(-1), "time limit in seconds (-1 is unlimited)")
+    ("time-limit", po::value<int>()->default_value(-1), "time limit in seconds (-1 is unlimited)")
     ("breakpoints,B", po::value<int>()->default_value(50), "number of breakpoints")
     ("seed,s", po::value<int>()->default_value(0), "random number generator seed")
     ("input", po::value<StringVector>(), "input files (ref and alt read counts)")
+    ("sweep,S", "perform sweep")
     ("output,o", po::value<std::string>()->default_value("out"), "output prefix");
 
   po::positional_options_description p;
@@ -111,7 +112,12 @@ int main(int argc, char** argv)
     std::ofstream outLog(outputPrefix + "_log.tsv");
     outLog << "k\tLB\tUB" << std::endl;
     
-    for (int k = 1; k <= nrStrains; ++k)
+    int k = nrStrains;
+    if (vm.count("sweep"))
+    {
+      k = 1;
+    }
+    for (; k <= nrStrains; ++k)
     {
       Solver* pSolve = nullptr;
       if (vm.count("ca"))
@@ -120,8 +126,8 @@ int main(int argc, char** argv)
       }
       else
       {
-        pSolve = new SolverMilpL1(filteredInput, k, nrThreads, timeLimit);
-  //      pSolve = new SolverMilpBinom(filteredInput, nrStrains, nrThreads, timeLimit, nrBreakpoints);
+//        pSolve = new SolverMilpL1(filteredInput, k, nrThreads, timeLimit);
+        pSolve = new SolverMilpBinom(filteredInput, k, nrThreads, timeLimit, nrBreakpoints);
       }
       if (pSolve->solve())
       {
