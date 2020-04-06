@@ -41,6 +41,8 @@ bool SolverMilp::solve()
   int status = _model.get(GRB_IntAttr_Status);
   if (status == GRB_INFEASIBLE)
   {
+//    _model.computeIIS();
+//    _model.write("IIS.ilp");
     return false;
   }
   

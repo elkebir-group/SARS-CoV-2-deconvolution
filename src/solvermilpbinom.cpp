@@ -76,16 +76,17 @@ void SolverMilpBinom::initConstraints()
       if (_input.getMutationStatus(i, p) == InputInstance::MutAbsent)
       {
 //        _model.addConstr(_varF[i][p] == _eps);
-//        _model.addConstr(_varLambda[i][p][0] == 1);
+        _model.addConstr(_varLambda[i][p][0] == 1);
       }
       else if (_input.getMutationStatus(i, p) == InputInstance::MutClonal)
       {
 //        _model.addConstr(_varF[i][p] == 1 - _eps);
-//        _model.addConstr(_varLambda[i][p][_nrBreakpoints - 1] == 1);
+        _model.addConstr(_varLambda[i][p][_nrBreakpoints - 1] == 1);
       }
       _model.addConstr(sum == 1);
       _model.addConstr(sum2 == _varF[i][p]);
       sum.clear();
+      sum2.clear();
     }
   }
   
@@ -114,6 +115,6 @@ void SolverMilpBinom::initObjective()
     }
   }
   
-  _model.setObjective(obj, GRB_MINIMIZE);
+  _model.setObjective(obj, GRB_MAXIMIZE);
   _model.update();
 }
