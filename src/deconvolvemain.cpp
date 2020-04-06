@@ -22,6 +22,7 @@ int main(int argc, char** argv)
   desc.add_options()
     ("help,h", "produce help message")
     ("ca,C", "coordinate ascent")
+    ("binom", "use binomial likelihood")
     ("strains,k", po::value<int>(), "number of strains")
     ("restarts,N", po::value<int>()->default_value(50), "number of restarts")
     ("threads,T", po::value<int>()->default_value(1), "number of threads")
@@ -124,10 +125,13 @@ int main(int argc, char** argv)
       {
         pSolve = new SolverCa(filteredInput, nrStrains, nrRestarts, nrThreads, true, true);
       }
+      else if (vm.count("binom"))
+      {
+        pSolve = new SolverMilpBinom(filteredInput, k, nrThreads, timeLimit, nrBreakpoints);
+      }
       else
       {
-//        pSolve = new SolverMilpL1(filteredInput, k, nrThreads, timeLimit);
-        pSolve = new SolverMilpBinom(filteredInput, k, nrThreads, timeLimit, nrBreakpoints);
+        pSolve = new SolverMilpL1(filteredInput, k, nrThreads, timeLimit);
       }
       if (pSolve->solve())
       {
