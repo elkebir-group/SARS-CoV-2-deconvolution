@@ -65,6 +65,11 @@ void SolverMilpL1::initConstraints()
           _model.addConstr(_varF[i][p] == 1);
 //          _model.addConstr(_varG[i][p] == 1 - obs_f_ip);
         }
+				else if (_input.getMutationStatus(i, p) == InputInstance::MutSubclonal)
+				{
+					_model.addConstr(_varF[i][p] >= 0.05);
+					_model.addConstr(_varF[i][p] <= 0.95);
+				}
       }
     }
   }
