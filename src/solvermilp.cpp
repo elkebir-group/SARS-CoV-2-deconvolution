@@ -177,7 +177,18 @@ void SolverMilp::initConstraints()
     _model.addConstr(sum == 1);
     sum.clear();
   }
-  
+	
+	// each mutation exists in at least one strain
+	for (int i = 0; i < nrMutations; ++i)
+  {
+		for (int j = 0; j < _nrStrains; ++j)
+		{
+			sum += _varB[i][j];
+		}
+		_model.addConstr(sum >= 1);
+		sum.clear();
+	}
+
   _model.update();
 
 //  GRBLinExpr sum2;
