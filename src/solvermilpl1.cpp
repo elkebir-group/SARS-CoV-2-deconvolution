@@ -65,14 +65,26 @@ void SolverMilpL1::initConstraints()
           _model.addConstr(_varF[i][p] == 1);
 //          _model.addConstr(_varG[i][p] == 1 - obs_f_ip);
         }
-				else if (_input.getMutationStatus(i, p) == InputInstance::MutSubclonal)
-				{
-					_model.addConstr(_varF[i][p] >= 0.05);
-					_model.addConstr(_varF[i][p] <= 0.95);
-				}
+//				else if (_input.getMutationStatus(i, p) == InputInstance::MutSubclonal)
+//				{
+//					_model.addConstr(_varF[i][p] >= 0.05);
+//					//_model.addConstr(_varF[i][p] <= 0.95);
+//				}
       }
     }
   }
+	
+	GRBLinExpr sum;
+
+	for (int i = 0; i < nrMutations; ++i)
+ {
+		for (int p = 0; p < nrSamples; ++p)
+		{
+			sum += _varF[i][p];
+		}
+	 _model.addConstr(sum >= 0.05);
+	 sum.clear();
+	}
   
   _model.update();
 }
