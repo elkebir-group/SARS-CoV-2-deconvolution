@@ -166,6 +166,16 @@ void SolverMilp::initConstraints()
     }
   }
   
+  for (int p = 0; p < nrSamples; ++p)
+  {
+    for (int j = 0; j < _nrStrains; ++j)
+    {
+      sum += _varU[j][p];
+    }
+    _model.addConstr(sum == 1);
+    sum.clear();
+  }
+  
   _model.update();
 
 //  GRBLinExpr sum2;
