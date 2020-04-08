@@ -74,17 +74,17 @@ void SolverMilpL1::initConstraints()
     }
   }
 	
-	GRBLinExpr sum;
-
-	for (int i = 0; i < nrMutations; ++i)
- {
-		for (int p = 0; p < nrSamples; ++p)
-		{
-			sum += _varF[i][p];
-		}
-	 _model.addConstr(sum >= 0.05);
-	 sum.clear();
-	}
+//	GRBLinExpr sum;
+//
+// for (int i = 0; i < nrMutations; ++i)
+// {
+//		for (int p = 0; p < nrSamples; ++p)
+//		{
+//			sum += _varF[i][p];
+//		}
+//	 _model.addConstr(sum >= 0.05);
+//	 sum.clear();
+//	}
   
   _model.update();
 }

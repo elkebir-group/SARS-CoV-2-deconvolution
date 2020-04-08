@@ -15,6 +15,18 @@
 
 namespace po = boost::program_options;
 
+StringSet getSampleLocationSet(const InputInstance& input)
+{
+  StringSet res;
+  
+  for (const std::string& sample : input.getSampleLocations())
+  {
+    res.insert(sample);
+  }
+  
+  return res;
+}
+
 int main(int argc, char** argv)
 {
   // Declare the supported options.
@@ -105,58 +117,63 @@ int main(int argc, char** argv)
     int seed = vm["seed"].as<int>();
     g_rng = std::mt19937(seed);
 
-
     std::ofstream outFilteredInput(outputPrefix + "_filtered.tsv");
     outFilteredInput << filteredInput;
     outFilteredInput.close();
     
     std::ofstream outLog(outputPrefix + "_log.tsv");
-    outLog << "k\tLB\tUB" << std::endl;
+    outLog << "loc\tk\tLB\tUB" << std::endl;
     
-    int k = nrStrains;
-    if (vm.count("sweep"))
+    StringSet locations = getSampleLocationSet(filteredInput);
+    for (const std::string& loc : locations)
     {
-      k = 1;
+      IntVector newToOld, oldToNew;
+      InputInstance filteredInputLoc = filteredInput.filterSamplesByLocation(loc, newToOld, oldToNew);
+      
+      int k = nrStrains;
+      if (vm.count("sweep"))
+      {
+        k = 1;
+      }
+      for (; k <= nrStrains; ++k)
+      {
+        Solver* pSolve = nullptr;
+        if (vm.count("ca"))
+        {
+          pSolve = new SolverCa(filteredInputLoc, nrStrains, nrRestarts, nrThreads, true, true);
+        }
+        else if (vm.count("binom"))
+        {
+          pSolve = new SolverMilpBinom(filteredInputLoc, k, nrThreads, timeLimit, nrBreakpoints);
+        }
+        else
+        {
+          pSolve = new SolverMilpL1(filteredInputLoc, k, nrThreads, timeLimit);
+        }
+        if (pSolve->solve())
+        {
+          outLog << loc << "\t" << k << "\t" << pSolve->getObjectiveValueLB() << "\t" << pSolve->getObjectiveValue() << std::endl;
+          
+          std::ofstream outF(outputPrefix + "_" + loc + "_k" + std::to_string(k) + "_F.tsv");
+          pSolve->writeSolF(outF);
+          outF.close();
+          
+          std::ofstream outU(outputPrefix + "_" + loc + "_k" + std::to_string(k) + "_U.tsv");
+          pSolve->writeSolU(outU);
+          outU.close();
+          
+          std::ofstream outB(outputPrefix + "_" + loc + "_k" + std::to_string(k) + "_B.tsv");
+          pSolve->writeSolB(outB);
+          outB.close();
+        }
+        else
+        {
+          outLog << loc << "\t" << k << "\t" << "-" << "\t" << "-" << std::endl;
+        }
+        outLog.flush();
+        delete pSolve;
+      }
     }
-    for (; k <= nrStrains; ++k)
-    {
-      Solver* pSolve = nullptr;
-      if (vm.count("ca"))
-      {
-        pSolve = new SolverCa(filteredInput, nrStrains, nrRestarts, nrThreads, true, true);
-      }
-      else if (vm.count("binom"))
-      {
-        pSolve = new SolverMilpBinom(filteredInput, k, nrThreads, timeLimit, nrBreakpoints);
-      }
-      else
-      {
-        pSolve = new SolverMilpL1(filteredInput, k, nrThreads, timeLimit);
-      }
-      if (pSolve->solve())
-      {
-        outLog << k << "\t" << pSolve->getObjectiveValueLB() << "\t" << pSolve->getObjectiveValue() << std::endl;
-        
-        std::ofstream outF(outputPrefix + "_k" + std::to_string(k) + "_F.tsv");
-        pSolve->writeSolF(outF);
-        outF.close();
-        
-        std::ofstream outU(outputPrefix + "_k" + std::to_string(k) + "_U.tsv");
-        pSolve->writeSolU(outU);
-        outU.close();
-        
-        std::ofstream outB(outputPrefix + "_k" + std::to_string(k) + "_B.tsv");
-        pSolve->writeSolB(outB);
-        outB.close();
-      }
-      else
-      {
-        outLog << k << "\t" << "-" << "\t" << "-" << std::endl;
-      }
-      outLog.flush();
-      delete pSolve;
-    }
-    
     outLog.close();
   }
   catch (const boost::program_options::error& error)

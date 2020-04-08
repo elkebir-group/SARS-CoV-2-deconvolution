@@ -7,6 +7,58 @@
 
 #include "inputinstance.h"
 
+void InputInstance::initSampleLocations()
+{
+  _sampleLocations.clear();
+  for (const std::string& sample : _samples)
+  {
+    StringVector s;
+    boost::split(s, sample, boost::is_any_of("|:"));
+    _sampleLocations.push_back(s[1]);
+  }
+}
+
+InputInstance InputInstance::filterSamplesByLocation(const std::string& location,
+                                                     IntVector& newToOld,
+                                                     IntVector& oldToNew) const
+{
+  oldToNew = IntVector(_nrSamples, -1);
+  
+  for (int p = 0; p < _nrSamples; ++p)
+  {
+    if (_sampleLocations[p] == location)
+    {
+      newToOld.push_back(p);
+    }
+  }
+  
+  InputInstance newInput;
+  
+  newInput._alt = IntMatrix(_nrMutations, IntVector(_nrSamples, 0));
+  newInput._ref = IntMatrix(_nrMutations, IntVector(_nrSamples, 0));
+  newInput._vaf = DoubleMatrix(_nrMutations, DoubleVector(_nrSamples, 0));
+  newInput._mutDetails = _mutDetails;
+  newInput._nrSamples = newToOld.size();
+  newInput._nrMutations = _nrMutations;
+  
+  for (int i = 0; i < _nrMutations; ++i)
+  {
+    for (int pp = 0; pp < newInput._nrSamples; ++pp)
+    {
+      int p = newToOld[pp];
+      newInput._alt[i][pp] = _alt[i][p];
+      newInput._ref[i][pp] = _ref[i][p];
+      newInput._vaf[i][pp] = _vaf[i][p];
+      if (i == 0)
+      {
+        newInput._samples.push_back(_samples[p]);
+      }
+    }
+  }
+  newInput.initSampleLocations();
+  return newInput;
+}
+
 InputInstance InputInstance::filterSamples(IntVector& newToOld,
                                            IntVector& oldToNew) const
 {
@@ -60,7 +112,7 @@ InputInstance InputInstance::filterSamples(IntVector& newToOld,
       }
     }
   }
-  
+  newInput.initSampleLocations();
   return newInput;
 }
 
@@ -102,6 +154,7 @@ InputInstance InputInstance::filterMutations(IntVector& newToOld,
     newInput._vaf.push_back(_vaf[i]);
     newInput._mutDetails.push_back(_mutDetails[i]);
   }
+  newInput._sampleLocations = _sampleLocations;
   newInput._samples = _samples;
   newInput._nrSamples = _nrSamples;
   newInput._nrMutations = newToOld.size();
@@ -208,6 +261,8 @@ void InputInstance::read(std::istream& inRef, std::istream& inAlt)
       _vaf[i][p] = (double)_alt[i][p] / (double)(_alt[i][p] + _ref[i][p]);
     }
   }
+  
+  initSampleLocations();
 }
 
 std::istream& operator>>(std::istream& in, InputInstance& input)
@@ -271,6 +326,8 @@ std::istream& operator>>(std::istream& in, InputInstance& input)
     
     input._nrMutations++;
   }
+  
+  input.initSampleLocations();
   
   return in;
 }

@@ -85,6 +85,12 @@ public:
     return _samples;
   }
   
+  /// Return sample location
+  const StringVector& getSampleLocations() const
+  {
+    return _sampleLocations;
+  }
+  
   /// Return altiant allele frequency
   /// @param i Mutation
   /// @param p Sample
@@ -142,6 +148,17 @@ public:
   /// @param oldToNew Map from old indices to new indices (-1 indicates unmapped)
   InputInstance filterSamples(IntVector& newToOld, IntVector& oldToNew) const;
   
+  /// Filter out samples by location
+  /// @param location Location
+  /// @param newToOld Map from new indices to old indices
+  /// @param oldToNew Map from old indices to new indices (-1 indicates unmapped)
+  InputInstance filterSamplesByLocation(const std::string& location,
+                                        IntVector& newToOld,
+                                        IntVector& oldToNew) const;
+  
+protected:
+  void initSampleLocations();
+  
 private:
   typedef std::vector<MutationDetails> MutationDetailsVector;
   
@@ -153,6 +170,8 @@ private:
   MutationDetailsVector _mutDetails;
   /// Sample names
   StringVector _samples;
+  /// Sample locations
+  StringVector _sampleLocations;
   /// altiant allele frequencies
   DoubleMatrix _vaf;
   /// Reference read count
