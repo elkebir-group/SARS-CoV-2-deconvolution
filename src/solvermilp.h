@@ -1,16 +1,16 @@
 /*
- * solvermilp.h
+ * solvermiqp.h
  *
  *  Created on: 4-apr-2020
  *      Author: M. El-Kebir
  */
 
-#ifndef SOLVERMILP_H
-#define SOLVERMILP_H
+#ifndef SOLVERMIQP_H
+#define SOLVERMIQP_H
 
 #include "solver.h"
 
-class SolverMilp : public Solver
+class SolverMiqp : public Solver
 {
 public:
   /// Constructor
@@ -18,7 +18,7 @@ public:
   /// @param nrStrains Number of strains
   /// @param nrThreads Number of threads
   /// @param timeLimit Time limit in seconds
-  SolverMilp(const InputInstance& input,
+  SolverMiqp(const InputInstance& input,
              int nrStrains,
              int nrThreads,
              int timeLimit);
@@ -61,4 +61,4 @@ protected:
   Var3Matrix _varBU;
 };
 
-#endif // SOLVERMILP_H
+#endif // SOLVERMIQP_H

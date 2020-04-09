@@ -12,7 +12,7 @@ SolverMilpBinom::SolverMilpBinom(const InputInstance& input,
                                  int nrThreads,
                                  int timeLimit,
                                  int nrBreakpoints)
-  : SolverMilp(input, nrStrains, nrThreads, timeLimit)
+  : SolverMiqp(input, nrStrains, nrThreads, timeLimit)
   , _nrBreakpoints(nrBreakpoints)
   , _varLambda()
   , _coord()
@@ -21,7 +21,7 @@ SolverMilpBinom::SolverMilpBinom(const InputInstance& input,
 
 void SolverMilpBinom::initVariables()
 {
-  SolverMilp::initVariables();
+  SolverMiqp::initVariables();
   
   const int nrMutations = _input.getNrMutations();
   const int nrSamples = _input.getNrSamples();
@@ -48,7 +48,7 @@ void SolverMilpBinom::initVariables()
 
 void SolverMilpBinom::initConstraints()
 {
-  SolverMilp::initConstraints();
+  SolverMiqp::initConstraints();
   
   const int nrMutations = _input.getNrMutations();
   const int nrSamples = _input.getNrSamples();

@@ -10,6 +10,7 @@
 #include "solverca.h"
 #include "solvermilpl1.h"
 #include "solvermilpbinom.h"
+#include "solution.h"
 #include <fstream>
 #include <boost/program_options.hpp>
 
@@ -130,6 +131,10 @@ int main(int argc, char** argv)
       IntVector newToOld, oldToNew;
       InputInstance filteredInputLoc = filteredInput.filterSamplesByLocation(loc, newToOld, oldToNew);
       
+      std::ofstream outFilteredInput(outputPrefix + "_" + loc + "_filtered.tsv");
+      outFilteredInput << filteredInputLoc;
+      outFilteredInput.close();
+      
       int k = nrStrains;
       if (vm.count("sweep"))
       {
@@ -148,22 +153,24 @@ int main(int argc, char** argv)
         }
         else
         {
-          pSolve = new SolverMilpL1(filteredInputLoc, k, nrThreads, timeLimit);
+          pSolve = new SolverMiqpL2(filteredInputLoc, k, nrThreads, timeLimit);
         }
         if (pSolve->solve())
         {
           outLog << loc << "\t" << k << "\t" << pSolve->getObjectiveValueLB() << "\t" << pSolve->getObjectiveValue() << std::endl;
           
+          Solution sol(pSolve->getB(), pSolve->getU(), filteredInputLoc.getMutationDetails());
+          
           std::ofstream outF(outputPrefix + "_" + loc + "_k" + std::to_string(k) + "_F.tsv");
-          pSolve->writeSolF(outF);
+          sol.writeSolF(filteredInputLoc, outF);
           outF.close();
           
           std::ofstream outU(outputPrefix + "_" + loc + "_k" + std::to_string(k) + "_U.tsv");
-          pSolve->writeSolU(outU);
+          sol.writeSolU(filteredInputLoc, outU);
           outU.close();
           
           std::ofstream outB(outputPrefix + "_" + loc + "_k" + std::to_string(k) + "_B.tsv");
-          pSolve->writeSolB(outB);
+          sol.writeSolB(filteredInputLoc, outB);
           outB.close();
         }
         else
@@ -175,6 +182,11 @@ int main(int argc, char** argv)
       }
     }
     outLog.close();
+  }
+  catch (const std::runtime_error& error)
+  {
+    std::cerr << error.what() << std::endl;
+    return 1;
   }
   catch (const boost::program_options::error& error)
   {

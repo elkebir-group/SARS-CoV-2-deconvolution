@@ -38,6 +38,8 @@ public:
     int _nrConsensusSamples;
   };
   
+  typedef std::vector<MutationDetails> MutationDetailsVector;
+  
   enum MutationStatus
   {
     MutAbsent,
@@ -132,6 +134,12 @@ public:
     return _mutDetails[i];
   }
   
+  /// Return mutation details
+  const MutationDetailsVector getMutationDetails() const
+  {
+    return _mutDetails;
+  }
+  
   /// Read input files
   /// @param inRef Reference reads
   /// @param inAlt Alternate reads
@@ -160,8 +168,6 @@ protected:
   void initSampleLocations();
   
 private:
-  typedef std::vector<MutationDetails> MutationDetailsVector;
-  
   /// Number of bulk samples
   int _nrSamples;
   /// Number of mutations

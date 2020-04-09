@@ -7,7 +7,7 @@
 
 #include "solvermilp.h"
 
-SolverMilp::SolverMilp(const InputInstance& input,
+SolverMiqp::SolverMiqp(const InputInstance& input,
                        int nrStrains,
                        int nrThreads,
                        int timeLimit)
@@ -21,7 +21,7 @@ SolverMilp::SolverMilp(const InputInstance& input,
 {
 }
 
-bool SolverMilp::solve()
+bool SolverMiqp::solve()
 {
   const int nrMutations = _input.getNrMutations();
   const int nrSamples = _input.getNrSamples();
@@ -43,6 +43,10 @@ bool SolverMilp::solve()
   {
 //    _model.computeIIS();
 //    _model.write("IIS.ilp");
+    return false;
+  }
+  if (_model.get(GRB_IntAttr_SolCount) == 0)
+  {
     return false;
   }
   
@@ -76,14 +80,14 @@ bool SolverMilp::solve()
   return true;
 }
 
-void SolverMilp::init()
+void SolverMiqp::init()
 {
   initVariables();
   initConstraints();
   initObjective();
 }
 
-void SolverMilp::initVariables()
+void SolverMiqp::initVariables()
 {
   const int nrMutations = _input.getNrMutations();
   const int nrSamples = _input.getNrSamples();
@@ -141,13 +145,12 @@ void SolverMilp::initVariables()
   _model.update();
 }
 
-void SolverMilp::initConstraints()
+void SolverMiqp::initConstraints()
 {
   const int nrMutations = _input.getNrMutations();
   const int nrSamples = _input.getNrSamples();
   
   GRBLinExpr sum;
-//  GRBQuadExpr sum;
   for (int i = 0; i < nrMutations; ++i)
   {
     for (int p = 0; p < nrSamples; ++p)
@@ -155,14 +158,9 @@ void SolverMilp::initConstraints()
       for (int j = 0; j < _nrStrains; ++j)
       {
         _model.addQConstr(_varBU[i][p][j] == _varB[i][j] * _varU[j][p]);
-//        sum += _varB[i][j] * _varU[j][p];
-//        _model.addConstr(_varBU[i][p][j] <= _varB[i][j]);
-//        _model.addConstr(_varBU[i][p][j] <= _varU[j][p]);
-//        _model.addConstr(_varBU[i][p][j] >= _varB[i][j] + _varU[j][p] - 1);
         sum += _varBU[i][p][j];
         
       }
-//      _model.addQConstr(_varF[i][p] == sum);
       _model.addConstr(_varF[i][p] == sum);
       sum.clear();
     }
@@ -178,32 +176,5 @@ void SolverMilp::initConstraints()
     sum.clear();
   }
 	
-//	// each mutation exists in at least one strain
-//	for (int i = 0; i < nrMutations; ++i)
-//  {
-//		for (int j = 0; j < _nrStrains; ++j)
-//		{
-//			sum += _varB[i][j];
-//		}
-//		_model.addConstr(sum >= 1);
-//		sum.clear();
-//	}
-
   _model.update();
-
-//  GRBLinExpr sum2;
-//  GRBLinExpr newSum;
-//  for (int j = 0; j < _nrStrains; ++j)
-//  {
-//    sum2.clear();
-//    for (int i = 0; i < nrMutations; ++i)
-//    {
-//      sum2 += _varB[i][j];
-//    }
-//    if (j > 0)
-//    {
-//      _model.addConstr(newSum >= sum2);
-//    }
-//    newSum = sum2;
-//  }
 }

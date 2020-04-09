@@ -10,7 +10,7 @@
 
 #include "solvermilp.h"
 
-class SolverMilpBinom : public SolverMilp
+class SolverMilpBinom : public SolverMiqp
 {
 public:
   /// Constructor

@@ -60,12 +60,6 @@ public:
     return _F;
   }
   
-  void writeSolF(std::ostream& out) const;
-  
-  void writeSolU(std::ostream& out) const;
-  
-  void writeSolB(std::ostream& out) const;
-  
 protected:
   /// Input
   const InputInstance& _input;

@@ -6,6 +6,21 @@ set( CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR} ${CMAKE_MODULE_PATH} )
 
 find_package( GUROBI REQUIRED )
 
+set (merge_src
+  src/mergemain.cpp
+  src/inputinstance.cpp
+  src/utils.cpp
+  src/solution.cpp
+  src/solutionset.cpp
+)
+
+set (merge_hdr
+  src/inputinstance.h
+  src/utils.h
+  src/solution.h
+  src/solutionset.h
+)
+
 set( deconvolve_src
   src/deconvolvemain.cpp
   src/inputinstance.cpp
@@ -19,6 +34,7 @@ set( deconvolve_src
   src/solvermilp.cpp
   src/solvermilpl1.cpp
   src/solvermilpbinom.cpp
+  src/solution.cpp
 )
 
 set( deconvolve_hdr
@@ -33,6 +49,7 @@ set( deconvolve_hdr
   src/solvermilp.h
   src/solvermilpl1.h
   src/solvermilpbinom.h
+  src/solution.h
 )
 
 # first we can indicate the documentation build as an option and set it to OFF by default
@@ -96,3 +113,6 @@ add_executable( deconvolve ${deconvolve_src} ${deconvolve_hdr} )
 target_include_directories( deconvolve PUBLIC "${LIBLEMON_ROOT}/include" "src" ${Boost_INCLUDE_DIRS} ${GUROBI_INCLUDE_DIR} )
 target_link_libraries( deconvolve ${CommonLibs} ${GUROBI_LIBRARIES} )
 
+add_executable( merge ${merge_src} ${merge_hdr} )
+target_include_directories( merge PUBLIC "${LIBLEMON_ROOT}/include" "src" ${Boost_INCLUDE_DIRS} )
+target_link_libraries( merge ${CommonLibs} )
