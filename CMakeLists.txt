@@ -25,12 +25,16 @@ set ( relax_src
   src/relaxmain.cpp
   src/inputinstance.cpp
   src/utils.cpp
+  src/solvercau.cpp
+  src/solvercaul1.cpp
   src/solution.cpp
 )
 
 set ( relax_hdr
   src/inputinstance.h
   src/utils.h
+  src/solvercau.h
+  src/solvercaul1.h
   src/solution.h
 )
 
