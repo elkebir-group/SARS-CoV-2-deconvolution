@@ -44,6 +44,7 @@ typedef std::pair<int, int> IntPair;
 typedef std::set<IntPair> IntPairSet;
 typedef std::vector<IntSet> IntSetVector;
 typedef std::pair<int, IntPair> IntTriple;
+typedef std::set<BoolVector> BoolVectorSet;
 
 /// Get line from stream in a platform independent manner
 std::istream& getline(std::istream& is, std::string& t);

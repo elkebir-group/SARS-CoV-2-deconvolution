@@ -144,7 +144,7 @@ public:
   /// @param inRef Reference reads
   /// @param inAlt Alternate reads
   void read(std::istream& inRef, std::istream& inAlt);
-  
+	
   /// Filter out local mutations
   /// @param newToOld Map from new indices to old indices
   /// @param oldToNew Map from old indices to new indices (-1 indicates unmapped)
@@ -163,7 +163,9 @@ public:
   InputInstance filterSamplesByLocation(const std::string& location,
                                         IntVector& newToOld,
                                         IntVector& oldToNew) const;
-  
+
+	BoolMatrix blowupBmat();
+	
 protected:
   void initSampleLocations();
   
@@ -184,7 +186,7 @@ private:
   IntMatrix _ref;
   /// altiant read count
   IntMatrix _alt;
-  
+	
   friend std::ostream& operator<<(std::ostream& out, const InputInstance& input);
   friend std::istream& operator>>(std::istream& in, InputInstance& input);
 };
