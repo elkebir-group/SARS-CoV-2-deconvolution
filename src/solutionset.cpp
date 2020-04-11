@@ -9,41 +9,10 @@
 #include <fstream>
 
 SolutionSet::SolutionSet(const InputInstance& input)
-  : _input(input)
-  , _inputByLocation()
+  : _input(input.filter())
+  , _inputByLocation(_input.splitSamplesByLocation())
   , _solutionsByLocation()
 {
-  // filter
-  while (true)
-  {
-    IntVector newToOldMutations, oldToNewMutations;
-    _input = _input.filterMutations(newToOldMutations, oldToNewMutations);
-    std::cerr << "Filtered out " << oldToNewMutations.size() - newToOldMutations.size() << " mutation(s) that are present in at most one sample." << std::endl;
-
-    int deltaMuts = newToOldMutations.size() - oldToNewMutations.size();
-
-    IntVector newToOldSamples, oldToNewSamples;
-    _input = _input.filterSamples(newToOldSamples, oldToNewSamples);
-    std::cerr << "Filtered out " << oldToNewSamples.size() - newToOldSamples.size() << " sample(s) that do not contain subclonal mutations." << std::endl;
-    std::cerr << _input.getNrMutations() << " mutations in " << _input.getNrSamples() << " samples left." << std::endl;
-
-    int deltaSamples = newToOldSamples.size() - oldToNewSamples.size();
-    if (deltaMuts == 0 && deltaSamples == 0) break;
-  }
-  
-  // get locations
-  StringSet locations;
-  for (const std::string& sample : _input.getSampleLocations())
-  {
-    locations.insert(sample);
-  }
-  
-  // get location specific input
-  for (const std::string& loc : locations)
-  {
-    IntVector newToOld, oldToNew;
-    _inputByLocation[loc] = _input.filterSamplesByLocation(loc, newToOld, oldToNew);
-  }
 }
 
 void SolutionSet::populate(const std::string& prefix,
