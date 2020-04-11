@@ -21,6 +21,23 @@ set (merge_hdr
   src/solutionset.h
 )
 
+set ( relax_src
+  src/relaxmain.cpp
+  src/inputinstance.cpp
+  src/utils.cpp
+  src/solvercau.cpp
+  src/solvercaul1.cpp
+  src/solution.cpp
+)
+
+set ( relax_hdr
+  src/inputinstance.h
+  src/utils.h
+  src/solvercau.h
+  src/solvercaul1.h
+  src/solution.h
+)
+
 set( deconvolve_src
   src/deconvolvemain.cpp
   src/inputinstance.cpp
@@ -120,3 +137,7 @@ target_link_libraries( deconvolve ${CommonLibs} ${GUROBI_LIBRARIES} )
 add_executable( merge ${merge_src} ${merge_hdr} )
 target_include_directories( merge PUBLIC "${LIBLEMON_ROOT}/include" "src" ${Boost_INCLUDE_DIRS} )
 target_link_libraries( merge ${CommonLibs} )
+
+add_executable( relax ${relax_src} ${relax_hdr} )
+target_include_directories( relax PUBLIC "${LIBLEMON_ROOT}/include" "src" ${Boost_INCLUDE_DIRS} ${GUROBI_INCLUDE_DIR} )
+target_link_libraries( relax ${CommonLibs} ${GUROBI_LIBRARIES} )

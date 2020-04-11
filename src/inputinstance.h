@@ -172,7 +172,9 @@ public:
   typedef std::map<std::string, InputInstance> InputInstanceMap;
   
   InputInstanceMap splitSamplesByLocation() const;
-  
+
+	BoolMatrix blowupBmat();
+	
 protected:
   void initSampleLocations();
   
@@ -193,7 +195,7 @@ private:
   IntMatrix _ref;
   /// altiant read count
   IntMatrix _alt;
-  
+	
   friend std::ostream& operator<<(std::ostream& out, const InputInstance& input);
   friend std::istream& operator>>(std::istream& in, InputInstance& input);
 };

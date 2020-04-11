@@ -64,7 +64,7 @@ protected:
   /// Input
   const InputInstance& _input;
   /// Number of strains
-  const int _nrStrains;
+	int _nrStrains;
   /// Number of threads
   const int _nrThreads;
   /// Objective balue

@@ -162,6 +162,110 @@ InputInstance InputInstance::filterMutations(IntVector& newToOld,
   return newInput;
 }
 
+BoolMatrix InputInstance::blowupBmat()
+{
+	std::set<BoolVector> strainSet;
+	
+	for (int p = 0; p < _nrSamples; ++p)
+	{
+		int subclonalCount = 0;
+		IntVector subclonalIndices;
+		BoolVector baseStrain;
+		
+		//std::cout << "clonal mutations:";
+		
+		for (int i = 0; i < _nrMutations; ++i)
+		{
+			if (getMutationStatus(i, p) == MutAbsent)
+			{
+				baseStrain.push_back(false);
+			}
+			else if (getMutationStatus(i, p) == MutClonal)
+			{
+				//std::cout << " " << i;
+				baseStrain.push_back(true);
+			}
+			else if (getMutationStatus(i, p) == MutSubclonal)
+			{
+				++subclonalCount;
+				subclonalIndices.push_back(i);
+				baseStrain.push_back(false);
+			}
+		}
+		
+		//std::cout << std::endl;
+		
+		if (subclonalCount > 16)
+		{
+			throw std::runtime_error("too many mutations in sample " + _samples[p]);
+		}
+		
+		for (int k = 0; k < pow(2.0, subclonalCount); ++k)
+		{
+			int caseNum = k;
+			std::string blowupIndex;
+			
+			while (caseNum != 0)
+			{
+				blowupIndex = (caseNum%2 == 0 ? "0" : "1") + blowupIndex;
+				caseNum/=2;
+			}
+			
+			blowupIndex.insert(blowupIndex.begin(), subclonalCount - blowupIndex.length(), '0');
+
+			/*
+			std::cout << blowupIndex << " -- " << subclonalCount << " [";
+			
+			for (int index : subclonalIndices)
+			{
+				std::cout << " " << index;
+			}
+
+			std::cout << " ]\n";
+			*/
+			
+			BoolVector currStrain = baseStrain;
+			
+			for (int idx = 0; idx < subclonalIndices.size(); ++idx)
+			{
+				if (blowupIndex[idx] == '1')
+				{
+					currStrain[subclonalIndices[idx]] = true;
+					
+					//std::cout << subclonalIndices[idx] << " made true" << std::endl;
+				}
+			}
+			
+			strainSet.insert(currStrain);
+		}
+		
+		/*
+		std::cout << _samples[p] << " -- " << subclonalCount << " -- " << strainSet.size() << " [";
+		
+		for (int index : subclonalIndices)
+		{
+			std::cout << " " << index;
+		}
+		
+		std::cout << " ]\n";
+		*/
+	}
+	
+	BoolMatrix Bmat(_nrMutations);
+
+	for (BoolVector strain : strainSet)
+	{
+		for (int i = 0; i < _nrMutations; ++i)
+		{
+			Bmat[i].push_back(strain[i]);
+		}
+	}
+	
+	std::cout << "number of strains after blowup -- " << strainSet.size() <<std::endl;
+	
+	return Bmat;
+}
+
 void InputInstance::read(std::istream& inRef, std::istream& inAlt)
 {
   _nrSamples = 0;
