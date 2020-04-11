@@ -389,3 +389,78 @@ std::ostream& operator<<(std::ostream& out, const InputInstance& input)
   return out;
 }
 
+InputInstance::InputInstanceMap InputInstance::splitSamplesByLocation() const
+{
+  InputInstanceMap inputByLocation;
+  
+  // get locations
+  StringSet locations;
+  for (const std::string& sample : getSampleLocations())
+  {
+    locations.insert(sample);
+  }
+  
+  // get location specific input
+  for (const std::string& loc : locations)
+  {
+    IntVector newToOld, oldToNew;
+    inputByLocation[loc] = filterSamplesByLocation(loc, newToOld, oldToNew);
+  }
+  
+  return inputByLocation;
+}
+
+InputInstance InputInstance::filter() const
+{
+  InputInstance filteredInput(*this);
+  
+  // filter
+  while (true)
+  {
+    IntVector newToOldMutations, oldToNewMutations;
+    filteredInput = filteredInput.filterMutations(newToOldMutations, oldToNewMutations);
+    std::cerr << "Filtered out " << oldToNewMutations.size() - newToOldMutations.size() << " mutation(s) that are present in at most one sample." << std::endl;
+
+    int deltaMuts = newToOldMutations.size() - oldToNewMutations.size();
+
+    IntVector newToOldSamples, oldToNewSamples;
+    filteredInput = filteredInput.filterSamples(newToOldSamples, oldToNewSamples);
+    std::cerr << "Filtered out " << oldToNewSamples.size() - newToOldSamples.size() << " sample(s) that do not contain subclonal mutations." << std::endl;
+
+    int deltaSamples = newToOldSamples.size() - oldToNewSamples.size();
+    if (deltaMuts == 0 && deltaSamples == 0) break;
+  }
+  
+  std::cerr << filteredInput.getNrMutations() << " mutations in " << filteredInput.getNrSamples() << " samples left." << std::endl;
+
+  return filteredInput;
+}
+
+InputInstance InputInstance::filterSamples(const IntSet& sampleIndices) const
+{
+  InputInstance newInstance;
+  newInstance._nrMutations = _nrMutations;
+  newInstance._nrSamples = sampleIndices.size();
+  newInstance._mutDetails = _mutDetails;
+  newInstance._vaf = DoubleMatrix(newInstance._nrMutations, DoubleVector(newInstance._nrSamples, 0));
+  newInstance._ref = IntMatrix(newInstance._nrMutations, IntVector(newInstance._nrSamples, 0));
+  newInstance._alt = IntMatrix(newInstance._nrMutations, IntVector(newInstance._nrSamples, 0));
+  
+  
+  int pp = 0;
+  for (int p : sampleIndices)
+  {
+    newInstance._samples.push_back(_samples[p]);
+    for (int i = 0; i < newInstance._nrMutations; ++i)
+    {
+      newInstance._vaf[i][pp] = _vaf[i][p];
+      newInstance._ref[i][pp] = _ref[i][p];
+      newInstance._alt[i][pp] = _alt[i][p];
+    }
+    ++pp;
+  }
+  
+  newInstance.initSampleLocations();
+  
+  return newInstance;
+}

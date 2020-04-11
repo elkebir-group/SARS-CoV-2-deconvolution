@@ -145,11 +145,14 @@ public:
   /// @param inAlt Alternate reads
   void read(std::istream& inRef, std::istream& inAlt);
   
+  /// Filter samples and mutations
+  InputInstance filter() const;
+  
   /// Filter out local mutations
   /// @param newToOld Map from new indices to old indices
   /// @param oldToNew Map from old indices to new indices (-1 indicates unmapped)
   InputInstance filterMutations(IntVector& newToOld,
-                                     IntVector& oldToNew) const;
+                                IntVector& oldToNew) const;
   
   /// Filter out samples with no mutations
   /// @param newToOld Map from new indices to old indices
@@ -163,6 +166,12 @@ public:
   InputInstance filterSamplesByLocation(const std::string& location,
                                         IntVector& newToOld,
                                         IntVector& oldToNew) const;
+  
+  InputInstance filterSamples(const IntSet& sampleIndices) const;
+  
+  typedef std::map<std::string, InputInstance> InputInstanceMap;
+  
+  InputInstanceMap splitSamplesByLocation() const;
   
 protected:
   void initSampleLocations();

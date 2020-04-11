@@ -25,6 +25,7 @@ set( deconvolve_src
   src/deconvolvemain.cpp
   src/inputinstance.cpp
   src/utils.cpp
+  src/dc.cpp
   src/solver.cpp
   src/solverca.cpp
   src/solvercabl1.cpp
@@ -38,8 +39,11 @@ set( deconvolve_src
 )
 
 set( deconvolve_hdr
+  src/dkm.hpp
+  src/dkm_utils.hpp
   src/inputinstance.h
   src/utils.h
+  src/dc.h
   src/solver.h
   src/solverca.h
   src/solvercabl1.h
