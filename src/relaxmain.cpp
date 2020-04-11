@@ -7,8 +7,11 @@
 
 #include "utils.h"
 #include "inputinstance.h"
-//#include "solution.h"
+#include "solution.h"
 //#include "solverlpl1.h"
+#include "solverrelax.h"
+#include "solvercaul1.h"
+#include "solvercaul2.h"
 #include <fstream>
 #include <boost/program_options.hpp>
 
@@ -21,9 +24,9 @@ int main(int argc, char** argv)
   desc.add_options()
     ("help,h", "produce help message")
     ("threads,T", po::value<int>()->default_value(1), "number of threads")
-    ("time-limit", po::value<int>()->default_value(-1), "time limit in seconds (-1 is unlimited)")
     ("input", po::value<StringVector>(), "input files (ref and alt read counts)")
-		("threshold,t", po::value<double>()->default_value(0), "threshold value for each strain")
+		("threshold,t", po::value<double>()->default_value(0.0), "threshold value for each strain")
+		("lnorm,l", po::value<int>()->default_value(1), "the norm for the objective function")
 	  ("output,o", po::value<std::string>()->default_value("out"), "output prefix");
 
   po::positional_options_description p;
@@ -42,7 +45,9 @@ int main(int argc, char** argv)
     }
 
     int nrThreads = vm["threads"].as<int>();
-    int timeLimit = vm["time-limit"].as<int>();
+		int lnorm = vm["lnorm"].as<int>();
+		double threshold = vm["threshold"].as<double>();
+		std::cout << "threshold is " << threshold << std::endl;
     std::string inputFilenameRef = vm["input"].as<StringVector>()[0];
     std::string inputFilenameAlt = vm["input"].as<StringVector>()[1];
     std::string outputPrefix = vm["output"].as<std::string>();
@@ -109,6 +114,40 @@ int main(int argc, char** argv)
 				outBmat << Bmat[i][j] << "\t";
 			}
 			outBmat << "\n";
+		}
+		
+		int nrStrains = Bmat[0].size();
+		
+		Solver* psolve = nullptr;
+		
+		if (lnorm == 1)
+		{
+			psolve = new SolverRelax(filteredInput, Bmat, nrStrains, nrThreads, true, threshold);
+		}
+		else if (lnorm == 2)
+		{
+			psolve = new SolverRelax(filteredInput, Bmat, nrStrains, nrThreads, false, threshold);
+		}
+		
+		if (psolve->solve())
+		{
+			Solution sol(psolve->getB(), psolve->getU(), filteredInput.getMutationDetails());
+			
+			std::ofstream outF(outputPrefix + "_F.txt");
+			sol.writeSolF(filteredInput, outF);
+			outF.close();
+			
+			std::ofstream outU(outputPrefix + "_U.txt");
+			sol.writeSolU(filteredInput, outU);
+			outU.close();
+			
+			std::ofstream outB(outputPrefix + "_B.txt");
+			sol.writeSolB(filteredInput, outB);
+			outB.close();
+		}
+		else
+		{
+			std::cout << "could not find solution!\n";
 		}
 		
   }

@@ -261,6 +261,8 @@ BoolMatrix InputInstance::blowupBmat()
 		}
 	}
 	
+	std::cout << "number of strains after blowup -- " << strainSet.size() <<std::endl;
+	
 	return Bmat;
 }
 
