@@ -6,6 +6,21 @@ set( CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR} ${CMAKE_MODULE_PATH} )
 
 find_package( GUROBI REQUIRED )
 
+set (gradient_src
+  src/gradientmain.cpp
+  src/solvergradientb.cpp
+  src/inputinstance.cpp
+  src/utils.cpp
+  src/solution.cpp
+)
+
+set (gradient_hdr
+  src/solvergradientb.h
+  src/inputinstance.h
+  src/utils.h
+  src/solution.h
+)
+
 set (merge_src
   src/mergemain.cpp
   src/inputinstance.cpp
@@ -56,8 +71,8 @@ set( deconvolve_src
 )
 
 set( deconvolve_hdr
-  src/dkm.hpp
-  src/dkm_utils.hpp
+  src/dkm/dkm.hpp
+  src/dkm/dkm_utils.hpp
   src/inputinstance.h
   src/utils.h
   src/dc.h
@@ -141,3 +156,7 @@ target_link_libraries( merge ${CommonLibs} )
 add_executable( relax ${relax_src} ${relax_hdr} )
 target_include_directories( relax PUBLIC "${LIBLEMON_ROOT}/include" "src" ${Boost_INCLUDE_DIRS} ${GUROBI_INCLUDE_DIR} )
 target_link_libraries( relax ${CommonLibs} ${GUROBI_LIBRARIES} )
+
+add_executable( gradient ${gradient_src} ${gradient_hdr} )
+target_include_directories( gradient PUBLIC "${LIBLEMON_ROOT}/include" "src" ${Boost_INCLUDE_DIRS} ${GUROBI_INCLUDE_DIR} )
+target_link_libraries( gradient ${CommonLibs} ${GUROBI_LIBRARIES} )
