@@ -172,6 +172,7 @@ set( CommonLibs
   ${Boost_LIBRARIES}
 )
 
+set( CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Ofast" )
 set( CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DDEBUG" )
 
 add_executable( deconvolve ${deconvolve_src} ${deconvolve_hdr} )

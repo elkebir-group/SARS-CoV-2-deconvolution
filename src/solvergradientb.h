@@ -70,6 +70,7 @@ protected:
       BoostDoubleMatrix BB = element_prod(B, B);
       //BoostDoubleMatrix BBB = element_prod(BB, B);
       
+      double fb = 0;
       for (int i = 0; i < nrMutations; ++i)
       {
         for (int j = 0; j < nrStrains; ++j)
@@ -77,12 +78,20 @@ protected:
 	 	  double bij = B(i,j);
           int ii = i * nrStrains + j;
           //grad[ii] = 2 * B_U_Ut(i, j) - 2 * _F_Ut(i, j) + _lambda * (2 * BBB(i, j) + B(i,j) - 3 * BB(i, j));
-          grad[ii] = 2 * B_U_Ut(i, j) - 2 * _F_Ut(i, j) + _lambda * ( 2 * bij * bij * bij + bij - 3 * bij * bij );
+          //grad[ii] = 2 * B_U_Ut(i, j) - 2 * _F_Ut(i, j) + _lambda * ( 2 * bij * bij * bij + bij - 3 * bij * bij );
+	  double sign = ( bij - bij * bij > 0 ) * 2.0 - 1.0;
+
+	  if ( abs(bij - bij * bij) < 1e-4 ) sign = 0;
+
+          grad[ii] = 2 * B_U_Ut(i, j) - 2 * _F_Ut(i, j) + _lambda * sign * ( 1 - 2 * bij );
+
+	  fb += _lambda * abs(bij * bij - bij);
         }
       }
       
-      double fb = pow(norm_frobenius(_F - prod(B, _U)), 2.);
-      fb += _lambda * pow(norm_frobenius(BB - B), 2.);
+      fb += pow(norm_frobenius(_F - prod(B, _U)), 2.);
+      //fb += 0.5 * _lambda * pow(norm_frobenius(BB - B), 2.);
+      //fb += _lambda * norm_1(BB - B);
 
 	  //double fb = 0.;
 	  /*

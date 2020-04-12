@@ -23,6 +23,7 @@ int main(int argc, char** argv)
     ("strains,k", po::value<int>(), "number of strains")
     ("restarts,N", po::value<int>()->default_value(50), "number of restarts")
     ("eps,e", po::value<double>()->default_value(0.01), "termination condition")
+    ("seed,s", po::value<int>()->default_value(0), "random number generator seed")
     ("threads,T", po::value<int>()->default_value(1), "number of threads")
     ("input", po::value<StringVector>(), "input files (ref and alt read counts)")
 	  ("output,o", po::value<std::string>()->default_value("out"), "output prefix");
@@ -77,6 +78,9 @@ int main(int argc, char** argv)
     }
     inFileRef.close();
     inFileAlt.close();
+    
+    int seed = vm["seed"].as<int>();
+    g_rng = std::mt19937(seed);
 
     InputInstance filteredInput = input;//.filter();
 

@@ -7,6 +7,7 @@
 
 #include "solvergradientb.h"
 #include <LBFGS.h>
+//#include <LBFGSB.h>
 
 SolverGradientB::SolverGradientB(const BoostDoubleMatrix& F,
                                  const BoostDoubleMatrix& B,
@@ -47,9 +48,11 @@ SolverGradientB::BoostDoubleMatrix SolverGradientB::solve() const
   
   // Set up parameters
   LBFGSpp::LBFGSParam<double> param;
-  param.epsilon = 1e-6;
-  param.max_iterations = 1000;
+  param.epsilon = 1e-8;
+  param.max_iterations = 200;
+  param.m = 5;
   
+ 
   // Create solver and function object
   LBFGSpp::LBFGSSolver<double> solver(param);
   Rosenbrock fun(_F, _U, _lambda);
@@ -58,12 +61,17 @@ SolverGradientB::BoostDoubleMatrix SolverGradientB::solve() const
   const int nrStrains = _U.size1();
   Eigen::VectorXd b(nrMutations * nrStrains);
   
+  //Eigen::VectorXd ub(nrMutations * nrStrains);
+  //Eigen::VectorXd lb(nrMutations * nrStrains); 
+
   for (int i = 0; i < nrMutations; ++i)
   {
     for (int j = 0; j < nrStrains; ++j)
     {
       int ii = i * nrStrains + j;
       b[ii] = _B(i, j);
+      //ub[ii] = 2;
+      //lb[ii] = -1;
     }
   }
   
