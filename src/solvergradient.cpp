@@ -43,7 +43,9 @@ bool SolverGradient::solve()
   }
 
   BoostDoubleMatrix oldB;
-  BoostDoubleMatrix oldU;  
+  BoostDoubleMatrix oldU;
+	BoostDoubleMatrix BU;
+	double frobNorm = 0;
   //double bestObjValue = std::numeric_limits<double>::max();
  
   for (int r = 0; r < _nrRestarts; ++r)
@@ -81,8 +83,21 @@ bool SolverGradient::solve()
           _boostU(j, p) = std::max(1e-4, _boostU(j, p));
         }
       }
-      
-      std::cout << "Frob norm 1 after updating U: " << norm_frobenius(boostF - prod(_boostB, _boostU)) << std::endl;
+			
+			frobNorm = 0;
+			BU = prod(_boostB, _boostU);
+			for (int i = 0; i < nrMutations; ++i)
+			{
+				for (int p = 0; p < nrSamples; ++p)
+				{
+					if (!std::isnan(boostF(i,p)))
+					{
+						frobNorm += (boostF(i,p) - BU(i,p)) * (boostF(i,p) - BU(i,p));
+					}
+				}
+			}
+			
+      std::cout << "Frob norm 1 after updating U: " << frobNorm << std::endl;
 
       if(idx  > 0)
       {
@@ -105,10 +120,24 @@ bool SolverGradient::solve()
 //          _boostB(i, j) = std::max(1e-10, _boostB(i, j));
 //        }
 //      }
-
+			
+			frobNorm = 0;
+			BU = prod(_boostB, _boostU);
+			for (int i = 0; i < nrMutations; ++i)
+			{
+				for (int p = 0; p < nrSamples; ++p)
+				{
+					if (!std::isnan(boostF(i,p)))
+					{
+						frobNorm += (boostF(i,p) - BU(i,p)) * (boostF(i,p) - BU(i,p));
+					}
+				}
+			}
+      std::cout << "Frob norm 2 after updating B : " << frobNorm << std::endl;
+			
       std::cout << "Iteration number -------- " << idx << "  -----------" << std::endl;      
-      std::cout << "Frob norm 2 after updating B : " << norm_frobenius(boostF - prod(_boostB, _boostU)) << std::endl;
-      std::cout << "Lambda : " << lambda << " ----- " << "normalized: " << norm_frobenius(boostF - prod(_boostB, _boostU))/norm_frobenius(boostF) << std::endl;
+
+      //std::cout << "Lambda : " << lambda << " ----- " << "normalized: " << norm_frobenius(boostF - prod(_boostB, _boostU))/norm_frobenius(boostF) << std::endl;
       //std::cout << "lambda : " << lambda << std::endl;
       
 			

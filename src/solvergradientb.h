@@ -57,6 +57,7 @@ protected:
       const int nrMutations = _F.size1();
       const int nrStrains = _U.size1();
 
+			// vector-to-matrix of B
       BoostDoubleMatrix B(nrMutations, nrStrains, 0);
       for (int ii = 0; ii < _n; ++ii)
       {
@@ -65,51 +66,54 @@ protected:
         
         B(i, j) = b[ii];
       }
-      
-      BoostDoubleMatrix B_U_Ut = prod(B, _U_Ut);
-      BoostDoubleMatrix BB = element_prod(B, B);
-      //BoostDoubleMatrix BBB = element_prod(BB, B);
-      
+			
+			BoostDoubleMatrix BU = prod(B, _U);
+			const int nrSamples = _U.size2();
+
+			// compute the objective function and the gradient
       double fb = 0;
       for (int i = 0; i < nrMutations; ++i)
       {
         for (int j = 0; j < nrStrains; ++j)
         {
-	 	  double bij = B(i,j);
+					double bij = B(i,j);
           int ii = i * nrStrains + j;
-          //grad[ii] = 2 * B_U_Ut(i, j) - 2 * _F_Ut(i, j) + _lambda * (2 * BBB(i, j) + B(i,j) - 3 * BB(i, j));
-          //grad[ii] = 2 * B_U_Ut(i, j) - 2 * _F_Ut(i, j) + _lambda * ( 2 * bij * bij * bij + bij - 3 * bij * bij );
-	  double sign = ( bij - bij * bij > 0 ) * 2.0 - 1.0;
+					double sign = ( bij - bij * bij > 0 ) * 2.0 - 1.0;
 
-	  if ( abs(bij - bij * bij) < 1e-4 ) sign = 0;
+					if ( std::abs(bij - bij * bij) < 1e-4 ) sign = 0;
+					
+					// penalty term in the gradient
+					grad[ii] = _lambda * sign * ( 1 - 2 * bij );
+					
+					for (int p = 0; p < nrSamples; ++p)
+					{
+						if (!std::isnan(_F(i,p)))
+						{
+							// update gradient if F is not nan
+							grad[ii] += 2 * BU(i,p) * _U(j,p) - 2 * _F(i,p) * _U(j,p);
+							
+							// update objective function if F is not nan
+							fb += (_F(i,p) - BU(i,p)) * (_F(i,p) - BU(i,p));
+						}
+					}
 
-          grad[ii] = 2 * B_U_Ut(i, j) - 2 * _F_Ut(i, j) + _lambda * sign * ( 1 - 2 * bij );
-
-	  fb += _lambda * abs(bij * bij - bij);
+					fb += _lambda * std::abs(bij * bij - bij);
         }
       }
-      
-      fb += pow(norm_frobenius(_F - prod(B, _U)), 2.);
-      //fb += 0.5 * _lambda * pow(norm_frobenius(BB - B), 2.);
-      //fb += _lambda * norm_1(BB - B);
-
-	  //double fb = 0.;
-	  /*
-	  const int nrSamples = _U.size2();
-
-	  for (int ii = 0; ii < _n; ++ii)
-	  {
-		int i = ii / nrStrains;
-		int j = ii % nrStrains;
-
-		double bij = B(i,j);
-		fb += (bij * bij - bij) * (bij * bij  - bij);
-
-	  	//for (int )
-
-	  }
-       */    
- 
+			
+			/*
+			for (int i = 0; i < nrMutations; ++i)
+			{
+				for (int p = 0; p < nrSamples; ++p)
+				{
+					if (!std::isnan(_F(i,p)))
+					{
+						fb += (_F(i,p) - BU(i,p)) * (_F(i,p) - BU(i,p));
+					}
+				}
+			}
+			*/
+			
       return fb;
     }
   };

@@ -53,7 +53,8 @@ public:
   {
     MutAbsent,
     MutClonal,
-    MutSubclonal
+    MutSubclonal,
+		MutNull
   };
   
   /// Return mutation status
@@ -72,10 +73,15 @@ public:
     {
       return MutSubclonal;
     }
-    else
+    else if (_vaf[i][p] < 0.05)
     {
       return MutAbsent;
     }
+		else
+		{
+			std::cout << _vaf[i][p] << "made mutnull" << std::endl;
+			return MutNull;
+		}
   }
   
   /// Return number of samples
