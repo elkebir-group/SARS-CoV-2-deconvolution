@@ -5,6 +5,7 @@
 *      Author: M. El-Kebir
 */
 
+#include <cmath>
 #include "solution.h"
 
 Solution::Solution()
@@ -140,7 +141,8 @@ double Solution::computeDistanceL2(const InputInstance& input) const
     {
       double f_ip = _F[i][p];
       double obs_f_ip = input.getVaf(i, p);
-      if (!std::isnan(obs_f_ip))
+      //if (!std::isnan(obs_f_ip))
+      if (obs_f_ip != -1)
       {
         double diff = f_ip - obs_f_ip;
         diff *= diff;

@@ -5,6 +5,7 @@
  *      Author: M. El-Kebir
  */
 
+#include <cmath>
 #include "solvergradientu.h"
 
 SolverGradientU::SolverGradientU(const BoostDoubleMatrix& F,
@@ -130,11 +131,24 @@ void SolverGradientU::initObjective()
   {
     for (int p = 0; p < nrSamples; ++p)
     {
-      double obs_f_ip = _F(i, p);
-      obj += (obs_f_ip - _varBU[i][p]) * (obs_f_ip - _varBU[i][p]);
+			if (_F(i,p) != -1)
+			{
+				double obs_f_ip = _F(i, p);
+				obj += (obs_f_ip - _varBU[i][p]) * (obs_f_ip - _varBU[i][p]);
+			}
     }
   }
-  
-  _model.setObjective(obj, GRB_MINIMIZE);
+	
+	try
+	{
+		_model.setObjective(obj, GRB_MINIMIZE);
+	}
+	catch (GRBException e)
+	{
+	 std::cout << "GUROBI OBJ Error code = " << e.getErrorCode() << std::endl;
+	 std::cout << e.getMessage() << std::endl;
+	 exit(1);
+	}
+	
   _model.update();
 }

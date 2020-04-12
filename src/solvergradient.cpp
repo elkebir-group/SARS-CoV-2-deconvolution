@@ -5,6 +5,7 @@
  *      Author: M. El-Kebir
  */
 
+#include <cmath>
 #include "solvergradient.h"
 #include "solvergradientb.h"
 #include "solvergradientu.h"
@@ -37,8 +38,11 @@ bool SolverGradient::solve()
   }
 
   BoostDoubleMatrix oldB;
-  BoostDoubleMatrix oldU;  
+  BoostDoubleMatrix oldU;
+  BoostDoubleMatrix BU;
 
+  double frobNorm = 0;
+ 
   if (_boostB.size1() == 0 && _boostB.size2() == 0)
   {
     randomizeB();
@@ -48,52 +52,65 @@ bool SolverGradient::solve()
     randomizeU();
   }
     
-    double lambda = _param._lambda;
-    int idx = 0;
-    while (true)
+  double lambda = _param._lambda;
+  int idx = 0;
+  while (true)
+  {
+    for (int i = 0; i < nrMutations; ++i)
     {
-      for (int i = 0; i < nrMutations; ++i)
-      {
-        for (int j = 0; j < _param._nrStrains; ++j)
-        {
-          _boostB(i, j) = std::max(1e-4, _boostB(i, j));
-					//_boostB(i, j) = std::min(1.0001, _boostB(i,j));
-        }
-      }
-      
-      if(idx > 0)
-      {
-        _boostB = 0.3 * _boostB + 0.7 * oldB;
-				std::cout << "performed mixing" << std::endl;
-      }
-			
-      // solve for U
-      SolverGradientU solverU(boostF, _boostB, _param._nrThreads, _env);
-      _boostU = solverU.solve();
-      
       for (int j = 0; j < _param._nrStrains; ++j)
       {
-        for (int p = 0; p < nrSamples; ++p)
+        _boostB(i, j) = std::max(1e-4, _boostB(i, j));
+        //_boostB(i, j) = std::min(1.0001, _boostB(i,j));
+      }
+    }
+    
+    if(idx > 0)
+    {
+      _boostB = 0.3 * _boostB + 0.7 * oldB;
+      std::cout << "performed mixing" << std::endl;
+    }
+    
+    // solve for U
+    SolverGradientU solverU(boostF, _boostB, _param._nrThreads, _env);
+    _boostU = solverU.solve();
+    
+    for (int j = 0; j < _param._nrStrains; ++j)
+    {
+      for (int p = 0; p < nrSamples; ++p)
+      {
+        _boostU(j, p) = std::max(1e-4, _boostU(j, p));
+      }
+    }
+    
+    frobNorm = 0;
+    BU = prod(_boostB, _boostU);
+    for (int i = 0; i < nrMutations; ++i)
+    {
+      for (int p = 0; p < nrSamples; ++p)
+      {
+        if (boostF(i,p) != -1)
         {
-          _boostU(j, p) = std::max(1e-4, _boostU(j, p));
+          frobNorm += (boostF(i,p) - BU(i,p)) * (boostF(i,p) - BU(i,p));
         }
       }
-      
-      std::cout << "Frob norm 1 after updating U: " << norm_frobenius(boostF - prod(_boostB, _boostU)) << std::endl;
+    }
+    
+    std::cout << "Frob norm 1 after updating U: " << frobNorm << std::endl;
 
-      if(idx  > 0)
-      {
-				_boostU = 0.3 * _boostU + 0.7 * oldU;
-      }     
- 
-      // solve for B
-      SolverGradientB solverB(boostF, _boostB, _boostU, lambda);
-      _boostB = solverB.solve();
+    if (idx  > 0)
+    {
+      _boostU = 0.3 * _boostU + 0.7 * oldU;
+    }
+
+    // solve for B
+    SolverGradientB solverB(boostF, _boostB, _boostU, lambda);
+    _boostB = solverB.solve();
 
 
-      oldB = _boostB;
-      oldU = _boostU;
-      ++idx;
+    oldB = _boostB;
+    oldU = _boostU;
+    ++idx;
 
 //      for (int i = 0; i < nrMutations; ++i)
 //      {
@@ -102,30 +119,43 @@ bool SolverGradient::solve()
 //          _boostB(i, j) = std::max(1e-10, _boostB(i, j));
 //        }
 //      }
-
-      std::cout << "Iteration number -------- " << idx << "  -----------" << std::endl;      
-      std::cout << "Frob norm 2 after updating B : " << norm_frobenius(boostF - prod(_boostB, _boostU)) << std::endl;
-      std::cout << "Lambda : " << lambda << " ----- " << "normalized: " << norm_frobenius(boostF - prod(_boostB, _boostU))/norm_frobenius(boostF) << std::endl;
-      //std::cout << "lambda : " << lambda << std::endl;
-      
-			
-			// check if B is integral
-      BoostDoubleMatrix BB = element_prod(_boostB, _boostB);
-      BoostDoubleMatrix BB_diff = BB - _boostB;
-      BoostDoubleMatrix BB_diff_squared = element_prod(BB_diff, BB_diff);
-      double max_diff = norm_inf(BB_diff_squared);
-			
-      std::cout << "max_diff => " << max_diff << std::endl;
-      
-      if (max_diff < _param._epsilon || idx >= _param._maxIter)
+    
+    frobNorm = 0;
+    BU = prod(_boostB, _boostU);
+    for (int i = 0; i < nrMutations; ++i)
+    {
+      for (int p = 0; p < nrSamples; ++p)
       {
-        break;
+        if (boostF(i,p) != -1)
+        {
+          frobNorm += (boostF(i,p) - BU(i,p)) * (boostF(i,p) - BU(i,p));
+        }
       }
-      
-      //if (lambda < 4) lambda *= 1.1;
-			lambda *= 1.1;
     }
-//  }
+    std::cout << "Frob norm 2 after updating B : " << frobNorm << std::endl;
+    
+    std::cout << "Iteration number -------- " << idx << "  -----------" << std::endl;
+
+    //std::cout << "Lambda : " << lambda << " ----- " << "normalized: " << norm_frobenius(boostF - prod(_boostB, _boostU))/norm_frobenius(boostF) << std::endl;
+    std::cout << "lambda : " << lambda << std::endl;
+    
+    
+    // check if B is integral
+    BoostDoubleMatrix BB = element_prod(_boostB, _boostB);
+    BoostDoubleMatrix BB_diff = BB - _boostB;
+    BoostDoubleMatrix BB_diff_squared = element_prod(BB_diff, BB_diff);
+    double max_diff = norm_inf(BB_diff_squared);
+    
+    std::cout << "max_diff => " << max_diff << std::endl;
+    
+    if (max_diff < _param._epsilon || idx >= _param._maxIter)
+    {
+      break;
+    }
+    
+    if (lambda < 4) lambda *= 1.1;
+    //lambda *= 1.1;
+  }
   
   // set original matrices
   std::ofstream outTmp("doubleB.tsv");

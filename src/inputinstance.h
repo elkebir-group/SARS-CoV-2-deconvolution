@@ -8,6 +8,7 @@
 #ifndef INPUTINSTANCE_H
 #define INPUTINSTANCE_H
 
+#include <cmath>
 #include "utils.h"
 
 /// Deconvolution input instance
@@ -53,7 +54,8 @@ public:
   {
     MutAbsent,
     MutClonal,
-    MutSubclonal
+    MutSubclonal,
+		MutNull
   };
   
   /// Return mutation status
@@ -72,6 +74,11 @@ public:
     {
       return MutSubclonal;
     }
+    else if ( _alt[i][p] + _ref[i][p] < 5)
+    {
+//			std::cout << _vaf[i][p] << "   " << _alt[i][p] << "\t" << _ref[i][p] << "made mutnull" << std::endl;
+			return MutNull;
+		}
     else
     {
       return MutAbsent;
@@ -259,7 +266,7 @@ void InputInstance::writeTemp(const T& matrix, std::ostream& out) const
       out << "\t";
 
       const double x_ip = matrix[i][p];
-      if (std::isnan(x_ip))
+      if (x_ip == -1)
       {
         out << "NULL";
       }

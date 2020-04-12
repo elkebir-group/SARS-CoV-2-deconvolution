@@ -42,9 +42,10 @@ public:
   /// Solve
   bool solve();
   
-  
+  /// Initialize matrix B
   void initB(const DoubleMatrix& B);
   
+  /// Initialize matrix U
   void initU(const DoubleMatrix& U);
   
 protected:

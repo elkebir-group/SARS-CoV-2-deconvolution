@@ -109,27 +109,34 @@ int main(int argc, char** argv)
       }
     }
     
-    ub::matrix<double> M(nrMutations, nrSamples);
+    ub::matrix<double> M(nrMutations, nrSamples, 0);
     for (int i = 0; i < nrMutations; ++i)
     {
       for (int p = 0; p < nrSamples; ++p)
       {
         if (unif(g_rng) < missing)
         {
-          M(i, p) = NAN;
+          M(i, p) = -1;
         }
       }
     }
     
     // generate F
-    ub::matrix<double> F = ub::element_prod(M, ub::prod(B, U));
+    ub::matrix<double> F = ub::prod(B, U);
     
     DoubleMatrix stdF(nrMutations, DoubleVector(nrSamples, 0));
     for (int i = 0; i < nrMutations; ++i)
     {
       for (int p = 0; p < nrSamples; ++p)
       {
-        stdF[i][p] = F(i, p);
+        if (M(i,p) ==  -1)
+        {
+          stdF[i][p] = -1;
+        }
+        else
+        {
+          stdF[i][p] = F(i, p);
+        }
       }
     }
     

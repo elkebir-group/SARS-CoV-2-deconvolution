@@ -68,7 +68,7 @@ InputInstance::InputInstance(DoubleMatrix F,
   {
     for (int p = 0; p < _nrSamples; ++p)
     {
-      if (_vaf[i][p] != NaN && _vaf[i][p] != INFINITY)
+      if (_vaf[i][p] != -1)
       {
         _alt[i][p] = depth * _vaf[i][p];
         _ref[i][p] = depth - _alt[i][p];
@@ -432,7 +432,14 @@ void InputInstance::read(std::istream& inRef, std::istream& inAlt)
   {
     for (int p = 0; p < _nrSamples; ++p)
     {
-      _vaf[i][p] = (double)_alt[i][p] / (double)(_alt[i][p] + _ref[i][p]);
+      if (_alt[i][p] + _ref[i][p] == 0)
+      {
+        _vaf[i][p] = -1;
+      }
+      else
+      {
+        _vaf[i][p] = (double)_alt[i][p] / (double)(_alt[i][p] + _ref[i][p]);
+      }
     }
   }
   
