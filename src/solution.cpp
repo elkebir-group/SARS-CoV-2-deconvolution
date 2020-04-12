@@ -20,6 +20,7 @@ Solution::Solution(const BoolMatrix& B,
                    const DoubleMatrix& U,
                    const InputInstance::MutationDetailsVector& mutDetails)
   : _B(B)
+  , _doubleB()
   , _U(U)
   , _F()
   , _mutDetails(mutDetails)
@@ -28,6 +29,51 @@ Solution::Solution(const BoolMatrix& B,
   const int nrMutations = getNrMutations();
   const int nrStrains = getNrStrains();
   assert(_mutDetails.size() == _B.size());
+  
+  _doubleB = DoubleMatrix(nrMutations, DoubleVector(nrStrains, 0));
+  for (int i = 0; i < nrMutations; ++i)
+  {
+    for (int j = 0; j < nrStrains; ++j)
+    {
+      _doubleB[i][j] = 0;
+    }
+  }
+  
+  _F = DoubleMatrix(nrMutations, DoubleVector(nrSamples, 0.));
+  for (int i = 0; i < nrMutations; ++i)
+  {
+    for (int p = 0; p < nrSamples; ++p)
+    {
+      for (int j = 0; j < nrStrains; ++j)
+      {
+        _F[i][p] += _B[i][j] * _U[j][p];
+      }
+    }
+  }
+}
+
+Solution::Solution(const DoubleMatrix& doubleB,
+                   const DoubleMatrix& U,
+                   const InputInstance::MutationDetailsVector& mutDetails)
+  : _B()
+  , _doubleB(doubleB)
+  , _U(U)
+  , _F()
+  , _mutDetails(mutDetails)
+{
+  const int nrSamples = getNrSamples();
+  const int nrMutations = getNrMutations();
+  const int nrStrains = getNrStrains();
+  assert(_mutDetails.size() == _B.size());
+  
+  _B = BoolMatrix(nrMutations, BoolVector(nrStrains, false));
+  for (int i = 0; i < nrMutations; ++i)
+  {
+    for (int j = 0; j < nrStrains; ++j)
+    {
+      _B[i][j] = _doubleB[i][j] >= 0.5;
+    }
+  }
   
   _F = DoubleMatrix(nrMutations, DoubleVector(nrSamples, 0.));
   
@@ -272,10 +318,12 @@ void Solution::readSolB(std::istream& in)
     mutDetails._nrSamples = boost::lexical_cast<int>(s[8]);
     mutDetails._nrConsensusSamples = boost::lexical_cast<int>(s[9]);
     
+    _doubleB.push_back(DoubleVector(nrStrains, 0.));
     _B.push_back(BoolVector(nrStrains, false));
     for (int j = 0; j < nrStrains; ++j)
     {
-      _B.back()[j] = boost::lexical_cast<int>(s[10 + j]);
+      _doubleB.back()[j] = boost::lexical_cast<double>(s[10 + j]);
+      _B.back()[j] = _doubleB.back()[j] >= 0.5;
     }
     _mutDetails.push_back(mutDetails);
   }

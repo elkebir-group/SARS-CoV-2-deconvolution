@@ -105,9 +105,24 @@ int main(int argc, char** argv)
     outFilteredInput << filteredInput;
     outFilteredInput.close();
     
-    
-    
     SolverGradient solver(filteredInput, param);
+    
+    if (vm.count("initB"))
+    {
+      std::ifstream in(vm["initB"].as<std::string>().c_str());
+      Solution sol;
+      sol.readSolB(in);
+      solver.initB(sol.getDoubleB());
+    }
+    
+    if (vm.count("initU"))
+    {
+      std::ifstream in(vm["initU"].as<std::string>().c_str());
+      Solution sol;
+      sol.readSolU(in);
+      solver.initU(sol.getU());
+    }
+    
     if (solver.solve())
 		{
       Solution sol(solver.getB(), solver.getU(), filteredInput.getMutationDetails());

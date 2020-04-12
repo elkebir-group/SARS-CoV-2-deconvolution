@@ -21,6 +21,34 @@ SolverGradient::SolverGradient(const InputInstance& input,
 {
 }
 
+void SolverGradient::initB(const DoubleMatrix& B)
+{
+  const int nrMutations = _input.getNrMutations();
+  
+  _boostB = BoostDoubleMatrix(_input.getNrMutations(), _param._nrStrains);
+  for (int i = 0; i < nrMutations; ++i)
+  {
+    for (int j = 0; j < _param._nrStrains; ++j)
+    {
+      _boostB(i,j) = B[i][j];
+    }
+  }
+}
+
+void SolverGradient::initU(const DoubleMatrix& U)
+{
+  const int nrSamples = _input.getNrSamples();
+  
+  _boostU = BoostDoubleMatrix(_param._nrStrains, _input.getNrSamples());
+  for (int j = 0; j < _param._nrStrains; ++j)
+  {
+    for (int p = 0; p < nrSamples; ++p)
+    {
+      _boostU(j,p) = U[j][p];
+    }
+  }
+}
+
 bool SolverGradient::solve()
 {
   using namespace boost::numeric::ublas;

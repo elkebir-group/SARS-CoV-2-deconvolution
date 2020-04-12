@@ -17,10 +17,10 @@ public:
   Solution();
   
   /// Constructor
-  /// @param B Genotype matrix
+  /// @param doubleB Genotype matrix
   /// @param U Mixture matrix
   /// @param mutDetails Mutation details
-  Solution(const DoubleMatrix& B, const DoubleMatrix& U,
+  Solution(const DoubleMatrix& doubleB, const DoubleMatrix& U,
            const InputInstance::MutationDetailsVector& mutDetails);
   
   /// Constructor
@@ -74,6 +74,12 @@ public:
   }
   
   /// Return genotype matrix B
+  const DoubleMatrix& getDoubleB() const
+  {
+    return _doubleB;
+  }
+  
+  /// Return genotype matrix B
   const BoolMatrix& getB() const
   {
     return _B;
@@ -115,7 +121,6 @@ public:
   void readSol(std::istream& inB,
                std::istream& inU);
   
-private:
   /// Read mixture matrix
   /// @param in Input stream
   void readSolU(std::istream& in);
