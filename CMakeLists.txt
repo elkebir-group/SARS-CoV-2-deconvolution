@@ -6,9 +6,27 @@ set( CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR} ${CMAKE_MODULE_PATH} )
 
 find_package( GUROBI REQUIRED )
 
+set (simulate_src
+  src/simulatemain.cpp
+  src/inputinstance.cpp
+  src/utils.cpp
+  src/solution.cpp
+)
+
+set (simulate_hdr
+  src/inputinstance.h
+  src/utils.h
+  src/solution.h
+)
+
 set (gradient_src
   src/gradientmain.cpp
+  src/solvergradient.cpp
   src/solvergradientb.cpp
+  src/solvergradientu.cpp
+  src/solver.cpp
+  src/solvercau.cpp
+  src/solvercaul2.cpp
   src/inputinstance.cpp
   src/utils.cpp
   src/solution.cpp
@@ -16,6 +34,11 @@ set (gradient_src
 
 set (gradient_hdr
   src/solvergradientb.h
+  src/solvergradient.h
+  src/solvergradientu.h
+  src/solver.h
+  src/solvercau.h
+  src/solvercaul2.h
   src/inputinstance.h
   src/utils.h
   src/solution.h
@@ -140,7 +163,7 @@ MESSAGE( STATUS "found boost:"
   "\nLIB: ${Boost_LIBRARIES}"
 )
 
-include_directories( "src" ${Boost_INCLUDE_DIRS} )
+include_directories( "src" ${Boost_INCLUDE_DIRS} "src/LBFGSpp" "src/Eigen" )
 link_directories( ${Boost_LIBRARY_DIRS} ${GUROBI_LIBRARIES} )
 
 set( CommonLibs
@@ -152,17 +175,21 @@ set( CommonLibs
 set( CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DDEBUG" )
 
 add_executable( deconvolve ${deconvolve_src} ${deconvolve_hdr} )
-target_include_directories( deconvolve PUBLIC "${LIBLEMON_ROOT}/include" "src" ${Boost_INCLUDE_DIRS} ${GUROBI_INCLUDE_DIR} )
+target_include_directories( deconvolve PUBLIC "src" ${Boost_INCLUDE_DIRS} ${GUROBI_INCLUDE_DIR} )
 target_link_libraries( deconvolve ${CommonLibs} ${GUROBI_LIBRARIES} )
 
 add_executable( merge ${merge_src} ${merge_hdr} )
-target_include_directories( merge PUBLIC "${LIBLEMON_ROOT}/include" "src" ${Boost_INCLUDE_DIRS} )
+target_include_directories( merge PUBLIC "src" ${Boost_INCLUDE_DIRS} )
 target_link_libraries( merge ${CommonLibs} )
 
 add_executable( relax ${relax_src} ${relax_hdr} )
-target_include_directories( relax PUBLIC "${LIBLEMON_ROOT}/include" "src" ${Boost_INCLUDE_DIRS} ${GUROBI_INCLUDE_DIR} )
+target_include_directories( relax PUBLIC "src" ${Boost_INCLUDE_DIRS} ${GUROBI_INCLUDE_DIR} )
 target_link_libraries( relax ${CommonLibs} ${GUROBI_LIBRARIES} )
 
 add_executable( gradient ${gradient_src} ${gradient_hdr} )
-target_include_directories( gradient PUBLIC "${LIBLEMON_ROOT}/include" "src" ${Boost_INCLUDE_DIRS} ${GUROBI_INCLUDE_DIR} )
+target_include_directories( gradient PUBLIC "src" ${Boost_INCLUDE_DIRS} ${GUROBI_INCLUDE_DIR} )
 target_link_libraries( gradient ${CommonLibs} ${GUROBI_LIBRARIES} )
+
+add_executable( simulate ${simulate_src} ${simulate_hdr} )
+target_include_directories( simulate PUBLIC "src" ${Boost_INCLUDE_DIRS} )
+target_link_libraries( simulate ${CommonLibs} )

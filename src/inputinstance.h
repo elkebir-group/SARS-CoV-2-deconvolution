@@ -14,6 +14,15 @@
 class InputInstance
 {
 public:
+  /// Default constructor
+  InputInstance();
+  
+  /// Constructor
+  /// @param F Frequency matrix (mutation by sample)
+  /// @param depth Number of reads
+  InputInstance(DoubleMatrix F,
+                int depth);
+  
   struct MutationDetails
   {
     /// Nucleotide position
@@ -145,6 +154,11 @@ public:
   /// @param inAlt Alternate reads
   void read(std::istream& inRef, std::istream& inAlt);
   
+  /// Write input files
+  /// @param outRef Reference reads
+  /// @param outAlt Alternate reads
+  void write(std::ostream& outRef, std::ostream& outAlt) const;
+  
   /// Filter samples and mutations
   InputInstance filter() const;
   
@@ -176,6 +190,9 @@ public:
 	BoolMatrix blowupBmat();
 	
 protected:
+  template <typename T>
+  void writeTemp(const T& matrix, std::ostream& out) const;
+  
   void initSampleLocations();
   
 private:
@@ -199,5 +216,61 @@ private:
   friend std::ostream& operator<<(std::ostream& out, const InputInstance& input);
   friend std::istream& operator>>(std::istream& in, InputInstance& input);
 };
+
+template <typename T>
+void InputInstance::writeTemp(const T& matrix, std::ostream& out) const
+{
+  out << "pos" << "\t"
+      << "ref" << "\t"
+      << "alt" << "\t"
+      << "gene" << "\t"
+      << "N/S" << "\t"
+      << "AA" << "\t"
+      << "nSRAsubclonal" << "\t"
+      << "nSRAclonal" << "\t"
+      << "nSRA" << "\t"
+      << "nConsensus";
+  
+  for (const std::string& sample : _samples)
+  {
+    out << "\t" << sample;
+  }
+  
+  out << std::endl;
+  
+  const int n = _nrMutations;
+  const int m = _nrSamples;
+  for (int i = 0; i < n; ++i)
+  {
+    const InputInstance::MutationDetails& mutDetails_i = _mutDetails[i];
+    out << mutDetails_i._pos << "\t"
+        << mutDetails_i._refAllele << "\t"
+        << mutDetails_i._altAllele << "\t"
+        << mutDetails_i._gene << "\t"
+        << mutDetails_i._type << "\t"
+        << mutDetails_i._aminoAcidSub << "\t"
+        << mutDetails_i._nrSubclonalSamples << "\t"
+        << mutDetails_i._nrClonalSamples << "\t"
+        << mutDetails_i._nrSamples << "\t"
+        << mutDetails_i._nrConsensusSamples;
+    
+    for (int p = 0; p < m; ++p)
+    {
+      out << "\t";
+
+      const double x_ip = matrix[i][p];
+      if (std::isnan(x_ip))
+      {
+        out << "NULL";
+      }
+      else
+      {
+        out << x_ip;
+      }
+    }
+    
+    out << std::endl;
+  }
+}
 
 #endif // INPUTINSTANCE_H

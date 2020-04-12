@@ -7,6 +7,73 @@
 
 #include "inputinstance.h"
 
+InputInstance::InputInstance()
+  : _nrSamples(0)
+  , _nrMutations(0)
+  , _mutDetails()
+  , _samples()
+  , _sampleLocations()
+  , _vaf()
+  , _ref()
+  , _alt()
+{
+}
+
+InputInstance::InputInstance(DoubleMatrix F,
+                             int depth)
+  : _nrSamples()
+  , _nrMutations()
+  , _mutDetails()
+  , _samples()
+  , _sampleLocations()
+  , _vaf(F)
+  , _ref()
+  , _alt()
+{
+  _nrMutations = _vaf.size();
+  if (_nrMutations > 0)
+  {
+    _nrSamples = _vaf[0].size();
+  }
+  else
+  {
+    _nrSamples = 0;
+  }
+  
+  for (int i = 0; i < _nrMutations; ++i)
+  {
+    MutationDetails det;
+    det._pos = i + 1;
+    det._refAllele = 'A';
+    det._altAllele = 'T';
+    det._gene = "ORF";
+    det._type = "S";
+    det._aminoAcidSub = "NULL";
+    det._nrSubclonalSamples = 0;
+    det._nrClonalSamples = 0;
+    det._nrSamples = 0;
+    det._nrConsensusSamples = 0;
+    _mutDetails.push_back(det);
+  }
+  
+  for (int p = 0; p < _nrSamples; ++p)
+  {
+    _samples.push_back("sample" + std::to_string(p) + "|Earth");
+    _sampleLocations.push_back("Earth");
+  }
+  
+  _alt = IntMatrix(_nrMutations, IntVector(_nrSamples, 0));
+  _ref = IntMatrix(_nrMutations, IntVector(_nrSamples, 0));
+  for (int i = 0; i < _nrMutations; ++i)
+  {
+    for (int p = 0; p < _nrSamples; ++p)
+    {
+      _alt[i][p] = depth * _vaf[i][p];
+      _ref[i][p] = depth - _alt[i][p];
+    }
+  }
+}
+
 void InputInstance::initSampleLocations()
 {
   _sampleLocations.clear();
@@ -436,60 +503,15 @@ std::istream& operator>>(std::istream& in, InputInstance& input)
   return in;
 }
 
+void InputInstance::write(std::ostream& outRef, std::ostream& outAlt) const
+{
+  writeTemp(_ref, outRef);
+  writeTemp(_alt, outAlt);
+}
+
 std::ostream& operator<<(std::ostream& out, const InputInstance& input)
 {
-  out << "pos" << "\t"
-      << "ref" << "\t"
-      << "alt" << "\t"
-      << "gene" << "\t"
-      << "N/S" << "\t"
-      << "AA" << "\t"
-      << "nSRAsubclonal" << "\t"
-      << "nSRAclonal" << "\t"
-      << "nSRA" << "\t"
-      << "nConsensus";
-  
-  for (const std::string& sample : input._samples)
-  {
-    out << "\t" << sample;
-  }
-  
-  out << std::endl;
-  
-  const int n = input._nrMutations;
-  const int m = input._nrSamples;
-  for (int i = 0; i < n; ++i)
-  {
-    const InputInstance::MutationDetails& mutDetails_i = input._mutDetails[i];
-    out << mutDetails_i._pos << "\t"
-        << mutDetails_i._refAllele << "\t"
-        << mutDetails_i._altAllele << "\t"
-        << mutDetails_i._gene << "\t"
-        << mutDetails_i._type << "\t"
-        << mutDetails_i._aminoAcidSub << "\t"
-        << mutDetails_i._nrSubclonalSamples << "\t"
-        << mutDetails_i._nrClonalSamples << "\t"
-        << mutDetails_i._nrSamples << "\t"
-        << mutDetails_i._nrConsensusSamples;
-    
-    for (int p = 0; p < m; ++p)
-    {
-      out << "\t";
-
-      const double f_ip = input._vaf[i][p];
-      if (std::isnan(f_ip))
-      {
-        out << "NULL";
-      }
-      else
-      {
-        out << f_ip;
-      }
-    }
-    
-    out << std::endl;
-  }
-  
+  input.writeTemp(input._vaf, out);
   return out;
 }
 

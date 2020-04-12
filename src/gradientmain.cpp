@@ -10,6 +10,7 @@
 #include "solution.h"
 #include <fstream>
 #include <boost/program_options.hpp>
+#include "solvergradient.h"
 
 namespace po = boost::program_options;
 
@@ -20,6 +21,8 @@ int main(int argc, char** argv)
   desc.add_options()
     ("help,h", "produce help message")
     ("strains,k", po::value<int>(), "number of strains")
+    ("restarts,N", po::value<int>()->default_value(50), "number of restarts")
+    ("eps,e", po::value<double>()->default_value(0.01), "termination condition")
     ("threads,T", po::value<int>()->default_value(1), "number of threads")
     ("input", po::value<StringVector>(), "input files (ref and alt read counts)")
 	  ("output,o", po::value<std::string>()->default_value("out"), "output prefix");
@@ -39,7 +42,11 @@ int main(int argc, char** argv)
       return 0;
     }
 
-    int nrThreads = vm["threads"].as<int>();
+    const int nrThreads = vm["threads"].as<int>();
+    const int nrStrains = vm["strains"].as<int>();
+    const int nrRestarts = vm["restarts"].as<int>();
+    const double epsilon = vm["eps"].as<double>();
+    
     std::string inputFilenameRef = vm["input"].as<StringVector>()[0];
     std::string inputFilenameAlt = vm["input"].as<StringVector>()[1];
     std::string outputPrefix = vm["output"].as<std::string>();
@@ -71,18 +78,16 @@ int main(int argc, char** argv)
     inFileRef.close();
     inFileAlt.close();
 
-    InputInstance filteredInput = input.filter();
+    InputInstance filteredInput = input;//.filter();
 
     std::ofstream outFilteredInput(outputPrefix + "_filtered.tsv");
     outFilteredInput << filteredInput;
     outFilteredInput.close();
     
-    int nrStrains = vm["strains"].as<int>();
-    
-    Solver* pSolve = NULL;
-    if (psolve->solve())
+    SolverGradient solver(filteredInput, nrStrains, nrRestarts, nrThreads, epsilon);
+    if (solver.solve())
 		{
-			Solution sol(psolve->getB(), psolve->getU(), filteredInput.getMutationDetails());
+      Solution sol(solver.getB(), solver.getU(), filteredInput.getMutationDetails());
 			
 			std::ofstream outF(outputPrefix + "_F.txt");
 			sol.writeSolF(filteredInput, outF);
