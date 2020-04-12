@@ -179,7 +179,7 @@ add_executable( merge ${merge_src} ${merge_hdr} )
 target_include_directories( merge PUBLIC "src" ${Boost_INCLUDE_DIRS} )
 target_link_libraries( merge ${CommonLibs} )
 
-add_executable( relax ${relax_src} ${relax_hdr} )
+add_executable( relax EXCLUDE_FROM_ALL ${relax_src} ${relax_hdr} )
 target_include_directories( relax PUBLIC "src" ${Boost_INCLUDE_DIRS} ${GUROBI_INCLUDE_DIR} )
 target_link_libraries( relax ${CommonLibs} ${GUROBI_LIBRARIES} )
 
