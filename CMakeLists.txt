@@ -25,8 +25,6 @@ set (gradient_src
   src/solvergradientb.cpp
   src/solvergradientu.cpp
   src/solver.cpp
-  src/solvercau.cpp
-  src/solvercaul2.cpp
   src/inputinstance.cpp
   src/utils.cpp
   src/solution.cpp
@@ -37,8 +35,6 @@ set (gradient_hdr
   src/solvergradient.h
   src/solvergradientu.h
   src/solver.h
-  src/solvercau.h
-  src/solvercaul2.h
   src/inputinstance.h
   src/utils.h
   src/solution.h
@@ -175,7 +171,7 @@ set( CommonLibs
 set( CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Ofast" )
 set( CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DDEBUG" )
 
-add_executable( deconvolve ${deconvolve_src} ${deconvolve_hdr} )
+add_executable( deconvolve EXCLUDE_FROM_ALL ${deconvolve_src} ${deconvolve_hdr} )
 target_include_directories( deconvolve PUBLIC "src" ${Boost_INCLUDE_DIRS} ${GUROBI_INCLUDE_DIR} )
 target_link_libraries( deconvolve ${CommonLibs} ${GUROBI_LIBRARIES} )
 

@@ -14,21 +14,38 @@
 class SolverGradient : public Solver
 {
 public:
+  /// Configuration parameters
+  struct Param : public Solver::Param
+  {
+    Param()
+      : Solver::Param()
+      , _maxIter(100)
+      , _epsilon(0.01)
+      , _lambda(1.)
+    {
+    }
+
+    /// Maximum number of iterations
+    int _maxIter;
+    /// Epsilon
+    double _epsilon;
+    /// Lambda
+    double _lambda;
+  };
+  
   /// Constructor
   /// @param input Input instance
-  /// @param nrStrains Number of strains
-  /// @param nrRestarts Number of restarts
-  /// @param nrThreads Number of threads
-  /// @param epsilon Threshold used for termination
+  /// @param param Parameters
   SolverGradient(const InputInstance& input,
-                 int nrStrains,
-                 int nrRestarts,
-								 int maxIter,
-                 int nrThreads,
-                 double epsilon);
+                 const Param& param);
     
   /// Solve
   bool solve();
+  
+  
+  void initB(const DoubleMatrix& B);
+  
+  void initU(const DoubleMatrix& U);
   
 protected:
   typedef boost::numeric::ublas::matrix<double> BoostDoubleMatrix;
@@ -40,12 +57,8 @@ protected:
   void randomizeB();
 
 protected:
-  /// Number of restarts
-  const int _nrRestarts;
-	/// maximum number of iterations
-	const int _maxIter;
-  /// Epsilon
-  const double _epsilon;
+  /// Parameters
+  const Param& _param;
   /// Genotype matrix (mutations by strains)
   BoostDoubleMatrix _boostB;
   /// Mixture matrix (strains by samples)

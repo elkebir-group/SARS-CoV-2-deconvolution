@@ -10,16 +10,14 @@
 #include "solvercabl1.h"
 
 Solver::Solver(const InputInstance& input,
-               int nrStrains,
-               int nrThreads)
+               const Param& param)
   : _input(input)
-  , _nrStrains(nrStrains)
-  , _nrThreads(nrThreads)
+  , _param(param)
   , _objectiveValue(-std::numeric_limits<double>::max())
   , _objectiveValueLB(-std::numeric_limits<double>::max())
-  , _B(input.getNrMutations(), BoolVector(_nrStrains, false))
-  , _U(_nrStrains, DoubleVector(input.getNrSamples(), 0.))
-  , _F(input.getNrMutations(), DoubleVector(input.getNrSamples(), 0.))
+  , _B(input.getNrMutations(), BoolVector(param._nrStrains, false))
+  , _U(param._nrStrains, DoubleVector(input.getNrSamples(), 0.))
+  , _BU(input.getNrMutations(), DoubleVector(input.getNrSamples(), 0.))
   , _env()
 {
 }

@@ -22,6 +22,7 @@ int main(int argc, char** argv)
   desc.add_options()
     ("help,h", "produce help message")
     ("strains,k", po::value<int>()->default_value(10), "number of strains")
+    ("missing", po::value<double>()->default_value(0), "missing mutation rate")
     ("samples,m", po::value<int>()->default_value(50), "number of samples")
     ("expstrains,K", po::value<int>()->default_value(3), "number of expected strains per sample")
     ("expmutations,N", po::value<int>()->default_value(5), "number of expected mutations per strain")
@@ -52,6 +53,7 @@ int main(int argc, char** argv)
     const int nrExpMutations = vm["expmutations"].as<int>();
     const int depth = vm["depth"].as<int>();
     const std::string outputPrefix = vm["output"].as<std::string>();
+    const double missing = vm["missing"].as<double>();
     
     int seed = vm["seed"].as<int>();
     g_rng = std::mt19937(seed);
@@ -107,8 +109,20 @@ int main(int argc, char** argv)
       }
     }
     
+    ub::matrix<double> M(nrMutations, nrSamples);
+    for (int i = 0; i < nrMutations; ++i)
+    {
+      for (int p = 0; p < nrSamples; ++p)
+      {
+        if (unif(g_rng) < missing)
+        {
+          M(i, p) = NAN;
+        }
+      }
+    }
+    
     // generate F
-    ub::matrix<double> F = ub::prod(B, U);
+    ub::matrix<double> F = ub::element_prod(M, ub::prod(B, U));
     
     DoubleMatrix stdF(nrMutations, DoubleVector(nrSamples, 0));
     for (int i = 0; i < nrMutations; ++i)

@@ -16,12 +16,16 @@ namespace po = boost::program_options;
 
 int main(int argc, char** argv)
 {
+  SolverGradient::Param param;
+  
   // Declare the supported options.
   po::options_description desc("Allowed options");
   desc.add_options()
     ("help,h", "produce help message")
     ("strains,k", po::value<int>(), "number of strains")
-    ("restarts,N", po::value<int>()->default_value(50), "number of restarts")
+    ("lambda,l", po::value<double>(), "initial value for lambda")
+    ("initB,B", po::value<std::string>(), "genotype matrix for initialization")
+    ("initU,U", po::value<std::string>(), "mixture matrix for initialization")
 		("maxIter,m", po::value<int>()->default_value(100), "maximum number of iterations")
     ("eps,e", po::value<double>()->default_value(0.01), "termination condition")
 		("filter,f", po::bool_switch()->default_value(false), "filtering flag")
@@ -45,13 +49,13 @@ int main(int argc, char** argv)
       return 0;
     }
 
-    const int nrThreads = vm["threads"].as<int>();
-    const int nrStrains = vm["strains"].as<int>();
-    const int nrRestarts = vm["restarts"].as<int>();
-    const double epsilon = vm["eps"].as<double>();
-		const bool filter = vm["filter"].as<bool>();
-		const int maxIter = vm["maxIter"].as<int>();
-		
+    param._nrThreads = vm["threads"].as<int>();
+    param._nrStrains = vm["strains"].as<int>();
+    param._epsilon = vm["eps"].as<double>();
+    param._maxIter = vm["maxIter"].as<int>();
+    param._lambda = vm["lambda"].as<double>();
+    const bool filter = vm["filter"].as<bool>();
+
     std::string inputFilenameRef = vm["input"].as<StringVector>()[0];
     std::string inputFilenameAlt = vm["input"].as<StringVector>()[1];
     std::string outputPrefix = vm["output"].as<std::string>();
@@ -101,7 +105,9 @@ int main(int argc, char** argv)
     outFilteredInput << filteredInput;
     outFilteredInput.close();
     
-    SolverGradient solver(filteredInput, nrStrains, nrRestarts, maxIter, nrThreads, epsilon);
+    
+    
+    SolverGradient solver(filteredInput, param);
     if (solver.solve())
 		{
       Solution sol(solver.getB(), solver.getU(), filteredInput.getMutationDetails());

@@ -68,8 +68,11 @@ InputInstance::InputInstance(DoubleMatrix F,
   {
     for (int p = 0; p < _nrSamples; ++p)
     {
-      _alt[i][p] = depth * _vaf[i][p];
-      _ref[i][p] = depth - _alt[i][p];
+      if (_vaf[i][p] != NaN && _vaf[i][p] != INFINITY)
+      {
+        _alt[i][p] = depth * _vaf[i][p];
+        _ref[i][p] = depth - _alt[i][p];
+      }
     }
   }
 }

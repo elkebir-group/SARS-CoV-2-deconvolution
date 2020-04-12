@@ -54,7 +54,7 @@ bool SolverMiqp::solve()
   {
     for (int p = 0; p < nrSamples; ++p)
     {
-      _F[i][p] = _varF[i][p].get(GRB_DoubleAttr_X);
+      _BU[i][p] = _varF[i][p].get(GRB_DoubleAttr_X);
     }
   }
   

@@ -20,6 +20,13 @@ public:
   /// @param B Genotype matrix
   /// @param U Mixture matrix
   /// @param mutDetails Mutation details
+  Solution(const DoubleMatrix& B, const DoubleMatrix& U,
+           const InputInstance::MutationDetailsVector& mutDetails);
+  
+  /// Constructor
+  /// @param B Genotype matrix
+  /// @param U Mixture matrix
+  /// @param mutDetails Mutation details
   Solution(const BoolMatrix& B, const DoubleMatrix& U,
            const InputInstance::MutationDetailsVector& mutDetails);
   
@@ -120,6 +127,8 @@ private:
 private:
   /// Genotype matrix (mutations by strains)
   BoolMatrix _B;
+  /// Genotype matrix as double (mutations by strains)
+  DoubleMatrix _doubleB;
   /// Mixture matrix (strains by samples)
   DoubleMatrix _U;
   /// Inferred frequences (mutations by samples)

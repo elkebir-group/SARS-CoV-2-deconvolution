@@ -79,10 +79,10 @@ bool SolverCa::solve()
       {
         double newObjValue = 0;
         SolverCaBL1 solveB(_input, _nrStrains, _nrThreads, _U, _env);
-        solveB.solve(_F, _B, newObjValue);
+        solveB.solve(_BU, _B, newObjValue);
   
         SolverCaUL1 solveU(_input, _nrStrains, _nrThreads, _B, _env);
-        solveU.solve(_F, _U, newObjValue);
+        solveU.solve(_BU, _U, newObjValue);
   
         delta = _objectiveValue - newObjValue;
         _objectiveValue = newObjValue;
@@ -99,10 +99,10 @@ bool SolverCa::solve()
       {
         double newObjValue = 0;
         SolverCaUL1 solveU(_input, _nrStrains, _nrThreads, _B, _env);
-        solveU.solve(_F, _U, newObjValue);
+        solveU.solve(_BU, _U, newObjValue);
         
         SolverCaBL1 solveB(_input, _nrStrains, _nrThreads, _U, _env);
-        solveB.solve(_F, _B, newObjValue);
+        solveB.solve(_BU, _B, newObjValue);
         
         delta = _objectiveValue - newObjValue;
         _objectiveValue = newObjValue;
@@ -113,14 +113,14 @@ bool SolverCa::solve()
     
     if (_objectiveValue < bestObj)
     {
-      bestF = _F;
+      bestF = _BU;
       bestU = _U;
       bestB = _B;
       bestObj = _objectiveValue;
     }
   }
   
-  _F = bestF;
+  _BU = bestF;
   _U = bestU;
   _B = bestB;
   _objectiveValue = bestObj;

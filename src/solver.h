@@ -14,13 +14,26 @@
 class Solver
 {
 public:
+  /// Configuration parameters
+  struct Param
+  {
+    Param()
+      : _nrStrains(1)
+      , _nrThreads(1)
+    {
+    }
+
+    /// Number of strains
+    int _nrStrains;
+    /// Number of threads
+    int _nrThreads;
+  };
+  
   /// Constructor
   /// @param input Input instance
-  /// @param nrStrains Number of strains
-  /// @param nrThreads Number of threads
+  /// @param param Parameters
   Solver(const InputInstance& input,
-         int nrStrains,
-         int nrThreads);
+         const Param& param);
   
   /// Destructor
   virtual ~Solver()
@@ -54,19 +67,17 @@ public:
     return _U;
   }
   
-  /// Return frequency matrix F
-  const DoubleMatrix& getF() const
+  /// Return inferred frequency matrix BU
+  const DoubleMatrix& getBU() const
   {
-    return _F;
+    return _BU;
   }
   
 protected:
   /// Input
   const InputInstance& _input;
-  /// Number of strains
-	int _nrStrains;
-  /// Number of threads
-  const int _nrThreads;
+  /// Parameters
+  const Param _param;
   /// Objective balue
   double _objectiveValue;
   /// Objective value lower bound
@@ -76,7 +87,7 @@ protected:
   /// Mixture matrix (strains by samples)
   DoubleMatrix _U;
   /// Inferred frequences (mutations by samples)
-  DoubleMatrix _F;
+  DoubleMatrix _BU;
   /// Gurobi environment
   GRBEnv _env;
 };

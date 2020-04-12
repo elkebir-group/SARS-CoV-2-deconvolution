@@ -12,17 +12,11 @@
 #include <fstream>
 
 SolverGradient::SolverGradient(const InputInstance& input,
-                               int nrStrains,
-                               int nrRestarts,
-															 int maxIter,
-                               int nrThreads,
-                               double epsilon)
-  : Solver(input, nrStrains, nrThreads)
-  , _nrRestarts(nrRestarts)
-	, _maxIter(maxIter)
-  , _epsilon(epsilon)
-  , _boostB(input.getNrMutations(), nrStrains)
-  , _boostU(nrStrains, input.getNrSamples())
+                               const Param& param)
+  : Solver(input, param)
+  , _param(param)
+  , _boostB()
+  , _boostU()
 {
 }
 
@@ -44,20 +38,23 @@ bool SolverGradient::solve()
 
   BoostDoubleMatrix oldB;
   BoostDoubleMatrix oldU;  
-  //double bestObjValue = std::numeric_limits<double>::max();
- 
-  for (int r = 0; r < _nrRestarts; ++r)
+
+  if (_boostB.size1() == 0 && _boostB.size2() == 0)
   {
     randomizeB();
+  }
+  if (_boostU.size1() == 0 && _boostU.size2() == 0)
+  {
     randomizeU();
+  }
     
-    double lambda = 1;
+    double lambda = _param._lambda;
     int idx = 0;
     while (true)
     {
       for (int i = 0; i < nrMutations; ++i)
       {
-        for (int j = 0; j < _nrStrains; ++j)
+        for (int j = 0; j < _param._nrStrains; ++j)
         {
           _boostB(i, j) = std::max(1e-4, _boostB(i, j));
 					//_boostB(i, j) = std::min(1.0001, _boostB(i,j));
@@ -71,10 +68,10 @@ bool SolverGradient::solve()
       }
 			
       // solve for U
-      SolverGradientU solverU(boostF, _boostB, _nrThreads, _env);
+      SolverGradientU solverU(boostF, _boostB, _param._nrThreads, _env);
       _boostU = solverU.solve();
       
-      for (int j = 0; j < _nrStrains; ++j)
+      for (int j = 0; j < _param._nrStrains; ++j)
       {
         for (int p = 0; p < nrSamples; ++p)
         {
@@ -120,7 +117,7 @@ bool SolverGradient::solve()
 			
       std::cout << "max_diff => " << max_diff << std::endl;
       
-      if (max_diff < _epsilon || idx >= _maxIter)
+      if (max_diff < _param._epsilon || idx >= _param._maxIter)
       {
         break;
       }
@@ -128,13 +125,13 @@ bool SolverGradient::solve()
       //if (lambda < 4) lambda *= 1.1;
 			lambda *= 1.1;
     }
-  }
+//  }
   
   // set original matrices
   std::ofstream outTmp("doubleB.tsv");
   for (int i = 0; i < nrMutations; ++i)
   {
-    for (int j = 0; j < _nrStrains; ++j)
+    for (int j = 0; j < _param._nrStrains; ++j)
     {
       if (j > 0)
         outTmp << "\t";
@@ -145,7 +142,7 @@ bool SolverGradient::solve()
   }
   outTmp.close();
   
-  for (int j = 0; j < _nrStrains; ++j)
+  for (int j = 0; j < _param._nrStrains; ++j)
   {
     for (int p = 0; p < nrSamples; ++p)
     {
@@ -158,7 +155,7 @@ bool SolverGradient::solve()
   {
     for (int p = 0; p < nrSamples; ++p)
     {
-      _F[i][p] = boostBU(i, p);
+      _BU[i][p] = boostBU(i, p);
     }
   }
   
@@ -185,13 +182,14 @@ void SolverGradient::randomizeB()
 //    }
 //  }
   
+  _boostB = BoostDoubleMatrix(_input.getNrMutations(), _param._nrStrains);
   std::uniform_real_distribution<> bit(0, 0.01);
 
   const int nrMutations = _input.getNrMutations();
 
   for (int i = 0; i < nrMutations; ++i)
   {
-    for (int j = 0; j < _nrStrains; ++j)
+    for (int j = 0; j < _param._nrStrains; ++j)
     {
       _boostB(i,j) = bit(g_rng);
     }
@@ -219,14 +217,15 @@ void SolverGradient::randomizeU()
     }
   }
   */
+  
+  _boostU = BoostDoubleMatrix(_param._nrStrains, _input.getNrSamples());
 
   // https://en.wikipedia.org/wiki/Dirichlet_distribution#Gamma_distribution
-  
   // Symmetric Dirichlet with concentration parameter alpha = 1
   std::gamma_distribution<> gamma(1, 1);
 
   const int nrSamples = _input.getNrSamples();
-  for (int j = 0; j < _nrStrains; ++j)
+  for (int j = 0; j < _param._nrStrains; ++j)
   {
     double sum = 0.;
     for (int p = 0; p < nrSamples; ++p)

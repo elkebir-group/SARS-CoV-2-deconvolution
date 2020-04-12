@@ -39,7 +39,7 @@ bool SolverRelax::solve()
 			_B = _Bmat;
 			SolverCaUL1 solveU(_input, _nrStrains, _nrThreads, _B, _env);
 			
-			solveU.solve(_F, _U, objValue);
+			solveU.solve(_BU, _U, objValue);
 			
 			std::cout << "objective value: " << objValue << std::endl;
 			
@@ -49,7 +49,7 @@ bool SolverRelax::solve()
 			_B = _Bmat;
 			SolverCaUL2 solveU(_input, _nrStrains, _nrThreads, _B, _env);
 			
-			solveU.solve(_F, _U, objValue);
+			solveU.solve(_BU, _U, objValue);
 			
 			std::cout << "objective value: " << objValue << std::endl;
 
