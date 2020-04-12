@@ -5,6 +5,7 @@
  *      Author: M. El-Kebir
  */
 
+#include <cmath>
 #include "solvergradientu.h"
 
 SolverGradientU::SolverGradientU(const BoostDoubleMatrix& F,
@@ -130,7 +131,7 @@ void SolverGradientU::initObjective()
   {
     for (int p = 0; p < nrSamples; ++p)
     {
-			if (!std::isnan(_F(i,p)))
+			if (_F(i,p) != NAN && _F(i,p) != INFINITY)
 			{
 				double obs_f_ip = _F(i, p);
 				obj += (obs_f_ip - _varBU[i][p]) * (obs_f_ip - _varBU[i][p]);

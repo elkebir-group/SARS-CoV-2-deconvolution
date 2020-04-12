@@ -8,6 +8,7 @@
 #ifndef INPUTINSTANCE_H
 #define INPUTINSTANCE_H
 
+#include <cmath>
 #include "utils.h"
 
 /// Deconvolution input instance
@@ -73,15 +74,15 @@ public:
     {
       return MutSubclonal;
     }
-    else if (_vaf[i][p] < 0.05)
+    else if ( _alt[i][p] + _ref[i][p] < 5)
+    {
+			std::cout << _vaf[i][p] << "   " << _alt[i][p] << "\t" << _ref[i][p] << "made mutnull" << std::endl;
+			return MutNull;
+		}
+    else
     {
       return MutAbsent;
     }
-		else
-		{
-			std::cout << _vaf[i][p] << "made mutnull" << std::endl;
-			return MutNull;
-		}
   }
   
   /// Return number of samples
@@ -265,7 +266,8 @@ void InputInstance::writeTemp(const T& matrix, std::ostream& out) const
       out << "\t";
 
       const double x_ip = matrix[i][p];
-      if (std::isnan(x_ip))
+      //if (std::isnan(x_ip))
+      if (x_ip != NAN && x_ip != INFINITY)
       {
         out << "NULL";
       }

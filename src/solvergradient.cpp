@@ -5,6 +5,7 @@
  *      Author: M. El-Kebir
  */
 
+#include <cmath>
 #include "solvergradient.h"
 #include "solvergradientb.h"
 #include "solvergradientu.h"
@@ -90,7 +91,7 @@ bool SolverGradient::solve()
 			{
 				for (int p = 0; p < nrSamples; ++p)
 				{
-					if (!std::isnan(boostF(i,p)))
+					if (boostF(i,p) != NAN && boostF(i,p) != INFINITY)
 					{
 						frobNorm += (boostF(i,p) - BU(i,p)) * (boostF(i,p) - BU(i,p));
 					}
@@ -127,7 +128,7 @@ bool SolverGradient::solve()
 			{
 				for (int p = 0; p < nrSamples; ++p)
 				{
-					if (!std::isnan(boostF(i,p)))
+					if (boostF(i,p) != NAN && boostF(i,p) != INFINITY)
 					{
 						frobNorm += (boostF(i,p) - BU(i,p)) * (boostF(i,p) - BU(i,p));
 					}
@@ -138,7 +139,7 @@ bool SolverGradient::solve()
       std::cout << "Iteration number -------- " << idx << "  -----------" << std::endl;      
 
       //std::cout << "Lambda : " << lambda << " ----- " << "normalized: " << norm_frobenius(boostF - prod(_boostB, _boostU))/norm_frobenius(boostF) << std::endl;
-      //std::cout << "lambda : " << lambda << std::endl;
+      std::cout << "lambda : " << lambda << std::endl;
       
 			
 			// check if B is integral
@@ -154,8 +155,8 @@ bool SolverGradient::solve()
         break;
       }
       
-      //if (lambda < 4) lambda *= 1.1;
-			lambda *= 1.1;
+      if (lambda < 4) lambda *= 1.1;
+			//lambda *= 1.1;
     }
   }
   

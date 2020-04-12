@@ -8,6 +8,7 @@
 #ifndef SOLVERGRADIENTB_H
 #define SOLVERGRADIENTB_H
 
+#include <cmath>
 #include <boost/numeric/ublas/matrix.hpp>
 #include <Eigen/Core>
 
@@ -87,7 +88,7 @@ protected:
 					
 					for (int p = 0; p < nrSamples; ++p)
 					{
-						if (!std::isnan(_F(i,p)))
+						if (_F(i,p) != NAN && _F(i,p) != INFINITY)
 						{
 							// update gradient if F is not nan
 							grad[ii] += 2 * BU(i,p) * _U(j,p) - 2 * _F(i,p) * _U(j,p);
@@ -106,7 +107,7 @@ protected:
 			{
 				for (int p = 0; p < nrSamples; ++p)
 				{
-					if (!std::isnan(_F(i,p)))
+					if (_F(i,p) != NAN)
 					{
 						fb += (_F(i,p) - BU(i,p)) * (_F(i,p) - BU(i,p));
 					}
