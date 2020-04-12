@@ -49,8 +49,8 @@ bool SolverGradient::solve()
     while (true)
     {
       // solve for U
-      SolverGradientU solverU(boostF, _boostB, _nrThreads, _env);
-      _boostU = solverU.solve();
+//      SolverGradientU solverU(boostF, _boostB, _nrThreads, _env);
+//      _boostU = solverU.solve();
       
 //      for (int j = 0; j < _nrStrains; ++j)
 //      {
@@ -85,12 +85,12 @@ bool SolverGradient::solve()
             
       std::cout << "max_diff => " << max_diff << std::endl;
       
-      if (max_diff < _epsilon)
+//      if (max_diff < _epsilon)
       {
         break;
       }
       
-      lambda *= 10;
+      lambda *= 1.1;
     }
   }
   
@@ -164,41 +164,42 @@ void SolverGradient::randomizeB()
 
 void SolverGradient::randomizeU()
 {
+  Solution sol;
+  
   std::ifstream inB("sim_B.tsv");
   std::ifstream inU("sim_U.tsv");
   sol.readSol(inB, inU);
 
-  boostU = sol.getU();
-  
-  BoolMatrix B = sol.getB();
-  
   const int nrMutations = _input.getNrMutations();
+  const int nrSamples = _input.getNrSamples();
   
-  for (int i = 0; i < nrMutations; ++i)
+  DoubleMatrix U = sol.getU();
+  for (int j = 0; j < _nrStrains; ++j)
   {
-    for (int j = 0; j < _nrStrains; ++j)
+    for (int p = 0; p < nrSamples; ++p)
     {
-      _boostB(i,j) = B[i][j];
+      _boostU(j,p) = U[j][p];
     }
   }
+  
   // https://en.wikipedia.org/wiki/Dirichlet_distribution#Gamma_distribution
   
   // Symmetric Dirichlet with concentration parameter alpha = 1
-  std::gamma_distribution<> gamma(1, 1);
-  
-  const int nrSamples = _input.getNrSamples();
-  for (int j = 0; j < _nrStrains; ++j)
-  {
-    double sum = 0.;
-    for (int p = 0; p < nrSamples; ++p)
-    {
-      _boostU(j, p) = gamma(g_rng);
-      sum += _boostU(j, p);
-    }
-    
-    for (int p = 0; p < nrSamples; ++p)
-    {
-      _boostU(j, p) /= sum;
-    }
-  }
+//  std::gamma_distribution<> gamma(1, 1);
+//
+//  const int nrSamples = _input.getNrSamples();
+//  for (int j = 0; j < _nrStrains; ++j)
+//  {
+//    double sum = 0.;
+//    for (int p = 0; p < nrSamples; ++p)
+//    {
+//      _boostU(j, p) = gamma(g_rng);
+//      sum += _boostU(j, p);
+//    }
+//
+//    for (int p = 0; p < nrSamples; ++p)
+//    {
+//      _boostU(j, p) /= sum;
+//    }
+//  }
 }
