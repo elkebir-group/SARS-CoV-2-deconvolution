@@ -23,6 +23,7 @@ public:
   SolverGradient(const InputInstance& input,
                  int nrStrains,
                  int nrRestarts,
+								 int maxIter,
                  int nrThreads,
                  double epsilon);
     
@@ -41,6 +42,8 @@ protected:
 protected:
   /// Number of restarts
   const int _nrRestarts;
+	/// maximum number of iterations
+	const int _maxIter;
   /// Epsilon
   const double _epsilon;
   /// Genotype matrix (mutations by strains)

@@ -22,7 +22,9 @@ int main(int argc, char** argv)
     ("help,h", "produce help message")
     ("strains,k", po::value<int>(), "number of strains")
     ("restarts,N", po::value<int>()->default_value(50), "number of restarts")
+		("maxIter,m", po::value<int>()->default_value(100), "maximum number of iterations")
     ("eps,e", po::value<double>()->default_value(0.01), "termination condition")
+		("filter,f", po::bool_switch()->default_value(false), "filtering flag")
     ("seed,s", po::value<int>()->default_value(0), "random number generator seed")
     ("threads,T", po::value<int>()->default_value(1), "number of threads")
     ("input", po::value<StringVector>(), "input files (ref and alt read counts)")
@@ -47,7 +49,9 @@ int main(int argc, char** argv)
     const int nrStrains = vm["strains"].as<int>();
     const int nrRestarts = vm["restarts"].as<int>();
     const double epsilon = vm["eps"].as<double>();
-    
+		const bool filter = vm["filter"].as<bool>();
+		const int maxIter = vm["maxIter"].as<int>();
+		
     std::string inputFilenameRef = vm["input"].as<StringVector>()[0];
     std::string inputFilenameAlt = vm["input"].as<StringVector>()[1];
     std::string outputPrefix = vm["output"].as<std::string>();
@@ -82,13 +86,22 @@ int main(int argc, char** argv)
     int seed = vm["seed"].as<int>();
     g_rng = std::mt19937(seed);
 
-    InputInstance filteredInput = input;//.filter();
+		InputInstance filteredInput;
+		if (!filter)
+		{
+			filteredInput = input;
+		}
+		else
+		{
+			std::cout << "performing filtering\n";
+			filteredInput = input.filter();
+		}
 
     std::ofstream outFilteredInput(outputPrefix + "_filtered.tsv");
     outFilteredInput << filteredInput;
     outFilteredInput.close();
     
-    SolverGradient solver(filteredInput, nrStrains, nrRestarts, nrThreads, epsilon);
+    SolverGradient solver(filteredInput, nrStrains, nrRestarts, maxIter, nrThreads, epsilon);
     if (solver.solve())
 		{
       Solution sol(solver.getB(), solver.getU(), filteredInput.getMutationDetails());

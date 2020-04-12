@@ -14,10 +14,12 @@
 SolverGradient::SolverGradient(const InputInstance& input,
                                int nrStrains,
                                int nrRestarts,
+															 int maxIter,
                                int nrThreads,
                                double epsilon)
   : Solver(input, nrStrains, nrThreads)
   , _nrRestarts(nrRestarts)
+	, _maxIter(maxIter)
   , _epsilon(epsilon)
   , _boostB(input.getNrMutations(), nrStrains)
   , _boostU(nrStrains, input.getNrSamples())
@@ -58,15 +60,16 @@ bool SolverGradient::solve()
         for (int j = 0; j < _nrStrains; ++j)
         {
           _boostB(i, j) = std::max(1e-4, _boostB(i, j));
-	  //_boostB(i, j) = std::min(1.0001, _boostB(i,j));
+					//_boostB(i, j) = std::min(1.0001, _boostB(i,j));
         }
       }
       
       if(idx > 0)
       {
         _boostB = 0.3 * _boostB + 0.7 * oldB;
-	std::cout << "performed mixing" << std::endl;
-      }       
+				std::cout << "performed mixing" << std::endl;
+      }
+			
       // solve for U
       SolverGradientU solverU(boostF, _boostB, _nrThreads, _env);
       _boostU = solverU.solve();
@@ -83,7 +86,7 @@ bool SolverGradient::solve()
 
       if(idx  > 0)
       {
-	_boostU = 0.3 * _boostU + 0.7 * oldU;
+				_boostU = 0.3 * _boostU + 0.7 * oldU;
       }     
  
       // solve for B
@@ -105,25 +108,25 @@ bool SolverGradient::solve()
 
       std::cout << "Iteration number -------- " << idx << "  -----------" << std::endl;      
       std::cout << "Frob norm 2 after updating B : " << norm_frobenius(boostF - prod(_boostB, _boostU)) << std::endl;
-      std::cout << "normalized: " << norm_frobenius(boostF - prod(_boostB, _boostU))/norm_frobenius(boostF) << std::endl;
-      std::cout << "lambda : " << lambda << std::endl;
+      std::cout << "Lambda : " << lambda << " ----- " << "normalized: " << norm_frobenius(boostF - prod(_boostB, _boostU))/norm_frobenius(boostF) << std::endl;
+      //std::cout << "lambda : " << lambda << std::endl;
       
-      // check if
+			
+			// check if B is integral
       BoostDoubleMatrix BB = element_prod(_boostB, _boostB);
       BoostDoubleMatrix BB_diff = BB - _boostB;
       BoostDoubleMatrix BB_diff_squared = element_prod(BB_diff, BB_diff);
       double max_diff = norm_inf(BB_diff_squared);
-      
-            
+			
       std::cout << "max_diff => " << max_diff << std::endl;
       
-      if (max_diff < _epsilon)
+      if (max_diff < _epsilon || idx >= _maxIter)
       {
-        //break;
+        break;
       }
       
-      if (lambda < 4)
-	lambda *= 1.1;
+      //if (lambda < 4) lambda *= 1.1;
+			lambda *= 1.1;
     }
   }
   
