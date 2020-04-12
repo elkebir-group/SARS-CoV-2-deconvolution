@@ -82,8 +82,7 @@ bool SolverGradient::solve()
       BoostDoubleMatrix BB_diff_squared = element_prod(BB_diff, BB_diff);
       double max_diff = norm_inf(BB_diff_squared);
       
-      
-      
+            
       std::cout << "max_diff => " << max_diff << std::endl;
       
       if (max_diff < _epsilon)
@@ -91,7 +90,7 @@ bool SolverGradient::solve()
         break;
       }
       
-      lambda *= 1.1;
+      lambda *= 10;
     }
   }
   
@@ -165,6 +164,23 @@ void SolverGradient::randomizeB()
 
 void SolverGradient::randomizeU()
 {
+  std::ifstream inB("sim_B.tsv");
+  std::ifstream inU("sim_U.tsv");
+  sol.readSol(inB, inU);
+
+  boostU = sol.getU();
+  
+  BoolMatrix B = sol.getB();
+  
+  const int nrMutations = _input.getNrMutations();
+  
+  for (int i = 0; i < nrMutations; ++i)
+  {
+    for (int j = 0; j < _nrStrains; ++j)
+    {
+      _boostB(i,j) = B[i][j];
+    }
+  }
   // https://en.wikipedia.org/wiki/Dirichlet_distribution#Gamma_distribution
   
   // Symmetric Dirichlet with concentration parameter alpha = 1

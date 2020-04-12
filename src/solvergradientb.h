@@ -68,20 +68,39 @@ protected:
       
       BoostDoubleMatrix B_U_Ut = prod(B, _U_Ut);
       BoostDoubleMatrix BB = element_prod(B, B);
-      BoostDoubleMatrix BBB = element_prod(BB, B);
+      //BoostDoubleMatrix BBB = element_prod(BB, B);
       
       for (int i = 0; i < nrMutations; ++i)
       {
         for (int j = 0; j < nrStrains; ++j)
         {
+	 	  double bij = B(i,j);
           int ii = i * nrStrains + j;
-          grad[ii] = 2 * B_U_Ut(i, j) - 2 * _F_Ut(i, j) + _lambda * (2 * BBB(i, j) + B(i,j) - 3 * BB(i, j));
+          //grad[ii] = 2 * B_U_Ut(i, j) - 2 * _F_Ut(i, j) + _lambda * (2 * BBB(i, j) + B(i,j) - 3 * BB(i, j));
+          grad[ii] = 2 * B_U_Ut(i, j) - 2 * _F_Ut(i, j) + _lambda * ( 2 * bij * bij * bij + bij - 3 * bij * bij );
         }
       }
       
       double fb = pow(norm_frobenius(_F - prod(B, _U)), 2.);
-      fb += pow(norm_frobenius(BB - B), 2.);
-      
+      fb += _lambda * pow(norm_frobenius(BB - B), 2.);
+
+	  //double fb = 0.;
+	  /*
+	  const int nrSamples = _U.size2();
+
+	  for (int ii = 0; ii < _n; ++ii)
+	  {
+		int i = ii / nrStrains;
+		int j = ii % nrStrains;
+
+		double bij = B(i,j);
+		fb += (bij * bij - bij) * (bij * bij  - bij);
+
+	  	//for (int )
+
+	  }
+       */    
+ 
       return fb;
     }
   };
