@@ -100,6 +100,10 @@ protected:
 							grad[ii] += 2 * BU(i,p) * _U(j,p) - 2 * _F(i,p) * _U(j,p);
 							BUUt(i,j) += BU(i,p) * _U(j,p);
 						}
+						else
+						{
+							std::cout << "here" << std::endl;
+						}
 					}
 					
 					fb += _lambda * std::abs(bij * bij - bij);
