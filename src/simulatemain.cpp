@@ -89,7 +89,7 @@ int main(int argc, char** argv)
     for (int p = 0; p < nrSamples; ++p)
     {
       // 1. decide on how many strains for this sample using a Poisson
-      const int nrStrains_p = 1 + pois(g_rng);
+      const int nrStrains_p = std::min(1 + pois(g_rng), nrStrains);
       
       // 2. pick strains
       std::random_shuffle(strains.begin(), strains.end());
@@ -181,6 +181,11 @@ int main(int argc, char** argv)
     outU.close();
   }
   catch (const std::runtime_error& error)
+  {
+    std::cerr << error.what() << std::endl;
+    return 1;
+  }
+  catch (const po::error& error)
   {
     std::cerr << error.what() << std::endl;
     return 1;
