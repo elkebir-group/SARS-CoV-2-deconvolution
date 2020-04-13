@@ -57,23 +57,20 @@ protected:
     double operator()(const Eigen::VectorXd& b,
                       Eigen::VectorXd& grad)
     {
+      
       using namespace boost::numeric::ublas;
-       
       const int nrMutations = _F.size1();
       const int nrStrains = _U.size1();
-
       BoostDoubleMatrix B(nrMutations, nrStrains, 0);
       for (int ii = 0; ii < _n; ++ii)
       {
         int i = ii / nrStrains;
         int j = ii % nrStrains;
-         
         B(i, j) = b[ii];
       }
-       
-      BoostDoubleMatrix B_U_Ut = prod(B, _U_Ut);
-      BoostDoubleMatrix BB = element_prod(B, B);
-       
+      BoostDoubleMatrix B_U = prod(B, _U);
+      BoostDoubleMatrix M_BU_F = element_prod(_M, B_U - _F);
+      BoostDoubleMatrix M_BU_F_Ut = prod(M_BU_F, _Ut);
       double fb = 0;
       for (int i = 0; i < nrMutations; ++i)
       {
@@ -82,19 +79,52 @@ protected:
           double bij = B(i,j);
           int ii = i * nrStrains + j;
           double sign = ( bij - bij * bij > 0 ) * 2.0 - 1.0;
-
           if ( abs(bij - bij * bij) < 1e-4 ) sign = 0;
-
-          grad[ii] = 2 * B_U_Ut(i, j) - 2 * _F_Ut(i, j) + _lambda * sign * ( 1 - 2 * bij );
-
+          grad[ii] = 2 * M_BU_F_Ut(i, j) + _lambda * sign * ( 1 - 2 * bij );
           fb += _lambda * abs(bij * bij - bij);
-         }
-       }
-       
-       fb += pow(norm_frobenius(_F - prod(B, _U)), 2.);
-  
-       return fb;
-     }
+        }
+      }
+      fb += pow(norm_frobenius(M_BU_F), 2.);
+      return fb;
+      
+//      using namespace boost::numeric::ublas;
+//
+//      const int nrMutations = _F.size1();
+//      const int nrStrains = _U.size1();
+//
+//      BoostDoubleMatrix B(nrMutations, nrStrains, 0);
+//      for (int ii = 0; ii < _n; ++ii)
+//      {
+//        int i = ii / nrStrains;
+//        int j = ii % nrStrains;
+//
+//        B(i, j) = b[ii];
+//      }
+//
+//      BoostDoubleMatrix B_U_Ut = prod(B, _U_Ut);
+//      BoostDoubleMatrix BB = element_prod(B, B);
+//
+//      double fb = 0;
+//      for (int i = 0; i < nrMutations; ++i)
+//      {
+//        for (int j = 0; j < nrStrains; ++j)
+//        {
+//          double bij = B(i,j);
+//          int ii = i * nrStrains + j;
+//          double sign = ( bij - bij * bij > 0 ) * 2.0 - 1.0;
+//
+//          if ( abs(bij - bij * bij) < 1e-4 ) sign = 0;
+//
+//          grad[ii] = 2 * B_U_Ut(i, j) - 2 * _F_Ut(i, j) + _lambda * sign * ( 1 - 2 * bij );
+//
+//          fb += _lambda * abs(bij * bij - bij);
+//         }
+//       }
+//
+//       fb += pow(norm_frobenius(_F - prod(B, _U)), 2.);
+//
+//       return fb;
+//     }
    };
   
 private:
