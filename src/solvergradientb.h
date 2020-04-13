@@ -168,6 +168,7 @@ protected:
 			outGrad.close();
 			
 			std::cout << "fb value ---- " << fb << std::endl;
+			std::cout << "labmda  ---- " << _lambda << std::endl;
 			
 			exit(1);
 			
