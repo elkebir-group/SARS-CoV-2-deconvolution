@@ -115,6 +115,12 @@ public:
   void writeSolB(const InputInstance& input,
                  std::ostream& out) const;
   
+  /// Write genotype matrix (double)
+  /// @param input Input instance
+  /// @param out Output stream
+  void writeSolDoubleB(const InputInstance& input,
+                       std::ostream& out) const;
+  
   /// Read solution
   /// @param inB Input stream for B
   /// @param inU Input stream for U

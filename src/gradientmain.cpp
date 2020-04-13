@@ -125,7 +125,7 @@ int main(int argc, char** argv)
     
     if (solver.solve())
 		{
-      Solution sol(solver.getB(), solver.getU(), filteredInput.getMutationDetails());
+      Solution sol(solver.getDoubleB(), solver.getU(), filteredInput.getMutationDetails());
 			
 			std::ofstream outF(outputPrefix + "_F.txt");
 			sol.writeSolF(filteredInput, outF);
@@ -138,6 +138,10 @@ int main(int argc, char** argv)
 			std::ofstream outB(outputPrefix + "_B.txt");
 			sol.writeSolB(filteredInput, outB);
 			outB.close();
+      
+      std::ofstream outDoubleB(outputPrefix + "_doubleB.txt");
+      sol.writeSolDoubleB(filteredInput, outB);
+      outDoubleB.close();
 		}
 		else
 		{
@@ -146,6 +150,11 @@ int main(int argc, char** argv)
 		
   }
   catch (const std::runtime_error& error)
+  {
+    std::cerr << error.what() << std::endl;
+    return 1;
+  }
+  catch (const po::error& error)
   {
     std::cerr << error.what() << std::endl;
     return 1;

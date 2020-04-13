@@ -454,3 +454,47 @@ void Solution::writeSolB(const InputInstance& input,
   }
 }
 
+void Solution::writeSolDoubleB(const InputInstance& input,
+                               std::ostream& out) const
+{
+  const int nrStrains = getNrStrains();
+  
+  out << "pos" << "\t"
+      << "ref" << "\t"
+      << "alt" << "\t"
+      << "gene" << "\t"
+      << "N/S" << "\t"
+      << "AA" << "\t"
+      << "nSRAsubclonal" << "\t"
+      << "nSRAclonal" << "\t"
+      << "nSRA" << "\t"
+      << "nConsensus";
+  
+  for (int j = 0; j < nrStrains; ++j)
+  {
+    out << "\tstrain" << j;
+  }
+  out << std::endl;
+  
+  const int nrMutations = input.getNrMutations();
+  for (int i = 0; i < nrMutations; ++i)
+  {
+    const InputInstance::MutationDetails& mutDetails_i = input.getMutationDetails(i);
+    out << mutDetails_i._pos << "\t"
+        << mutDetails_i._refAllele << "\t"
+        << mutDetails_i._altAllele << "\t"
+        << mutDetails_i._gene << "\t"
+        << mutDetails_i._type << "\t"
+        << mutDetails_i._aminoAcidSub << "\t"
+        << mutDetails_i._nrSubclonalSamples << "\t"
+        << mutDetails_i._nrClonalSamples << "\t"
+        << mutDetails_i._nrSamples << "\t"
+        << mutDetails_i._nrConsensusSamples;
+    
+    for (int j = 0; j < nrStrains; ++j)
+    {
+      out << "\t" << _doubleB[i][j];
+    }
+    out << std::endl;
+  }
+}
