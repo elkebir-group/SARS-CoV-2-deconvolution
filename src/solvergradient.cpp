@@ -14,10 +14,10 @@
 
 SolverGradient::SolverGradient(const InputInstance& input,
                                const Param& param)
-  : Solver(input, param)
-  , _param(param)
-  , _boostB()
-  , _boostU()
+: Solver(input, param)
+, _param(param)
+, _boostB()
+, _boostU()
 {
 }
 
@@ -69,12 +69,12 @@ bool SolverGradient::solve()
       }
     }
   }
-
+  
   BoostDoubleMatrix oldB;
   BoostDoubleMatrix oldU;
-
+  
   double frobNorm = 0;
- 
+  
   if (_boostB.size1() == 0 && _boostB.size2() == 0)
   {
     randomizeB();
@@ -83,24 +83,23 @@ bool SolverGradient::solve()
   {
     randomizeU();
   }
-    
+  
   double lambda = _param._lambda;
   int idx = 0;
   while (true)
   {
+    if (idx > 0)
+    {
+      _boostB = 0.2 * _boostB + 0.8 * oldB;
+      std::cout << "performed mixing" << std::endl;
+    }
+    
     for (int i = 0; i < nrMutations; ++i)
     {
       for (int j = 0; j < _param._nrStrains; ++j)
       {
         _boostB(i, j) = std::max(1e-4, _boostB(i, j));
-        //_boostB(i, j) = std::min(1.0001, _boostB(i,j));
       }
-    }
-    
-    if(idx > 0)
-    {
-      _boostB = 0.3 * _boostB + 0.7 * oldB;
-      std::cout << "performed mixing" << std::endl;
     }
     
     // solve for U
@@ -117,37 +116,43 @@ bool SolverGradient::solve()
     
     frobNorm = norm_frobenius(element_prod(boostM, boostF - prod(_boostB, _boostU)));
     std::cout << "Frob norm 1 after updating U: " << frobNorm << std::endl;
-
-    if (idx  > 0)
+    
+    if (idx > 0)
     {
-      _boostU = 0.3 * _boostU + 0.7 * oldU;
+      _boostU = 0.2 * _boostU + 0.8 * oldU;
     }
-
+    
     // solve for B
     SolverGradientB solverB(boostF, _boostB, _boostU, boostM, lambda);
     _boostB = solverB.solve();
+    
+    for (int i = 0; i < nrMutations; ++i)
+    {
+      for (int j = 0; j < _param._nrStrains; ++j)
+      {
+        _boostB(i, j) = std::max(1e-4, _boostB(i, j));
+      }
+    }
 
-
+    for (int j = 0; j < _param._nrStrains; ++j)
+    {
+      for (int p = 0; p < nrSamples; ++p)
+      {
+        _boostU(j, p) = std::max(1e-4, _boostU(j, p));
+      }
+    }
+    
     oldB = _boostB;
     oldU = _boostU;
     ++idx;
-
-//      for (int i = 0; i < nrMutations; ++i)
-//      {
-//        for (int j = 0; j < _nrStrains; ++j)
-//        {
-//          _boostB(i, j) = std::max(1e-10, _boostB(i, j));
-//        }
-//      }
+    
     
     frobNorm = frobNorm = norm_frobenius(element_prod(boostM, boostF - prod(_boostB, _boostU)));
     std::cout << "Frob norm 2 after updating B : " << frobNorm << std::endl;
     
     std::cout << "Iteration number -------- " << idx << "  -----------" << std::endl;
-
-    //std::cout << "Lambda : " << lambda << " ----- " << "normalized: " << norm_frobenius(boostF - prod(_boostB, _boostU))/norm_frobenius(boostF) << std::endl;
-    std::cout << "lambda : " << lambda << std::endl;
     
+    std::cout << "lambda : " << lambda << std::endl;
     
     // check if B is integral
     BoostDoubleMatrix BB = element_prod(_boostB, _boostB);
@@ -162,12 +167,13 @@ bool SolverGradient::solve()
       break;
     }
     
-    if (lambda < 4) lambda *= 1.1;
+    if (lambda < 4) lambda *= 1.05;
     //lambda *= 1.1;
   }
   
   // set original matrices
   std::ofstream outTmp("doubleB.tsv");
+  _doubleB = DoubleMatrix(nrMutations, DoubleVector(_param._nrStrains));
   for (int i = 0; i < nrMutations; ++i)
   {
     for (int j = 0; j < _param._nrStrains; ++j)
@@ -175,6 +181,8 @@ bool SolverGradient::solve()
       if (j > 0)
         outTmp << "\t";
       outTmp << _boostB(i, j);
+
+      _doubleB[i][j] = _boostB(i, j);
       _B[i][j] = _boostB(i, j) > 0.5;
     }
     outTmp << std::endl;
@@ -203,29 +211,29 @@ bool SolverGradient::solve()
 
 void SolverGradient::randomizeB()
 {
-//  Solution sol;
-//  
-//  std::ifstream inB("sim_B.tsv");
-//  std::ifstream inU("sim_U.tsv");
-//  sol.readSol(inB, inU);
-//  
-//  BoolMatrix B = sol.getB();
-//  
-//  const int nrMutations = _input.getNrMutations();
-//  
-//  for (int i = 0; i < nrMutations; ++i)
-//  {
-//    for (int j = 0; j < _nrStrains; ++j)
-//    {
-//      _boostB(i,j) = B[i][j];
-//    }
-//  }
+  //  Solution sol;
+  //
+  //  std::ifstream inB("sim_B.tsv");
+  //  std::ifstream inU("sim_U.tsv");
+  //  sol.readSol(inB, inU);
+  //
+  //  BoolMatrix B = sol.getB();
+  //
+  //  const int nrMutations = _input.getNrMutations();
+  //
+  //  for (int i = 0; i < nrMutations; ++i)
+  //  {
+  //    for (int j = 0; j < _nrStrains; ++j)
+  //    {
+  //      _boostB(i,j) = B[i][j];
+  //    }
+  //  }
   
   _boostB = BoostDoubleMatrix(_input.getNrMutations(), _param._nrStrains);
   std::uniform_real_distribution<> bit(0, 0.01);
-
+  
   const int nrMutations = _input.getNrMutations();
-
+  
   for (int i = 0; i < nrMutations; ++i)
   {
     for (int j = 0; j < _param._nrStrains; ++j)
@@ -238,31 +246,31 @@ void SolverGradient::randomizeB()
 void SolverGradient::randomizeU()
 {
   /*
-  Solution sol;
-  
-  std::ifstream inB("sim_B.tsv");
-  std::ifstream inU("sim_U.tsv");
-  sol.readSol(inB, inU);
-
-  const int nrMutations = _input.getNrMutations();
-  const int nrSamples = _input.getNrSamples();
-  
-  DoubleMatrix U = sol.getU();
-  for (int j = 0; j < _nrStrains; ++j)
-  {
-    for (int p = 0; p < nrSamples; ++p)
-    {
-      _boostU(j,p) = U[j][p];
-    }
-  }
-  */
+   Solution sol;
+   
+   std::ifstream inB("sim_B.tsv");
+   std::ifstream inU("sim_U.tsv");
+   sol.readSol(inB, inU);
+   
+   const int nrMutations = _input.getNrMutations();
+   const int nrSamples = _input.getNrSamples();
+   
+   DoubleMatrix U = sol.getU();
+   for (int j = 0; j < _nrStrains; ++j)
+   {
+   for (int p = 0; p < nrSamples; ++p)
+   {
+   _boostU(j,p) = U[j][p];
+   }
+   }
+   */
   
   _boostU = BoostDoubleMatrix(_param._nrStrains, _input.getNrSamples());
-
+  
   // https://en.wikipedia.org/wiki/Dirichlet_distribution#Gamma_distribution
   // Symmetric Dirichlet with concentration parameter alpha = 1
   std::gamma_distribution<> gamma(1, 1);
-
+  
   const int nrSamples = _input.getNrSamples();
   for (int j = 0; j < _param._nrStrains; ++j)
   {
@@ -272,7 +280,7 @@ void SolverGradient::randomizeU()
       _boostU(j, p) = gamma(g_rng);
       sum += _boostU(j, p);
     }
-
+    
     for (int p = 0; p < nrSamples; ++p)
     {
       _boostU(j, p) /= sum;

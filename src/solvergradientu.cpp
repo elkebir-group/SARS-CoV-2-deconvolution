@@ -28,13 +28,13 @@ SolverGradientU::BoostDoubleMatrix SolverGradientU::solve()
   const int nrStrains = _B.size2();
   
   init();
-  _model.getEnv().set(GRB_IntParam_LogToConsole, 0);
+//  _model.getEnv().set(GRB_IntParam_LogToConsole, 0);
   if (_nrThreads != -1)
   {
     _model.getEnv().set(GRB_IntParam_Threads, _nrThreads);
   }
   _model.optimize();
-
+  
   int status = _model.get(GRB_IntAttr_Status);
   if (status == GRB_INFEASIBLE)
   {
@@ -46,15 +46,13 @@ SolverGradientU::BoostDoubleMatrix SolverGradientU::solve()
   }
   
   BoostDoubleMatrix U(nrStrains, nrSamples);
-    
+  
   for (int j = 0; j < nrStrains; ++j)
   {
     for (int p = 0; p < nrSamples; ++p)
     {
       U(j,p) = _varU[j][p].get(GRB_DoubleAttr_X);
-			std::cout << U(j,p) << " ";
     }
-		std::cout << "\n";
   }
   
   return U;
@@ -121,18 +119,18 @@ void SolverGradientU::initConstraints()
       sum.clear();
     }
   }
-	
-	for (int p = 0; p < nrSamples; ++p)
-	{
-		for (int j = 0; j < nrStrains; ++j)
-		{
-			sum += _varU[j][p];
-		}
-		_model.addConstr(sum == 1);
-		sum.clear();
-	}
-	
-	_model.update();
+  
+  for (int p = 0; p < nrSamples; ++p)
+  {
+    for (int j = 0; j < nrStrains; ++j)
+    {
+      sum += _varU[j][p];
+    }
+    _model.addConstr(sum == 1);
+    sum.clear();
+  }
+  
+  _model.update();
 }
 
 void SolverGradientU::initObjective()
@@ -145,24 +143,24 @@ void SolverGradientU::initObjective()
   {
     for (int p = 0; p < nrSamples; ++p)
     {
-			if (_F(i,p) != -1)
-			{
-				double obs_f_ip = _F(i, p);
-				obj += (obs_f_ip - _varBU[i][p]) * (obs_f_ip - _varBU[i][p]);
-			}
+      if (_F(i,p) != -1)
+      {
+        double obs_f_ip = _F(i, p);
+        obj += (obs_f_ip - _varBU[i][p]) * (obs_f_ip - _varBU[i][p]);
+      }
     }
   }
-	
-	try
-	{
-		_model.setObjective(obj, GRB_MINIMIZE);
-	}
-	catch (GRBException e)
-	{
-	 std::cout << "GUROBI OBJ Error code = " << e.getErrorCode() << std::endl;
-	 std::cout << e.getMessage() << std::endl;
-	 exit(1);
-	}
-	
+  
+  try
+  {
+    _model.setObjective(obj, GRB_MINIMIZE);
+  }
+  catch (GRBException e)
+  {
+    std::cout << "GUROBI OBJ Error code = " << e.getErrorCode() << std::endl;
+    std::cout << e.getMessage() << std::endl;
+    exit(1);
+  }
+  
   _model.update();
 }

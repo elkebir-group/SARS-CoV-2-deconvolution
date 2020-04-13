@@ -48,6 +48,11 @@ public:
   /// Initialize matrix U
   void initU(const DoubleMatrix& U);
   
+  const DoubleMatrix& getDoubleB() const
+  {
+    return _doubleB;
+  }
+  
 protected:
   typedef boost::numeric::ublas::matrix<double> BoostDoubleMatrix;
   
@@ -64,6 +69,8 @@ protected:
   BoostDoubleMatrix _boostB;
   /// Mixture matrix (strains by samples)
   BoostDoubleMatrix _boostU;
+  /// Genotype matrix (double)
+  DoubleMatrix _doubleB;
 };
 
 #endif // SOLVERGRADIENT_H

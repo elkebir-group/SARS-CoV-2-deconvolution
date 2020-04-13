@@ -58,8 +58,8 @@ protected:
     double operator()(const Eigen::VectorXd& b,
                       Eigen::VectorXd& grad)
     {
-      
       using namespace boost::numeric::ublas;
+      
       const int nrMutations = _F.size1();
       const int nrStrains = _U.size1();
       BoostDoubleMatrix B(nrMutations, nrStrains, 0);
@@ -70,10 +70,9 @@ protected:
         B(i, j) = b[ii];
       }
 			
-			
 			BoostDoubleMatrix BU = prod(B, _U);
 			const int nrSamples = _U.size2();
-			BoostDoubleMatrix BUUt(nrMutations, nrStrains);
+//			BoostDoubleMatrix BUUt(nrMutations, nrStrains);
 			
 			// compute the objective function and the gradient
 			double fb = 0;
@@ -81,13 +80,13 @@ protected:
 			{
 				for (int j = 0; j < nrStrains; ++j)
 				{
-					BUUt(i,j) = 0;
+//					BUUt(i,j) = 0;
 					
 					double bij = B(i,j);
 					int ii = i * nrStrains + j;
 					double sign = ( bij - bij * bij > 0 ) * 2.0 - 1.0;
 					
-					if ( std::abs(bij - bij * bij) < 1e-4 ) sign = 0;
+					if ( fabs(bij - bij * bij) < 1e-4 ) sign = 0;
 					
 					// penalty term in the gradient
 					grad[ii] = _lambda * sign * ( 1 - 2 * bij );
@@ -98,7 +97,7 @@ protected:
 						{
 							// update gradient if F is not nan
 							grad[ii] += 2 * BU(i,p) * _U(j,p) - 2 * _F(i,p) * _U(j,p);
-							BUUt(i,j) += BU(i,p) * _U(j,p);
+//							BUUt(i,j) += BU(i,p) * _U(j,p);
 						}
 						else
 						{
@@ -106,7 +105,7 @@ protected:
 						}
 					}
 					
-					fb += _lambda * abs(bij * bij - bij);
+					fb += _lambda * fabs(bij * bij - bij);
 				}
 			}
 			
@@ -122,65 +121,65 @@ protected:
 				}
 			}
 			
-			std::ofstream outGrad("outgrad.txt");
-			for (int i = 0; i < nrMutations; ++i)
-			{
-				for (int j = 0; j < nrStrains; ++j)
-				{
-
-					int ii = i * nrStrains + j;
-				
-					outGrad << grad[ii] << " ";
-				}
-				
-				outGrad << "\n";
-			}
-			outGrad << "\n\n";
-			for (int j = 0; j < nrStrains; ++j)
-			{
-				for (int p = 0; p < nrSamples; ++p)
-				{
-					//int ii = i * nrStrains + j;
-					
-					outGrad << _U(j,p) << " ";
-				}
-				
-				outGrad << "\n";
-			}
-			outGrad << "\n\n";
-			for (int i = 0; i < nrMutations; ++i)
-			{
-				for (int j = 0; j < nrStrains; ++j)
-				{
-					outGrad << B(i,j) << " " ;
-				}
-				outGrad << "\n";
-			}
-			outGrad << "\n\n";
-			for (int i = 0; i < nrMutations; ++i)
-			{
-				for (int j = 0; j < nrStrains; ++j)
-				{
-						outGrad << BUUt(i,j) << " ";
-				}
-				outGrad << "\n";
-			}
-			outGrad << "\n\n";
-			for (int i = 0; i < nrMutations; ++i)
-			{
-				for (int p = 0; p < nrSamples; ++p)
-				{
-					outGrad << _F(i,p) << " " ;
-				}
-				outGrad << "\n";
-			}
-			
-			outGrad.close();
-			
-			std::cout << "fb value ---- " << fb << std::endl;
-			std::cout << "labmda  ---- " << _lambda << std::endl;
-			
-			exit(1);
+//			std::ofstream outGrad("outgrad.txt");
+//			for (int i = 0; i < nrMutations; ++i)
+//			{
+//				for (int j = 0; j < nrStrains; ++j)
+//				{
+//
+//					int ii = i * nrStrains + j;
+//
+//					outGrad << grad[ii] << " ";
+//				}
+//
+//				outGrad << "\n";
+//			}
+//			outGrad << "\n\n";
+//			for (int j = 0; j < nrStrains; ++j)
+//			{
+//				for (int p = 0; p < nrSamples; ++p)
+//				{
+//					//int ii = i * nrStrains + j;
+//
+//					outGrad << _U(j,p) << " ";
+//				}
+//
+//				outGrad << "\n";
+//			}
+//			outGrad << "\n\n";
+//			for (int i = 0; i < nrMutations; ++i)
+//			{
+//				for (int j = 0; j < nrStrains; ++j)
+//				{
+//					outGrad << B(i,j) << " " ;
+//				}
+//				outGrad << "\n";
+//			}
+//			outGrad << "\n\n";
+//			for (int i = 0; i < nrMutations; ++i)
+//			{
+//				for (int j = 0; j < nrStrains; ++j)
+//				{
+//						outGrad << BUUt(i,j) << " ";
+//				}
+//				outGrad << "\n";
+//			}
+//			outGrad << "\n\n";
+//			for (int i = 0; i < nrMutations; ++i)
+//			{
+//				for (int p = 0; p < nrSamples; ++p)
+//				{
+//					outGrad << _F(i,p) << " " ;
+//				}
+//				outGrad << "\n";
+//			}
+//
+//			outGrad.close();
+//
+//			std::cout << "fb value ---- " << fb << std::endl;
+//			std::cout << "labmda  ---- " << _lambda << std::endl;
+//
+//			exit(1);
 			
 			return fb;
 			
@@ -199,11 +198,11 @@ protected:
 					double bij = B(i,j);
           int ii = i * nrStrains + j;
           double sign = ( bij - bij * bij > 0 ) * 2.0 - 1.0;
-          if ( abs(bij - bij * bij) < 1e-4 ) sign = 0;
+          if ( fabs(bij - bij * bij) < 1e-4 ) sign = 0;
 					
 					grad[ii] = 2 * M_BU_F_Ut(i, j) + _lambda * sign * ( 1 - 2 * bij );
 					
-					fb += _lambda * abs(bij * bij - bij);
+					fb += _lambda * fabs(bij * bij - bij);
 					
 				}
       }
@@ -238,11 +237,11 @@ protected:
 //          int ii = i * nrStrains + j;
 //          double sign = ( bij - bij * bij > 0 ) * 2.0 - 1.0;
 //
-//          if ( abs(bij - bij * bij) < 1e-4 ) sign = 0;
+//          if ( fabs(bij - bij * bij) < 1e-4 ) sign = 0;
 //
 //          grad[ii] = 2 * B_U_Ut(i, j) - 2 * _F_Ut(i, j) + _lambda * sign * ( 1 - 2 * bij );
 //
-//          fb += _lambda * abs(bij * bij - bij);
+//          fb += _lambda * fabs(bij * bij - bij);
 //         }
 //       }
 //
@@ -250,7 +249,7 @@ protected:
 //
 //       return fb;
 //     }
-		}
+		 }
    };
   
 private:
