@@ -35,7 +35,7 @@ Solution::Solution(const BoolMatrix& B,
   {
     for (int j = 0; j < nrStrains; ++j)
     {
-      _doubleB[i][j] = 0;
+      _doubleB[i][j] = _B[i][j] ? 1.0 : 0.;
     }
   }
   
@@ -62,7 +62,7 @@ Solution::Solution(const DoubleMatrix& doubleB,
   , _mutDetails(mutDetails)
 {
   const int nrSamples = getNrSamples();
-  const int nrMutations = getNrMutations();
+  const int nrMutations = _doubleB.size();
   const int nrStrains = getNrStrains();
   assert(_mutDetails.size() == _B.size());
   
