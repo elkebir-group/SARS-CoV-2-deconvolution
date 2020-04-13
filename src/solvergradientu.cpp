@@ -28,7 +28,7 @@ SolverGradientU::BoostDoubleMatrix SolverGradientU::solve()
   const int nrStrains = _B.size2();
   
   init();
-//  _model.getEnv().set(GRB_IntParam_LogToConsole, 0);
+  _model.getEnv().set(GRB_IntParam_LogToConsole, 0);
   if (_nrThreads != -1)
   {
     _model.getEnv().set(GRB_IntParam_Threads, _nrThreads);
