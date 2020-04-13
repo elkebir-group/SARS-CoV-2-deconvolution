@@ -127,6 +127,18 @@ protected:
 				
 				outGrad << "\n";
 			}
+			outGrad << "\n\n";
+			for (int j = 0; j < nrStrains; ++j)
+			{
+				for (int p = 0; p < nrSamples; ++p)
+				{
+					//int ii = i * nrStrains + j;
+					
+					outGrad << _U(j,p) << " ";
+				}
+				
+				outGrad << "\n";
+			}
 			outGrad.close();
 			
 			std::cout << "fb value ---- " << fb << std::endl;
