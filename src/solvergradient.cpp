@@ -84,7 +84,7 @@ bool SolverGradient::solve()
     randomizeU();
   }
   
-  double lambda = _param._lambda;
+  double lambda = 1;
   int idx = 0;
   while (true)
   {
@@ -199,7 +199,7 @@ bool SolverGradient::solve()
       break;
     }
     
-    if (lambda < 4) lambda *= 1.05;
+    if (lambda < 4) lambda *= _param._lambda;
     //lambda *= 1.1;
     // set original matrices
   }

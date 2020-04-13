@@ -21,7 +21,7 @@ public:
       : Solver::Param()
       , _maxIter(100)
       , _epsilon(0.01)
-      , _lambda(1.)
+      , _lambda(1.05)
     {
     }
 
