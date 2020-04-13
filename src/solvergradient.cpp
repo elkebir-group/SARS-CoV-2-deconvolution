@@ -166,7 +166,7 @@ bool SolverGradient::solve()
 
     std::cout << "------------------------normalized = " << frobNorm/norm_frobenius(element_prod(boostM, boostF)) << " ----------------\n";
 
-    if ( idx % 10 == 0)
+    if ( idx % 50 == 0)
     {
       std::ofstream outError(_outputPrefix+"_error_"+std::to_string(idx)+".txt");
       BoostDoubleMatrix E = element_prod(boostM, boostF - prod(_boostB, _boostU));
