@@ -52,7 +52,9 @@ SolverGradientU::BoostDoubleMatrix SolverGradientU::solve()
     for (int p = 0; p < nrSamples; ++p)
     {
       U(j,p) = _varU[j][p].get(GRB_DoubleAttr_X);
+			std::cout << U(j,p) << " ";
     }
+		std::cout << "\n";
   }
   
   return U;
