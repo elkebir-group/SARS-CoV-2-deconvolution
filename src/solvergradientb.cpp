@@ -12,40 +12,18 @@
 SolverGradientB::SolverGradientB(const BoostDoubleMatrix& F,
                                  const BoostDoubleMatrix& B,
                                  const BoostDoubleMatrix& U,
+                                 const BoostDoubleMatrix& M,
                                  double lambda)
   : _F(F)
   , _B(B)
   , _U(U)
+  , _M(M)
   , _lambda(lambda)
 {
 }
 
 SolverGradientB::BoostDoubleMatrix SolverGradientB::solve() const
 {
-//  using namespace boost::numeric::ublas;
-//
-//  // U^T
-//  BoostDoubleMatrix Ut = trans(_U);
-//
-//  // F U^T
-//  BoostDoubleMatrix F_Ut = prod(_F, Ut);
-//
-//  // U U^T
-//  BoostDoubleMatrix U_Ut = prod(_U, Ut);
-//
-//  // B U U^T
-//  BoostDoubleMatrix B_U_Ut = prod(_B, U_Ut);
-//
-//  BoostDoubleMatrix BB = element_prod(_B, _B);
-//
-//  BoostDoubleMatrix B1 = 2 * F_Ut  + _lambda * 3 * BB;
-//
-//  BoostDoubleMatrix B2 = 2 * B_U_Ut + _lambda * ( 2 * element_prod(_B, BB) + _B);
-//
-//  BoostDoubleMatrix newB = element_prod(_B, element_div(B1, B2));
-//
-//  std::cout << "grad => " << norm_inf(B2 - B1) << std::endl;
-  
   // Set up parameters
   LBFGSpp::LBFGSParam<double> param;
   param.epsilon = 1e-8;
@@ -55,7 +33,7 @@ SolverGradientB::BoostDoubleMatrix SolverGradientB::solve() const
  
   // Create solver and function object
   LBFGSpp::LBFGSSolver<double> solver(param);
-  Rosenbrock fun(_F, _U, _lambda);
+  Rosenbrock fun(_F, _U, _M, _lambda);
   
   const int nrMutations = _F.size1();
   const int nrStrains = _U.size1();

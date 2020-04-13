@@ -57,17 +57,21 @@ bool SolverGradient::solve()
   const int nrSamples = _input.getNrSamples();
   
   BoostDoubleMatrix boostF(nrMutations, nrSamples);
+  BoostDoubleMatrix boostM(nrMutations, nrSamples, 1.);
   for (int i = 0; i < nrMutations; ++i)
   {
     for (int p = 0; p < nrSamples; ++p)
     {
       boostF(i, p) = _input.getVaf(i, p);
+      if (boostF(i,p) == -1)
+      {
+        boostM(i, p) = 0;
+      }
     }
   }
 
   BoostDoubleMatrix oldB;
   BoostDoubleMatrix oldU;
-  BoostDoubleMatrix BU;
 
   double frobNorm = 0;
  
@@ -111,19 +115,7 @@ bool SolverGradient::solve()
       }
     }
     
-    frobNorm = 0;
-    BU = prod(_boostB, _boostU);
-    for (int i = 0; i < nrMutations; ++i)
-    {
-      for (int p = 0; p < nrSamples; ++p)
-      {
-        if (boostF(i,p) != -1)
-        {
-          frobNorm += (boostF(i,p) - BU(i,p)) * (boostF(i,p) - BU(i,p));
-        }
-      }
-    }
-    
+    frobNorm = norm_frobenius(element_prod(boostM, boostF - prod(_boostB, _boostU)));
     std::cout << "Frob norm 1 after updating U: " << frobNorm << std::endl;
 
     if (idx  > 0)
@@ -132,7 +124,7 @@ bool SolverGradient::solve()
     }
 
     // solve for B
-    SolverGradientB solverB(boostF, _boostB, _boostU, lambda);
+    SolverGradientB solverB(boostF, _boostB, _boostU, boostM, lambda);
     _boostB = solverB.solve();
 
 
@@ -148,18 +140,7 @@ bool SolverGradient::solve()
 //        }
 //      }
     
-    frobNorm = 0;
-    BU = prod(_boostB, _boostU);
-    for (int i = 0; i < nrMutations; ++i)
-    {
-      for (int p = 0; p < nrSamples; ++p)
-      {
-        if (boostF(i,p) != -1)
-        {
-          frobNorm += (boostF(i,p) - BU(i,p)) * (boostF(i,p) - BU(i,p));
-        }
-      }
-    }
+    frobNorm = frobNorm = norm_frobenius(element_prod(boostM, boostF - prod(_boostB, _boostU)));
     std::cout << "Frob norm 2 after updating B : " << frobNorm << std::endl;
     
     std::cout << "Iteration number -------- " << idx << "  -----------" << std::endl;
