@@ -121,6 +121,18 @@ void SolverGradientU::initConstraints()
       sum.clear();
     }
   }
+	
+	for (int p = 0; p < nrSamples; ++p)
+	{
+		for (int j = 0; j < nrStrains; ++j)
+		{
+			sum += _varU[j][p];
+		}
+		_model.addConstr(sum == 1);
+		sum.clear();
+	}
+	
+	_model.update();
 }
 
 void SolverGradientU::initObjective()
