@@ -147,7 +147,7 @@ bool SolverGradient::solve()
     ++idx;
     
     
-    frobNorm = frobNorm = norm_frobenius(element_prod(boostM, boostF - prod(_boostB, _boostU)));
+    frobNorm = norm_frobenius(element_prod(boostM, boostF - prod(_boostB, _boostU)));
     std::cout << "Frob norm 2 after updating B : " << frobNorm << std::endl;
     
     std::cout << "Iteration number -------- " << idx << "  -----------" << std::endl;
