@@ -105,7 +105,7 @@ int main(int argc, char** argv)
     outFilteredInput << filteredInput;
     outFilteredInput.close();
     
-    SolverGradient solver(filteredInput, param);
+    SolverGradient solver(filteredInput, param, outputPrefix);
     
     if (vm.count("initB"))
     {

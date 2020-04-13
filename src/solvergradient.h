@@ -37,7 +37,8 @@ public:
   /// @param input Input instance
   /// @param param Parameters
   SolverGradient(const InputInstance& input,
-                 const Param& param);
+                 const Param& param,
+								 std::string outputPrefix);
     
   /// Solve
   bool solve();
@@ -71,6 +72,9 @@ protected:
   BoostDoubleMatrix _boostU;
   /// Genotype matrix (double)
   DoubleMatrix _doubleB;
+	/// output prefix
+	std::string _outputPrefix;
+	
 };
 
 #endif // SOLVERGRADIENT_H

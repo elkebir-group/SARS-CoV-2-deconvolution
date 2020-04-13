@@ -13,11 +13,13 @@
 #include <fstream>
 
 SolverGradient::SolverGradient(const InputInstance& input,
-                               const Param& param)
+                               const Param& param,
+															 std::string outputPrefix)
 : Solver(input, param)
 , _param(param)
 , _boostB()
 , _boostU()
+, _outputPrefix(outputPrefix)
 {
 }
 
@@ -166,7 +168,7 @@ bool SolverGradient::solve()
 
     if ( idx % 10 == 0)
     {
-      std::ofstream outError("M_"+std::to_string(idx)+".txt");
+      std::ofstream outError(_outputPrefix+"_error_"+std::to_string(idx)+".txt");
       BoostDoubleMatrix E = element_prod(boostM, boostF - prod(_boostB, _boostU));
       for (int i = 0; i < nrMutations; ++i)
       {
@@ -180,7 +182,7 @@ bool SolverGradient::solve()
       }
       outError.close();
 
-      std::ofstream outTmp("doubleB_"+std::to_string(idx)+".txt");
+      std::ofstream outTmp(_outputPrefix+"_doubleB_"+std::to_string(idx)+".txt");
       for (int i = 0; i < nrMutations; ++i)
       {
         for (int j = 0; j < _param._nrStrains; ++j)
