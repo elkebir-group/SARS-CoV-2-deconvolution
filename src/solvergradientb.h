@@ -139,6 +139,15 @@ protected:
 				
 				outGrad << "\n";
 			}
+			outGrad << "\n\n";
+			for (int i = 0; i < nrMutations; ++i)
+			{
+				for (int j = 0; j < nrStrains; ++j)
+				{
+					outGrad << B(i,j) << " " ;
+				}
+				outGrad << "\n";
+			}
 			outGrad.close();
 			
 			std::cout << "fb value ---- " << fb << std::endl;
