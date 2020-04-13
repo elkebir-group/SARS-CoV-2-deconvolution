@@ -11,6 +11,7 @@
 #include <cmath>
 #include <boost/numeric/ublas/matrix.hpp>
 #include <Eigen/Core>
+#include <fstream>
 
 class SolverGradientB
 {
@@ -75,9 +76,9 @@ protected:
 			
 			// compute the objective function and the gradient
 			double fb = 0;
-			for (int j = 0; j < nrStrains; ++j)
+			for (int i = 0; i < nrMutations; ++i)
 			{
-				for (int i = 0; i < nrMutations; ++i)
+				for (int j = 0; j < nrStrains; ++j)
 				{
 					double bij = B(i,j);
 					int ii = i * nrStrains + j;
@@ -100,7 +101,7 @@ protected:
 					fb += _lambda * std::abs(bij * bij - bij);
 				}
 			}
-
+			
 			for (int i = 0; i < nrMutations; ++i)
 			{
 				for (int p = 0; p < nrSamples; ++p)
@@ -113,7 +114,24 @@ protected:
 				}
 			}
 			
+			std::ofstream outGrad("outgrad.txt");
+			for (int i = 0; i < nrMutations; ++i)
+			{
+				for (int j = 0; j < nrStrains; ++j)
+				{
 
+					int ii = i * nrStrains + j;
+				
+					outGrad << grad[ii] << " ";
+				}
+				
+				outGrad << "\n";
+			}
+			outGrad.close();
+			
+			std::cout << "fb value ---- " << fb << std::endl;
+			
+			exit(1);
 			
 			return fb;
 			
@@ -183,6 +201,7 @@ protected:
 //
 //       return fb;
 //     }
+		}
    };
   
 private:
