@@ -73,6 +73,7 @@ protected:
 			
 			BoostDoubleMatrix BU = prod(B, _U);
 			const int nrSamples = _U.size2();
+			BoostDoubleMatrix BUUt(nrMutations, nrStrains);
 			
 			// compute the objective function and the gradient
 			double fb = 0;
@@ -80,6 +81,8 @@ protected:
 			{
 				for (int j = 0; j < nrStrains; ++j)
 				{
+					BUUt(i,j) = 0;
+					
 					double bij = B(i,j);
 					int ii = i * nrStrains + j;
 					double sign = ( bij - bij * bij > 0 ) * 2.0 - 1.0;
@@ -95,6 +98,7 @@ protected:
 						{
 							// update gradient if F is not nan
 							grad[ii] += 2 * BU(i,p) * _U(j,p) - 2 * _F(i,p) * _U(j,p);
+							BUUt(i,j) += BU(i,p) * _U(j,p);
 						}
 					}
 					
@@ -145,6 +149,15 @@ protected:
 				for (int j = 0; j < nrStrains; ++j)
 				{
 					outGrad << B(i,j) << " " ;
+				}
+				outGrad << "\n";
+			}
+			outGrad << "\n\n";
+			for (int i = 0; i < nrMutations; ++i)
+			{
+				for (int j = 0; j < nrStrains; ++j)
+				{
+						outGrad << BUUt(i,j) << " ";
 				}
 				outGrad << "\n";
 			}
