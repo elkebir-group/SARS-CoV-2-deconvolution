@@ -106,7 +106,7 @@ protected:
 						}
 					}
 					
-					fb += _lambda * std::abs(bij * bij - bij);
+					fb += _lambda * abs(bij * bij - bij);
 				}
 			}
 			
