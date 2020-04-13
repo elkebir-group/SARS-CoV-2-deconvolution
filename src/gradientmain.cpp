@@ -140,7 +140,7 @@ int main(int argc, char** argv)
 			outB.close();
       
       std::ofstream outDoubleB(outputPrefix + "_doubleB.txt");
-      sol.writeSolDoubleB(filteredInput, outB);
+      sol.writeSolDoubleB(filteredInput, outDoubleB);
       outDoubleB.close();
 		}
 		else
