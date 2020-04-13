@@ -70,10 +70,9 @@ protected:
          
         B(i, j) = b[ii];
       }
-      
-      BoostDoubleMatrix B_U = prod(B, _U);
-      BoostDoubleMatrix M_BU_F = element_prod(_M, B_U - _F);
-      BoostDoubleMatrix M_BU_F_Ut = prod(M_BU_F, _Ut);
+       
+      BoostDoubleMatrix B_U_Ut = prod(B, _U_Ut);
+      BoostDoubleMatrix BB = element_prod(B, B);
        
       double fb = 0;
       for (int i = 0; i < nrMutations; ++i)
@@ -86,13 +85,13 @@ protected:
 
           if ( abs(bij - bij * bij) < 1e-4 ) sign = 0;
 
-          grad[ii] = 2 * M_BU_F_Ut(i, j) + _lambda * sign * ( 1 - 2 * bij );
+          grad[ii] = 2 * B_U_Ut(i, j) - 2 * _F_Ut(i, j) + _lambda * sign * ( 1 - 2 * bij );
 
           fb += _lambda * abs(bij * bij - bij);
          }
        }
        
-       fb += pow(norm_frobenius(M_BU_F), 2.);
+       fb += pow(norm_frobenius(_F - prod(B, _U)), 2.);
   
        return fb;
      }
@@ -105,7 +104,7 @@ private:
   const BoostDoubleMatrix& _B;
   /// Mixture matrix (strains by samples)
   const BoostDoubleMatrix& _U;
-  /// Mask matrix (mutations by samples)
+  /// Mask matrix
   const BoostDoubleMatrix& _M;
   /// Lambda
   const double _lambda;
