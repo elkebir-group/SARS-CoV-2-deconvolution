@@ -161,33 +161,58 @@ bool SolverGradient::solve()
     double max_diff = norm_inf(BB_diff_squared);
     
     std::cout << "max_diff => " << max_diff << std::endl;
+
+    std::cout << "------------------------normalized = " << frobNorm/norm_frobenius(element_prod(boostM, boostF)) << " ----------------\n";
+
+    if ( idx % 10 == 0)
+    {
+      std::ofstream outError("M_"+std::to_string(idx)+".txt");
+      BoostDoubleMatrix E = element_prod(boostM, boostF - prod(_boostB, _boostU));
+      for (int i = 0; i < nrMutations; ++i)
+      {
+        for (int j = 0; j < nrSamples; ++j)
+        {
+          if (j > 0)
+            outError << "\t";
+          outError << E(i, j);
+        }
+        outError << std::endl;
+      }
+      outError.close();
+
+      std::ofstream outTmp("doubleB_"+std::to_string(idx)+".txt");
+      for (int i = 0; i < nrMutations; ++i)
+      {
+        for (int j = 0; j < _param._nrStrains; ++j)
+        {
+          if (j > 0)
+            outTmp << "\t";
+          outTmp << _boostB(i, j);
+        }
+        outTmp << std::endl;
+      }
+      outTmp.close();
+    }
     
-    if (max_diff < _param._epsilon || idx >= _param._maxIter)
+    if ((max_diff < _param._epsilon && frobNorm < 0.05 * norm_frobenius(element_prod(boostM, boostF))) || idx >= _param._maxIter)
     {
       break;
     }
     
     if (lambda < 4) lambda *= _param._lambda;
     //lambda *= 1.1;
+    // set original matrices
   }
   
-  // set original matrices
-  std::ofstream outTmp("doubleB.tsv");
   _doubleB = DoubleMatrix(nrMutations, DoubleVector(_param._nrStrains));
   for (int i = 0; i < nrMutations; ++i)
   {
     for (int j = 0; j < _param._nrStrains; ++j)
     {
-      if (j > 0)
-        outTmp << "\t";
-      outTmp << _boostB(i, j);
-
       _doubleB[i][j] = _boostB(i, j);
       _B[i][j] = _boostB(i, j) > 0.5;
     }
-    outTmp << std::endl;
   }
-  outTmp.close();
   
   for (int j = 0; j < _param._nrStrains; ++j)
   {
