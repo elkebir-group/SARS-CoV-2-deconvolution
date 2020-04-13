@@ -165,6 +165,16 @@ protected:
 				}
 				outGrad << "\n";
 			}
+			outGrad << "\n\n";
+			for (int i = 0; i < nrMutations; ++i)
+			{
+				for (int p = 0; p < nrSamples; ++p)
+				{
+					outGrad << _F(i,p) << " " ;
+				}
+				outGrad << "\n";
+			}
+			
 			outGrad.close();
 			
 			std::cout << "fb value ---- " << fb << std::endl;
