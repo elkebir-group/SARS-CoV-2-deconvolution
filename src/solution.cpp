@@ -63,8 +63,8 @@ Solution::Solution(const DoubleMatrix& doubleB,
 {
   const int nrSamples = getNrSamples();
   const int nrMutations = _doubleB.size();
-  const int nrStrains = getNrStrains();
-  assert(_mutDetails.size() == _B.size());
+  const int nrStrains = _doubleB[0].size();
+  assert(_mutDetails.size() == _doubleB.size());
   
   _B = BoolMatrix(nrMutations, BoolVector(nrStrains, false));
   for (int i = 0; i < nrMutations; ++i)
