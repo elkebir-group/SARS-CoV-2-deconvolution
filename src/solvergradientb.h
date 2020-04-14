@@ -139,6 +139,26 @@ protected:
       
       double fb = norm_frobenius(M_BU_F);
       fb *= fb;
+			Eigen::VectorXd bb = b.cwiseProduct(b);
+			fb += _lambda * (bb - b).lpNorm<1>();
+			
+//			double l1norm = 0;
+//			for (int i = 0; i < nrMutations; ++i)
+//			{
+//				for (int j = 0; j < nrStrains; ++j)
+//				{
+//					double bij = B(i,j);
+//					//int ii = i*nrStrains + j;
+//					//std::cout << bb[ii] << "\t" << bij*bij << "\t" << b[ii]*b[ii] << "\n";
+//					l1norm += fabs(bij * bij - bij);
+//				}
+//			}
+//			
+//			std::cout << l1norm << "\t" << (bb - b).lpNorm<1>() << std::endl;
+//			
+//			exit(1);
+			
+			#
       for (int i = 0; i < nrMutations; ++i)
       {
         for (int j = 0; j < nrStrains; ++j)
@@ -151,7 +171,7 @@ protected:
           
           grad[ii] = 2 * M_BU_F_Ut(i, j) + _lambda * sign * ( 1 - 2 * bij );
           
-          fb += _lambda * fabs(bij * bij - bij);
+          //fb += _lambda * fabs(bij * bij - bij);
         }
       }
       
