@@ -163,13 +163,15 @@ protected:
 //			
 //			exit(1);
 			
-      #pragma omp parallel num_threads(_nthreads)
-      {
-         std::cout << "hello\n" << "number of threads is " << _nthreads;
-      }
+//      #pragma omp parallel num_threads(_nthreads)
+//      {
+//         std::cout << "hello\n" << "number of threads is " << _nthreads << std::endl;
+//      }
+//
+//      exit(1);
 
-      exit(1);
-
+      ////double wtime = omp_get_wtime();
+      #pragma omp parallel for num_threads(_nthreads) collapse(2)
       for (int i = 0; i < nrMutations; ++i)
       {
         for (int j = 0; j < nrStrains; ++j)
@@ -185,7 +187,12 @@ protected:
           //fb += _lambda * fabs(bij * bij - bij);
         }
       }
-      
+
+      //wtime = omp_get_wtime() - wtime;
+      //std::cout << "time taken for the loop with " << _nthreads << " threads is " << wtime << std::endl;
+
+      //exit(1);    
+ 
       return fb;
       
       static int count = 0;
