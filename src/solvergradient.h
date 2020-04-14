@@ -22,6 +22,7 @@ public:
       , _maxIter(100)
       , _epsilon(0.01)
       , _lambda(1.05)
+			, _lambdaInit(1)
     {
     }
 
@@ -31,6 +32,8 @@ public:
     double _epsilon;
     /// Lambda
     double _lambda;
+		/// LambdaInit
+		double _lambdaInit;
   };
   
   /// Constructor

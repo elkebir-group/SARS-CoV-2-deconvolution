@@ -23,7 +23,8 @@ int main(int argc, char** argv)
   desc.add_options()
     ("help,h", "produce help message")
     ("strains,k", po::value<int>(), "number of strains")
-    ("lambda,l", po::value<double>()->default_value(param._lambda), "initial value for lambda")
+    ("lambda,l", po::value<double>()->default_value(param._lambda), "rate of increase of lambda")
+	("lambdaInit,linit", po::value<double>()->default_value(param._lambdaInit), "initial value of lambda")
     ("initB,B", po::value<std::string>(), "genotype matrix for initialization")
     ("initU,U", po::value<std::string>(), "mixture matrix for initialization")
     ("maxIter,m", po::value<int>()->default_value(param._maxIter), "maximum number of iterations")
@@ -54,6 +55,7 @@ int main(int argc, char** argv)
     param._epsilon = vm["eps"].as<double>();
     param._maxIter = vm["maxIter"].as<int>();
     param._lambda = vm["lambda"].as<double>();
+		param._lambdaInit = vm["lambdaInit"].as<double>();
     const bool filter = vm["filter"].as<bool>();
 
     std::string inputFilenameRef = vm["input"].as<StringVector>()[0];

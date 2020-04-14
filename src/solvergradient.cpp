@@ -86,7 +86,7 @@ bool SolverGradient::solve()
     randomizeU();
   }
   
-  double lambda = 1;
+  double lambda = _param._lambdaInit;
   int idx = 0;
   while (true)
   {
