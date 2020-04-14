@@ -13,12 +13,14 @@ SolverGradientB::SolverGradientB(const BoostDoubleMatrix& F,
                                  const BoostDoubleMatrix& B,
                                  const BoostDoubleMatrix& U,
                                  const BoostDoubleMatrix& M,
-                                 double lambda)
+                                 double lambda,
+																 const int nthreads)
   : _F(F)
   , _B(B)
   , _U(U)
   , _M(M)
   , _lambda(lambda)
+  , _nthreads(nthreads)
 {
 }
 
@@ -33,7 +35,7 @@ SolverGradientB::BoostDoubleMatrix SolverGradientB::solve() const
  
   // Create solver and function object
   LBFGSpp::LBFGSSolver<double> solver(param);
-  Rosenbrock fun(_F, _U, _M, _lambda);
+  Rosenbrock fun(_F, _U, _M, _lambda, _nthreads);
   
   const int nrMutations = _F.size1();
   const int nrStrains = _U.size1();

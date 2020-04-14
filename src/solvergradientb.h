@@ -22,9 +22,11 @@ public:
                   const BoostDoubleMatrix& B,
                   const BoostDoubleMatrix& U,
                   const BoostDoubleMatrix& M,
-                  double lambda);
+                  double lambda,
+									const int nthreads);
   
   BoostDoubleMatrix solve() const;
+	
   
 protected:
   class Rosenbrock
@@ -35,6 +37,7 @@ protected:
     const BoostDoubleMatrix& _U;
     const BoostDoubleMatrix& _M;
     const double _lambda;
+		const int _nthreads;
     BoostDoubleMatrix _Ut;
     BoostDoubleMatrix _F_Ut;
     BoostDoubleMatrix _U_Ut;
@@ -43,12 +46,14 @@ protected:
     Rosenbrock(const BoostDoubleMatrix& F,
                const BoostDoubleMatrix& U,
                const BoostDoubleMatrix& M,
-               double lambda)
+               double lambda,
+							 const int nthreads)
     : _n(F.size1() * U.size1())
     , _F(F)
     , _U(U)
     , _M(M)
     , _lambda(lambda)
+		, _nthreads(nthreads)
     , _Ut(boost::numeric::ublas::trans(_U))
     , _F_Ut(boost::numeric::ublas::prod(_F, _Ut))
     , _U_Ut(boost::numeric::ublas::prod(_U, _Ut))
@@ -158,9 +163,9 @@ protected:
 //			
 //			exit(1);
 			
-      #pragma omp parallel num_threads(3)
+      #pragma omp parallel num_threads(_nthreads)
       {
-         std::cout << "hello\n";
+         std::cout << "hello\n" << "number of threads is " << _nthreads;
       }
 
       exit(1);
@@ -250,6 +255,8 @@ private:
   const BoostDoubleMatrix& _M;
   /// Lambda
   const double _lambda;
+	/// threads
+	const int _nthreads;
 };
 
 #endif // SOLVERGRADIENTB_H

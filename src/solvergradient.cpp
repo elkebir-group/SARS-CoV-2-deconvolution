@@ -125,7 +125,7 @@ bool SolverGradient::solve()
     }
     
     // solve for B
-    SolverGradientB solverB(boostF, _boostB, _boostU, boostM, lambda);
+    SolverGradientB solverB(boostF, _boostB, _boostU, boostM, lambda, _param._nrThreads);
     _boostB = solverB.solve();
     
     for (int i = 0; i < nrMutations; ++i)
