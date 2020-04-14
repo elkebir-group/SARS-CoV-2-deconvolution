@@ -158,7 +158,13 @@ protected:
 //			
 //			exit(1);
 			
-			#
+      #pragma omp parallel num_threads(3)
+      {
+         std::cout << "hello\n";
+      }
+
+      exit(1);
+
       for (int i = 0; i < nrMutations; ++i)
       {
         for (int j = 0; j < nrStrains; ++j)
