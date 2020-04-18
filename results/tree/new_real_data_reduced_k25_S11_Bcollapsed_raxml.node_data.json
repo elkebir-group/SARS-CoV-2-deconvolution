@@ -1,0 +1,136 @@
+{
+  "alignment": null,
+  "generated_by": {
+    "program": "augur",
+    "version": "6.4.2"
+  },
+  "input_tree": "new_real_data_reduced_k25_S11_Bcollapsed_raxml.nwk",
+  "nodes": {
+    "NODE_0000000": {
+      "branch_length": 0.001
+    },
+    "NODE_0000001": {
+      "branch_length": 1e-06
+    },
+    "NODE_0000002": {
+      "branch_length": 1e-06
+    },
+    "NODE_0000003": {
+      "branch_length": 1e-06
+    },
+    "NODE_0000004": {
+      "branch_length": 0.02242748
+    },
+    "NODE_0000005": {
+      "branch_length": 1e-06
+    },
+    "NODE_0000006": {
+      "branch_length": 0.03342083
+    },
+    "NODE_0000007": {
+      "branch_length": 1e-06
+    },
+    "NODE_0000008": {
+      "branch_length": 1e-06
+    },
+    "NODE_0000009": {
+      "branch_length": 0.0109598
+    },
+    "NODE_0000010": {
+      "branch_length": 1e-06
+    },
+    "NODE_0000011": {
+      "branch_length": 1e-06
+    },
+    "NODE_0000012": {
+      "branch_length": 0.02152001
+    },
+    "NODE_0000013": {
+      "branch_length": 1e-06
+    },
+    "NODE_0000014": {
+      "branch_length": 0.04441975
+    },
+    "NODE_0000015": {
+      "branch_length": 0.02083868
+    },
+    "NODE_0000016": {
+      "branch_length": 1e-06
+    },
+    "NODE_0000017": {
+      "branch_length": 1e-06
+    },
+    "NODE_0000018": {
+      "branch_length": 1e-06
+    },
+    "NODE_0000019": {
+      "branch_length": 0.01082886
+    },
+    "strain0": {
+      "branch_length": 0.01059812
+    },
+    "strain1": {
+      "branch_length": 0.01095383
+    },
+    "strain10": {
+      "branch_length": 0.07965833
+    },
+    "strain12": {
+      "branch_length": 0.0107932
+    },
+    "strain13": {
+      "branch_length": 1e-06
+    },
+    "strain14": {
+      "branch_length": 0.01095948
+    },
+    "strain15": {
+      "branch_length": 0.03203711
+    },
+    "strain17": {
+      "branch_length": 0.0104874
+    },
+    "strain18": {
+      "branch_length": 0.01052539
+    },
+    "strain19": {
+      "branch_length": 0.01095317
+    },
+    "strain2": {
+      "branch_length": 0.01053609
+    },
+    "strain20": {
+      "branch_length": 0.02202074
+    },
+    "strain21": {
+      "branch_length": 0.01075587
+    },
+    "strain22": {
+      "branch_length": 0.02065168
+    },
+    "strain23": {
+      "branch_length": 1e-06
+    },
+    "strain24": {
+      "branch_length": 1e-06
+    },
+    "strain3": {
+      "branch_length": 0.03342981
+    },
+    "strain4": {
+      "branch_length": 1e-06
+    },
+    "strain5": {
+      "branch_length": 0.01074755
+    },
+    "strain6": {
+      "branch_length": 0.01053609
+    },
+    "strain7": {
+      "branch_length": 1e-06
+    },
+    "strain8": {
+      "branch_length": 0.01094854
+    }
+  }
+}
