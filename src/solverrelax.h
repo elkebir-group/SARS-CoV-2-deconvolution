@@ -42,6 +42,8 @@ protected:
 	bool shrinkB();
 	
 protected:
+	int _nrStrains;
+	int _nrThreads;
   /// Use L1 norm
   const bool _L1;
 	/// threshold for B

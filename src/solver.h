@@ -34,7 +34,16 @@ public:
   /// @param param Parameters
   Solver(const InputInstance& input,
          const Param& param);
-  
+	
+	Solver(const InputInstance& input,
+				 int nrStrains,
+				 int nrThreads)
+	: _input(input)
+	{
+		_param._nrThreads = nrThreads;
+		_param._nrStrains = nrStrains;
+	}
+	
   /// Destructor
   virtual ~Solver()
   {
@@ -77,7 +86,7 @@ protected:
   /// Input
   const InputInstance& _input;
   /// Parameters
-  const Param _param;
+	Param _param;
   /// Objective balue
   double _objectiveValue;
   /// Objective value lower bound

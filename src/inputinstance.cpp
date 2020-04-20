@@ -232,6 +232,47 @@ InputInstance InputInstance::filterMutations(IntVector& newToOld,
   return newInput;
 }
 
+BoolMatrix InputInstance::readInitB(std::istream& in)
+{
+	// header
+	std::string line;
+	getline(in, line);
+	StringVector s;
+	boost::split(s, line, boost::is_any_of("\t"));
+	
+	int nrStrains = s.size() - 10;
+	if (nrStrains < 1)
+	{
+		throw std::runtime_error("Invalid number of strains.");
+	}
+	
+	BoolMatrix Bmat;
+	
+	while (in.good())
+	{
+		getline(in, line);
+		if (line.empty()) continue;
+		
+		StringVector s;
+		boost::split(s, line, boost::is_any_of("\t"));
+		
+		if (s.size() != nrStrains + 10)
+		{
+			throw std::runtime_error(getLineNumber() + "Invalid number of entries.");
+		}
+		
+		Bmat.push_back(BoolVector(nrStrains, false));
+		for (int j = 0; j < nrStrains; ++j)
+		{
+			Bmat.back()[j] = boost::lexical_cast<double>(s[10+j]) >= 0.5;
+		}
+	}
+	
+	std::cout << "number of strains in the input B matrix -- " << nrStrains << std::endl;
+	
+	return Bmat;
+}
+
 BoolMatrix InputInstance::blowupBmat()
 {
 	std::set<BoolVector> strainSet;

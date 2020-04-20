@@ -196,6 +196,8 @@ public:
 
 	BoolMatrix blowupBmat();
 	
+	BoolMatrix readInitB(std::istream& in);
+	
 protected:
   template <typename T>
   void writeTemp(const T& matrix, std::ostream& out) const;
