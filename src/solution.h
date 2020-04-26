@@ -53,9 +53,9 @@ public:
   /// Return number of strains
   int getNrStrains() const
   {
-    assert(_U.size() > 0);
+    //assert(_U.size() > 0);
     assert(_B.size() > 0);
-    assert(_B[0].size() == _U.size());
+    //assert(_B[0].size() == _U.size());
     
     return _B[0].size();
   }

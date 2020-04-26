@@ -36,6 +36,10 @@ public:
          const Param& param);
 	
 	Solver(const InputInstance& input,
+				 const Param& param,
+				 const int nrStrains);
+	
+	Solver(const InputInstance& input,
 				 int nrStrains,
 				 int nrThreads)
 	: _input(input)
