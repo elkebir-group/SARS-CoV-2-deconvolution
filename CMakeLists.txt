@@ -40,6 +40,26 @@ set (gradient_hdr
   src/solution.h
 )
 
+set (exposure_src
+  src/exposuremain.cpp
+  src/solverexposure.cpp
+  src/solverexposureu.cpp
+  src/solver.cpp
+  src/inputinstance.cpp
+  src/utils.cpp
+  src/solution.cpp
+)
+
+set (exposure_hdr
+  src/solverexposure.h
+  src/solvergradient.h
+  src/solverexposureu.h
+  src/solver.h
+  src/inputinstance.h
+  src/utils.h
+  src/solution.h
+)
+
 set (merge_src
   src/mergemain.cpp
   src/inputinstance.cpp
@@ -141,7 +161,7 @@ if (BUILD_DOC)
   endif()
 endif()
 
-set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fopenmp" )
+set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11" )
 
 if( ${CMAKE_SYSTEM_NAME} MATCHES "Darwin" )
   set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-local-typedefs" )
@@ -186,6 +206,10 @@ target_link_libraries( relax ${CommonLibs} ${GUROBI_LIBRARIES} )
 add_executable( gradient ${gradient_src} ${gradient_hdr} )
 target_include_directories( gradient PUBLIC "src" ${Boost_INCLUDE_DIRS} ${GUROBI_INCLUDE_DIR} )
 target_link_libraries( gradient ${CommonLibs} ${GUROBI_LIBRARIES} )
+
+add_executable( exposure ${exposure_src} ${exposure_hdr} )
+target_include_directories( exposure PUBLIC "src" ${Boost_INCLUDE_DIRS} ${GUROBI_INCLUDE_DIR} )
+target_link_libraries( exposure ${CommonLibs} ${GUROBI_LIBRARIES} )
 
 add_executable( simulate ${simulate_src} ${simulate_hdr} )
 target_include_directories( simulate PUBLIC "src" ${Boost_INCLUDE_DIRS} )
