@@ -1,56 +1,9 @@
 Academic license - for non-commercial use only
-Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
-Optimize a model with 96 rows, 224 columns and 753 nonzeros
-Model fingerprint: 0x4b818ce4
-Model has 95 quadratic objective terms
-Coefficient statistics:
-  Matrix range     [1e+00, 1e+00]
-  Objective range  [2e-02, 2e+00]
-  QObjective range [2e+00, 2e+00]
-  Bounds range     [1e+00, 1e+00]
-  RHS range        [1e+00, 1e+00]
-Presolve removed 65 rows and 68 columns
-Presolve time: 0.00s
-Presolved: 31 rows, 156 columns, 674 nonzeros
-Presolved model has 39 quadratic objective terms
-Ordering time: 0.00s
-
-Barrier statistics:
- AA' NZ     : 1.220e+02
- Factor NZ  : 2.230e+02
- Factor Ops : 1.995e+03 (less than 1 second per iteration)
- Threads    : 1
-
-                  Objective                Residual
-Iter       Primal          Dual         Primal    Dual     Compl     Time
-   0   9.76094205e+06 -9.80077070e+06  1.22e+05 9.73e+01  3.96e+05     0s
-   1   1.95751496e+05 -2.41970873e+05  9.01e+03 7.21e+00  2.97e+04     0s
-   2   6.12439824e+01 -4.75210124e+04  8.13e+01 6.50e-02  4.16e+02     0s
-   3   2.21861386e+01 -1.66802128e+04  2.39e+01 1.90e-02  1.24e+02     0s
-   4   9.68398977e+00 -5.79367513e+03  8.21e+00 6.53e-03  4.95e+01     0s
-   5   4.26005266e+00 -2.40124677e+03  1.66e+00 1.33e-03  1.34e+01     0s
-   6   3.38685566e+00 -7.69084986e+02  2.31e-01 1.87e-04  2.81e+00     0s
-   7   3.27311634e+00 -1.19778548e+01  2.65e-04 3.41e-07  4.87e-02     0s
-   8   2.38462116e+00 -1.24264102e+00  4.14e-05 5.34e-08  1.16e-02     0s
-   9   1.67891634e+00 -3.65579292e-01  1.63e-05 2.11e-08  6.53e-03     0s
-  10   1.33818366e+00  4.45132916e-01  6.08e-06 7.84e-09  2.85e-03     0s
-  11   1.08005639e+00  7.43437383e-01  5.99e-12 7.88e-15  1.08e-03     0s
-  12   1.02028614e+00  9.68568196e-01  1.82e-13 2.78e-16  1.65e-04     0s
-  13   1.00791129e+00  1.00014721e+00  8.49e-15 1.11e-16  2.48e-05     0s
-  14   1.00553994e+00  1.00209413e+00  7.15e-14 2.78e-17  1.10e-05     0s
-  15   1.00469576e+00  1.00419294e+00  2.19e-13 4.16e-17  1.61e-06     0s
-  16   1.00451991e+00  1.00444047e+00  4.76e-14 1.39e-17  2.54e-07     0s
-  17   1.00448619e+00  1.00447993e+00  6.58e-14 5.55e-17  2.00e-08     0s
-  18   1.00448349e+00  1.00448262e+00  1.95e-14 2.78e-17  2.75e-09     0s
-  19   1.00448312e+00  1.00448299e+00  3.01e-14 1.11e-16  3.90e-10     0s
-  20   1.00448306e+00  1.00448305e+00  1.01e-13 1.11e-16  5.54e-11     0s
-
-Barrier solved model in 20 iterations and 0.00 seconds
-Optimal objective 1.00448306e+00
-
-Frob norm 1 after updating U: 1.00224
-Frob norm 2 after updating B : 1.00224
+Frob norm 1 after updating U: 1.00179
+200 iterations
+f(b) = 2.11638
+Frob norm 2 after updating B : 1.00089
 Iteration number -------- 1  -----------
 lambda : 1
-max_diff => 0
-------------------------normalized = 0.47976 ----------------
+max_diff => 6.93864e-06
+------------------------normalized = 0.479115 ----------------
