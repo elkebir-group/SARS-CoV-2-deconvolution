@@ -1,0 +1,49 @@
+Academic license - for non-commercial use only
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Optimize a model with 355 rows, 353 columns and 1398 nonzeros
+Model fingerprint: 0x1ef21354
+Model has 92 quadratic objective terms
+Variable types: 224 continuous, 129 integer (129 binary)
+Coefficient statistics:
+  Matrix range     [5e-02, 1e+00]
+  Objective range  [2e-02, 2e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 4e+00]
+Found heuristic solution: objective 3.3114386
+Presolve removed 65 rows and 65 columns
+Presolve time: 0.01s
+Presolved: 290 rows, 288 columns, 1322 nonzeros
+Presolved model has 40 quadratic objective terms
+Variable types: 159 continuous, 129 integer (129 binary)
+
+Root relaxation: objective 1.176863e-03, 43 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    0.00118    0    7    3.31144    0.00118   100%     -    0s
+H    0     0                       0.0023479    0.00118  49.9%     -    0s
+     0     0    0.00136    0    5    0.00235    0.00136  41.9%     -    0s
+     0     0    0.00140    0    8    0.00235    0.00140  40.3%     -    0s
+     0     0    0.00153    0    7    0.00235    0.00153  34.9%     -    0s
+     0     0    0.00166    0    4    0.00235    0.00166  29.4%     -    0s
+     0     0    0.00207    0    3    0.00235    0.00207  11.8%     -    0s
+     0     0    0.00207    0    3    0.00235    0.00207  11.8%     -    0s
+H    0     0                       0.0023024    0.00207  10.1%     -    0s
+     0     0    0.00207    0    3    0.00230    0.00207  10.1%     -    0s
+H    0     0                       0.0020698    0.00207  0.00%     -    0s
+
+Explored 1 nodes (144 simplex iterations) in 0.04 seconds
+Thread count was 1 (of 28 available processors)
+
+Solution count 4: 0.00206975 0.00230236 0.00234785 3.31144 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.069752369111e-03, best bound 2.069752369111e-03, gap 0.0000%
+Frob norm 1 after updating U: 0.0454945
+nrStrains is 129
+size of _B is 95 x 129
+size of _U is 129 x 1
+size of boostB is 95 x 129
+size of boostU is 129 x 1

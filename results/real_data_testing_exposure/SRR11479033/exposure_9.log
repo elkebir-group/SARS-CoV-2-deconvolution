@@ -1,0 +1,52 @@
+Academic license - for non-commercial use only
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Optimize a model with 355 rows, 353 columns and 1398 nonzeros
+Model fingerprint: 0xe88a8c79
+Model has 94 quadratic objective terms
+Variable types: 224 continuous, 129 integer (129 binary)
+Coefficient statistics:
+  Matrix range     [5e-02, 1e+00]
+  Objective range  [1e-02, 2e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 9e+00]
+Found heuristic solution: objective 4.9260073
+Presolve removed 65 rows and 65 columns
+Presolve time: 0.01s
+Presolved: 290 rows, 288 columns, 1322 nonzeros
+Presolved model has 41 quadratic objective terms
+Variable types: 159 continuous, 129 integer (129 binary)
+
+Root relaxation: objective 7.446040e-04, 45 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    0.00074    0    3    4.92601    0.00074   100%     -    0s
+H    0     0                       0.0015959    0.00074  53.3%     -    0s
+     0     0    0.00077    0    7    0.00160    0.00077  51.6%     -    0s
+     0     0    0.00084    0    5    0.00160    0.00084  47.1%     -    0s
+     0     0    0.00085    0    5    0.00160    0.00085  46.9%     -    0s
+     0     0    0.00086    0    3    0.00160    0.00086  45.9%     -    0s
+     0     0    0.00092    0    5    0.00160    0.00092  42.2%     -    0s
+     0     0    0.00092    0    5    0.00160    0.00092  42.0%     -    0s
+     0     0    0.00093    0    3    0.00160    0.00093  41.4%     -    0s
+     0     0    0.00116    0    2    0.00160    0.00116  27.0%     -    0s
+     0     0    0.00116    0    2    0.00160    0.00116  27.0%     -    0s
+     0     0    0.00122    0    1    0.00160    0.00122  23.6%     -    0s
+     0     0    0.00122    0    1    0.00160    0.00122  23.6%     -    0s
+     0     0    0.00122    0    1    0.00160    0.00122  23.6%     -    0s
+
+Explored 1 nodes (180 simplex iterations) in 0.03 seconds
+Thread count was 1 (of 28 available processors)
+
+Solution count 2: 0.00159591 4.92601 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.595905546138e-03, best bound 1.595905546138e-03, gap 0.0000%
+Frob norm 1 after updating U: 0.0399488
+nrStrains is 129
+size of _B is 95 x 129
+size of _U is 129 x 1
+size of boostB is 95 x 129
+size of boostU is 129 x 1

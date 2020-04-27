@@ -1,0 +1,44 @@
+Academic license - for non-commercial use only
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Optimize a model with 355 rows, 353 columns and 1398 nonzeros
+Model fingerprint: 0xeee6fe52
+Model has 95 quadratic objective terms
+Variable types: 224 continuous, 129 integer (129 binary)
+Coefficient statistics:
+  Matrix range     [5e-02, 1e+00]
+  Objective range  [1e-02, 2e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 5e+00]
+Found heuristic solution: objective 6.0005393
+Presolve removed 65 rows and 65 columns
+Presolve time: 0.01s
+Presolved: 290 rows, 288 columns, 1322 nonzeros
+Presolved model has 41 quadratic objective terms
+Variable types: 159 continuous, 129 integer (129 binary)
+
+Root relaxation: objective 5.185585e-04, 28 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    0.00052    0    3    6.00054    0.00052   100%     -    0s
+H    0     0                       0.0230393    0.00052  97.7%     -    0s
+H    0     0                       0.0005393    0.00052  3.85%     -    0s
+     0     0    0.00052    0    4    0.00054    0.00052  3.49%     -    0s
+     0     0    0.00053    0    2    0.00054    0.00053  1.55%     -    0s
+     0     0     cutoff    0         0.00054    0.00054  0.00%     -    0s
+
+Explored 1 nodes (74 simplex iterations) in 0.02 seconds
+Thread count was 1 (of 28 available processors)
+
+Solution count 3: 0.000539312 0.0230393 6.00054 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 5.393120431094e-04, best bound 5.393120431094e-04, gap 0.0000%
+Frob norm 1 after updating U: 0.0232231
+nrStrains is 129
+size of _B is 95 x 129
+size of _U is 129 x 1
+size of boostB is 95 x 129
+size of boostU is 129 x 1

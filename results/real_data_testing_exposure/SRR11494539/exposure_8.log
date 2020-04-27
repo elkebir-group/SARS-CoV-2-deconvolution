@@ -1,0 +1,48 @@
+Academic license - for non-commercial use only
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Optimize a model with 355 rows, 353 columns and 1398 nonzeros
+Model fingerprint: 0x3fefc2a0
+Model has 95 quadratic objective terms
+Variable types: 224 continuous, 129 integer (129 binary)
+Coefficient statistics:
+  Matrix range     [5e-02, 1e+00]
+  Objective range  [1e-02, 2e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 8e+00]
+Found heuristic solution: objective 1.9855409
+Presolve removed 65 rows and 65 columns
+Presolve time: 0.01s
+Presolved: 290 rows, 288 columns, 1322 nonzeros
+Presolved model has 41 quadratic objective terms
+Variable types: 159 continuous, 129 integer (129 binary)
+
+Root relaxation: objective 4.602637e-04, 32 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    0.00046    0    5    1.98554    0.00046   100%     -    0s
+H    0     0                       0.0452980    0.00046  99.0%     -    0s
+H    0     0                       0.0006924    0.00046  33.5%     -    0s
+     0     0    0.00048    0   16    0.00069    0.00048  30.0%     -    0s
+     0     0    0.00054    0   11    0.00069    0.00054  22.5%     -    0s
+     0     0    0.00055    0   12    0.00069    0.00055  20.5%     -    0s
+     0     0    0.00061    0    8    0.00069    0.00061  11.9%     -    0s
+     0     0    0.00068    0    5    0.00069    0.00068  1.47%     -    0s
+     0     0    0.00068    0    3    0.00069    0.00068  1.39%     -    0s
+     0     0     cutoff    0         0.00069    0.00069  0.00%     -    0s
+
+Explored 1 nodes (277 simplex iterations) in 0.03 seconds
+Thread count was 1 (of 28 available processors)
+
+Solution count 3: 0.000692434 0.045298 1.98554 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.924335473408e-04, best bound 6.924335473408e-04, gap 0.0000%
+Frob norm 1 after updating U: 0.0263141
+nrStrains is 129
+size of _B is 95 x 129
+size of _U is 129 x 1
+size of boostB is 95 x 129
+size of boostU is 129 x 1

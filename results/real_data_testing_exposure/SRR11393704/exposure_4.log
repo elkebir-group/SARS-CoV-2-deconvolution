@@ -1,0 +1,46 @@
+Academic license - for non-commercial use only
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Optimize a model with 355 rows, 353 columns and 1398 nonzeros
+Model fingerprint: 0xbd3bc8a8
+Model has 95 quadratic objective terms
+Variable types: 224 continuous, 129 integer (129 binary)
+Coefficient statistics:
+  Matrix range     [5e-02, 1e+00]
+  Objective range  [2e-04, 2e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 4e+00]
+Found heuristic solution: objective 2.9929865
+Presolve removed 65 rows and 65 columns
+Presolve time: 0.01s
+Presolved: 290 rows, 288 columns, 1322 nonzeros
+Presolved model has 41 quadratic objective terms
+Variable types: 159 continuous, 129 integer (129 binary)
+
+Root relaxation: objective 1.111927e-04, 96 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    0.00011    0   11    2.99299    0.00011   100%     -    0s
+H    0     0                       0.0484250    0.00011   100%     -    0s
+H    0     0                       0.0001533    0.00011  27.5%     -    0s
+     0     0    0.00012    0    9    0.00015    0.00012  20.8%     -    0s
+     0     0    0.00012    0    9    0.00015    0.00012  18.9%     -    0s
+     0     0    0.00015    0    3    0.00015    0.00015  4.69%     -    0s
+     0     0    0.00015    0    2    0.00015    0.00015  3.42%     -    0s
+     0     0     cutoff    0         0.00015    0.00015  0.00%     -    0s
+
+Explored 1 nodes (218 simplex iterations) in 0.02 seconds
+Thread count was 1 (of 28 available processors)
+
+Solution count 3: 0.000153336 0.048425 2.99299 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.533357117030e-04, best bound 1.533357117030e-04, gap 0.0000%
+Frob norm 1 after updating U: 0.0123829
+nrStrains is 129
+size of _B is 95 x 129
+size of _U is 129 x 1
+size of boostB is 95 x 129
+size of boostU is 129 x 1
