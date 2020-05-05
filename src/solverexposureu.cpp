@@ -11,16 +11,16 @@
 SolverExposureU::SolverExposureU(const BoostDoubleMatrix& F,
                                  const BoostDoubleMatrix& B,
                                  int nrThreads,
-																 int nrStrainsMax,
+                                 int nrStrainsMax,
                                  GRBEnv env)
-  : _F(F)
-  , _B(B)
-  , _nrThreads(nrThreads)
-  , _env(env)
-  , _model(_env)
-  , _varBU()
-  , _varU()
-	, _k(nrStrainsMax)
+: _F(F)
+, _B(B)
+, _nrThreads(nrThreads)
+, _env(env)
+, _model(_env)
+, _varBU()
+, _varU()
+, _k(nrStrainsMax)
 {
 }
 
@@ -97,14 +97,14 @@ void SolverExposureU::initVariables()
       _varU[j][p] = _model.addVar(0, 1, 0, GRB_CONTINUOUS, buf);
     }
   }
-	
-	_varK = VarArray(nrStrains);
-	for (int j = 0; j < nrStrains; ++j)
-	{
-		snprintf(buf, 1024, "k:%d", j);
-		_varK[j] = _model.addVar(0, 1, 0, GRB_BINARY, buf);
-	}
-	
+  
+  _varK = VarArray(nrStrains);
+  for (int j = 0; j < nrStrains; ++j)
+  {
+    snprintf(buf, 1024, "k:%d", j);
+    _varK[j] = _model.addVar(0, 1, 0, GRB_BINARY, buf);
+  }
+  
   _model.update();
 }
 
@@ -138,30 +138,30 @@ void SolverExposureU::initConstraints()
     _model.addConstr(sum == 1);
     sum.clear();
   }
-	
-	for (int p = 0; p < nrSamples; ++p)
-	{
-		for (int j = 0; j < nrStrains; ++j)
-		{
-			_model.addConstr(_varK[j] >= _varU[j][p]);
-		}
-	}
-	
-	for (int j = 0; j < nrStrains; ++j)
-	{
-		sum += _varK[j];
-	}
-	_model.addConstr(sum <= _k);
-	sum.clear();
-	
-	for (int p = 0; p < nrSamples; ++p)
-	{
-		for (int j = 0; j < nrStrains; ++j)
-		{
-			_model.addConstr(_varU[j][p] >= 0.05 * _varK[j]);
-		}
-	}
-	
+  
+  for (int p = 0; p < nrSamples; ++p)
+  {
+    for (int j = 0; j < nrStrains; ++j)
+    {
+      _model.addConstr(_varK[j] >= _varU[j][p]);
+    }
+  }
+  
+  for (int j = 0; j < nrStrains; ++j)
+  {
+    sum += _varK[j];
+  }
+  _model.addConstr(sum <= _k);
+  sum.clear();
+  
+  for (int p = 0; p < nrSamples; ++p)
+  {
+    for (int j = 0; j < nrStrains; ++j)
+    {
+      _model.addConstr(_varU[j][p] >= 0.05 * _varK[j]);
+    }
+  }
+  
   _model.update();
 }
 

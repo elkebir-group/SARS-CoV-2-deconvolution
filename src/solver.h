@@ -18,11 +18,11 @@ public:
   struct Param
   {
     Param()
-      : _nrStrains(1)
-      , _nrThreads(1)
+    : _nrStrains(1)
+    , _nrThreads(1)
     {
     }
-
+    
     /// Number of strains
     int _nrStrains;
     /// Number of threads
@@ -34,25 +34,25 @@ public:
   /// @param param Parameters
   Solver(const InputInstance& input,
          const Param& param);
-	
-	Solver(const InputInstance& input,
-				 const Param& param,
-				 const int nrStrains);
-	
-	Solver(const InputInstance& input,
-				 int nrStrains,
-				 int nrThreads)
-	: _input(input)
-	{
-		_param._nrThreads = nrThreads;
-		_param._nrStrains = nrStrains;
-	}
-	
+  
+  Solver(const InputInstance& input,
+         const Param& param,
+         const int nrStrains);
+  
+  Solver(const InputInstance& input,
+         int nrStrains,
+         int nrThreads)
+  : _input(input)
+  {
+    _param._nrThreads = nrThreads;
+    _param._nrStrains = nrStrains;
+  }
+  
   /// Destructor
   virtual ~Solver()
   {
   }
-    
+  
   /// Solve
   virtual bool solve() = 0;
   
@@ -90,7 +90,7 @@ protected:
   /// Input
   const InputInstance& _input;
   /// Parameters
-	Param _param;
+  Param _param;
   /// Objective balue
   double _objectiveValue;
   /// Objective value lower bound

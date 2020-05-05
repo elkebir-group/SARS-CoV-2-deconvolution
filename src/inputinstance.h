@@ -55,7 +55,7 @@ public:
     MutAbsent,
     MutClonal,
     MutSubclonal,
-		MutNull
+    MutNull
   };
   
   /// Return mutation status
@@ -76,9 +76,9 @@ public:
     }
     else if ( _alt[i][p] + _ref[i][p] < 5)
     {
-//			std::cout << _vaf[i][p] << "   " << _alt[i][p] << "\t" << _ref[i][p] << "made mutnull" << std::endl;
-			return MutNull;
-		}
+      //			std::cout << _vaf[i][p] << "   " << _alt[i][p] << "\t" << _ref[i][p] << "made mutnull" << std::endl;
+      return MutNull;
+    }
     else
     {
       return MutAbsent;
@@ -193,11 +193,11 @@ public:
   typedef std::map<std::string, InputInstance> InputInstanceMap;
   
   InputInstanceMap splitSamplesByLocation() const;
-
-	BoolMatrix blowupBmat();
-	
-	BoolMatrix readInitB(std::istream& in);
-	
+  
+  BoolMatrix blowupBmat();
+  
+  BoolMatrix readInitB(std::istream& in);
+  
 protected:
   template <typename T>
   void writeTemp(const T& matrix, std::ostream& out) const;
@@ -221,7 +221,7 @@ private:
   IntMatrix _ref;
   /// altiant read count
   IntMatrix _alt;
-	
+  
   friend std::ostream& operator<<(std::ostream& out, const InputInstance& input);
   friend std::istream& operator>>(std::istream& in, InputInstance& input);
 };
@@ -230,15 +230,15 @@ template <typename T>
 void InputInstance::writeTemp(const T& matrix, std::ostream& out) const
 {
   out << "pos" << "\t"
-      << "ref" << "\t"
-      << "alt" << "\t"
-      << "gene" << "\t"
-      << "N/S" << "\t"
-      << "AA" << "\t"
-      << "nSRAsubclonal" << "\t"
-      << "nSRAclonal" << "\t"
-      << "nSRA" << "\t"
-      << "nConsensus";
+  << "ref" << "\t"
+  << "alt" << "\t"
+  << "gene" << "\t"
+  << "N/S" << "\t"
+  << "AA" << "\t"
+  << "nSRAsubclonal" << "\t"
+  << "nSRAclonal" << "\t"
+  << "nSRA" << "\t"
+  << "nConsensus";
   
   for (const std::string& sample : _samples)
   {
@@ -253,20 +253,20 @@ void InputInstance::writeTemp(const T& matrix, std::ostream& out) const
   {
     const InputInstance::MutationDetails& mutDetails_i = _mutDetails[i];
     out << mutDetails_i._pos << "\t"
-        << mutDetails_i._refAllele << "\t"
-        << mutDetails_i._altAllele << "\t"
-        << mutDetails_i._gene << "\t"
-        << mutDetails_i._type << "\t"
-        << mutDetails_i._aminoAcidSub << "\t"
-        << mutDetails_i._nrSubclonalSamples << "\t"
-        << mutDetails_i._nrClonalSamples << "\t"
-        << mutDetails_i._nrSamples << "\t"
-        << mutDetails_i._nrConsensusSamples;
+    << mutDetails_i._refAllele << "\t"
+    << mutDetails_i._altAllele << "\t"
+    << mutDetails_i._gene << "\t"
+    << mutDetails_i._type << "\t"
+    << mutDetails_i._aminoAcidSub << "\t"
+    << mutDetails_i._nrSubclonalSamples << "\t"
+    << mutDetails_i._nrClonalSamples << "\t"
+    << mutDetails_i._nrSamples << "\t"
+    << mutDetails_i._nrConsensusSamples;
     
     for (int p = 0; p < m; ++p)
     {
       out << "\t";
-
+      
       const double x_ip = matrix[i][p];
       if (x_ip == -1)
       {

@@ -234,147 +234,147 @@ InputInstance InputInstance::filterMutations(IntVector& newToOld,
 
 BoolMatrix InputInstance::readInitB(std::istream& in)
 {
-	// header
-	std::string line;
-	getline(in, line);
-	StringVector s;
-	boost::split(s, line, boost::is_any_of("\t"));
-	
-	int nrStrains = s.size() - 10;
-	if (nrStrains < 1)
-	{
-		throw std::runtime_error("Invalid number of strains.");
-	}
-	
-	BoolMatrix Bmat;
-	
-	while (in.good())
-	{
-		getline(in, line);
-		if (line.empty()) continue;
-		
-		StringVector s;
-		boost::split(s, line, boost::is_any_of("\t"));
-		
-		if (s.size() != nrStrains + 10)
-		{
-			throw std::runtime_error(getLineNumber() + "Invalid number of entries.");
-		}
-		
-		Bmat.push_back(BoolVector(nrStrains, false));
-		for (int j = 0; j < nrStrains; ++j)
-		{
-			Bmat.back()[j] = boost::lexical_cast<double>(s[10+j]) >= 0.5;
-		}
-	}
-	
-	std::cout << "number of strains in the input B matrix -- " << nrStrains << std::endl;
-	
-	return Bmat;
+  // header
+  std::string line;
+  getline(in, line);
+  StringVector s;
+  boost::split(s, line, boost::is_any_of("\t"));
+  
+  int nrStrains = s.size() - 10;
+  if (nrStrains < 1)
+  {
+    throw std::runtime_error("Invalid number of strains.");
+  }
+  
+  BoolMatrix Bmat;
+  
+  while (in.good())
+  {
+    getline(in, line);
+    if (line.empty()) continue;
+    
+    StringVector s;
+    boost::split(s, line, boost::is_any_of("\t"));
+    
+    if (s.size() != nrStrains + 10)
+    {
+      throw std::runtime_error(getLineNumber() + "Invalid number of entries.");
+    }
+    
+    Bmat.push_back(BoolVector(nrStrains, false));
+    for (int j = 0; j < nrStrains; ++j)
+    {
+      Bmat.back()[j] = boost::lexical_cast<double>(s[10+j]) >= 0.5;
+    }
+  }
+  
+  std::cout << "number of strains in the input B matrix -- " << nrStrains << std::endl;
+  
+  return Bmat;
 }
 
 BoolMatrix InputInstance::blowupBmat()
 {
-	std::set<BoolVector> strainSet;
-	
-	for (int p = 0; p < _nrSamples; ++p)
-	{
-		int subclonalCount = 0;
-		IntVector subclonalIndices;
-		BoolVector baseStrain;
-		
-		//std::cout << "clonal mutations:";
-		
-		for (int i = 0; i < _nrMutations; ++i)
-		{
-			if (getMutationStatus(i, p) == MutAbsent)
-			{
-				baseStrain.push_back(false);
-			}
-			else if (getMutationStatus(i, p) == MutClonal)
-			{
-				//std::cout << " " << i;
-				baseStrain.push_back(true);
-			}
-			else if (getMutationStatus(i, p) == MutSubclonal)
-			{
-				++subclonalCount;
-				subclonalIndices.push_back(i);
-				baseStrain.push_back(false);
-			}
-		}
-		
-		//std::cout << std::endl;
-		
-		if (subclonalCount > 16)
-		{
-			throw std::runtime_error("too many mutations in sample " + _samples[p]);
-		}
-		
-		for (int k = 0; k < pow(2.0, subclonalCount); ++k)
-		{
-			int caseNum = k;
-			std::string blowupIndex;
-			
-			while (caseNum != 0)
-			{
-				blowupIndex = (caseNum%2 == 0 ? "0" : "1") + blowupIndex;
-				caseNum/=2;
-			}
-			
-			blowupIndex.insert(blowupIndex.begin(), subclonalCount - blowupIndex.length(), '0');
-
-			/*
-			std::cout << blowupIndex << " -- " << subclonalCount << " [";
-			
-			for (int index : subclonalIndices)
-			{
-				std::cout << " " << index;
-			}
-
-			std::cout << " ]\n";
-			*/
-			
-			BoolVector currStrain = baseStrain;
-			
-			for (int idx = 0; idx < subclonalIndices.size(); ++idx)
-			{
-				if (blowupIndex[idx] == '1')
-				{
-					currStrain[subclonalIndices[idx]] = true;
-					
-					//std::cout << subclonalIndices[idx] << " made true" << std::endl;
-				}
-			}
-			
-			strainSet.insert(currStrain);
-		}
-		
-		/*
-		std::cout << _samples[p] << " -- " << subclonalCount << " -- " << strainSet.size() << " [";
-		
-		for (int index : subclonalIndices)
-		{
-			std::cout << " " << index;
-		}
-		
-		std::cout << " ]\n";
-		*/
-	}
-	
-	BoolMatrix Bmat(_nrMutations);
-
-	for (BoolVector strain : strainSet)
-	{
-		for (int i = 0; i < _nrMutations; ++i)
-		{
-			Bmat[i].push_back(strain[i]);
-		}
-	}
-	
-	std::cout << "number of strains after blowup -- " << strainSet.size() <<std::endl;
-	
-	return Bmat;
+  std::set<BoolVector> strainSet;
+  
+  for (int p = 0; p < _nrSamples; ++p)
+  {
+    int subclonalCount = 0;
+    IntVector subclonalIndices;
+    BoolVector baseStrain;
+    
+    //std::cout << "clonal mutations:";
+    
+    for (int i = 0; i < _nrMutations; ++i)
+    {
+      if (getMutationStatus(i, p) == MutAbsent)
+      {
+        baseStrain.push_back(false);
+      }
+      else if (getMutationStatus(i, p) == MutClonal)
+      {
+        //std::cout << " " << i;
+        baseStrain.push_back(true);
+      }
+      else if (getMutationStatus(i, p) == MutSubclonal)
+      {
+        ++subclonalCount;
+        subclonalIndices.push_back(i);
+        baseStrain.push_back(false);
+      }
+    }
+    
+    //std::cout << std::endl;
+    
+    if (subclonalCount > 16)
+    {
+      throw std::runtime_error("too many mutations in sample " + _samples[p]);
+    }
+    
+    for (int k = 0; k < pow(2.0, subclonalCount); ++k)
+    {
+      int caseNum = k;
+      std::string blowupIndex;
+      
+      while (caseNum != 0)
+      {
+        blowupIndex = (caseNum%2 == 0 ? "0" : "1") + blowupIndex;
+        caseNum/=2;
+      }
+      
+      blowupIndex.insert(blowupIndex.begin(), subclonalCount - blowupIndex.length(), '0');
+      
+      /*
+       std::cout << blowupIndex << " -- " << subclonalCount << " [";
+       
+       for (int index : subclonalIndices)
+       {
+       std::cout << " " << index;
+       }
+       
+       std::cout << " ]\n";
+       */
+      
+      BoolVector currStrain = baseStrain;
+      
+      for (int idx = 0; idx < subclonalIndices.size(); ++idx)
+      {
+        if (blowupIndex[idx] == '1')
+        {
+          currStrain[subclonalIndices[idx]] = true;
+          
+          //std::cout << subclonalIndices[idx] << " made true" << std::endl;
+        }
+      }
+      
+      strainSet.insert(currStrain);
+    }
+    
+    /*
+     std::cout << _samples[p] << " -- " << subclonalCount << " -- " << strainSet.size() << " [";
+     
+     for (int index : subclonalIndices)
+     {
+     std::cout << " " << index;
+     }
+     
+     std::cout << " ]\n";
+     */
+  }
+  
+  BoolMatrix Bmat(_nrMutations);
+  
+  for (BoolVector strain : strainSet)
+  {
+    for (int i = 0; i < _nrMutations; ++i)
+    {
+      Bmat[i].push_back(strain[i]);
+    }
+  }
+  
+  std::cout << "number of strains after blowup -- " << strainSet.size() <<std::endl;
+  
+  return Bmat;
 }
 
 void InputInstance::read(std::istream& inRef, std::istream& inAlt)
@@ -402,7 +402,7 @@ void InputInstance::read(std::istream& inRef, std::istream& inAlt)
   {
     _samples.push_back(s[i]);
   }
-
+  
   while (inRef.good())
   {
     getline(inRef, line);
@@ -447,7 +447,7 @@ void InputInstance::read(std::istream& inRef, std::istream& inAlt)
   {
     throw std::runtime_error("Invalid number of samples.");
   }
-
+  
   while (inAlt.good())
   {
     getline(inAlt, line);
@@ -460,7 +460,7 @@ void InputInstance::read(std::istream& inRef, std::istream& inAlt)
     {
       throw std::runtime_error(getLineNumber() + "Invalid number of entries.");
     }
-       
+    
     _alt.push_back(IntVector(_nrSamples, 0));
     for (int p = 0; p < _nrSamples; ++p)
     {
@@ -494,7 +494,7 @@ std::istream& operator>>(std::istream& in, InputInstance& input)
   input._mutDetails.clear();
   input._samples.clear();
   input._vaf.clear();
-
+  
   // header
   std::string line;
   getline(in, line);
@@ -510,7 +510,7 @@ std::istream& operator>>(std::istream& in, InputInstance& input)
   {
     input._samples.push_back(s[i]);
   }
-
+  
   while (in.good())
   {
     getline(in, line);
@@ -597,19 +597,19 @@ InputInstance InputInstance::filter() const
     IntVector newToOldMutations, oldToNewMutations;
     filteredInput = filteredInput.filterMutations(newToOldMutations, oldToNewMutations);
     std::cerr << "Filtered out " << oldToNewMutations.size() - newToOldMutations.size() << " mutation(s) that are present in at most one sample." << std::endl;
-
+    
     int deltaMuts = newToOldMutations.size() - oldToNewMutations.size();
-
+    
     IntVector newToOldSamples, oldToNewSamples;
     filteredInput = filteredInput.filterSamples(newToOldSamples, oldToNewSamples);
     std::cerr << "Filtered out " << oldToNewSamples.size() - newToOldSamples.size() << " sample(s) that do not contain subclonal mutations." << std::endl;
-
+    
     int deltaSamples = newToOldSamples.size() - oldToNewSamples.size();
     if (deltaMuts == 0 && deltaSamples == 0) break;
   }
   
   std::cerr << filteredInput.getNrMutations() << " mutations in " << filteredInput.getNrSamples() << " samples left." << std::endl;
-
+  
   return filteredInput;
 }
 

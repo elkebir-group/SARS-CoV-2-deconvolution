@@ -1,9 +1,9 @@
 /*
-* solution.cpp
-*
-*  Created on: 8-apr-2020
-*      Author: M. El-Kebir
-*/
+ * solution.cpp
+ *
+ *  Created on: 8-apr-2020
+ *      Author: M. El-Kebir
+ */
 
 #include <cmath>
 #include "solution.h"
@@ -166,7 +166,7 @@ double Solution::getBIC(const InputInstance& input) const
   double dist = computeDistanceL2(input);
   dist /= n;
   
-//  double bic = n * log(dist/n) + k * getNrMutations() * log(n);
+  //  double bic = n * log(dist/n) + k * getNrMutations() * log(n);
   double bic = n * log(dist/n) + k * log(n);
   
   return bic;
@@ -194,27 +194,27 @@ double Solution::computeDistanceL2(const InputInstance& input) const
         diff *= diff;
         dist += diff;
       }
-//
-//      switch (input.getMutationStatus(i, p))
-//      {
-//        case InputInstance::MutClonal:
-//          dist += (1 - f_ip) * (1 - f_ip);
-//          break;
-//        case InputInstance::MutAbsent:
-//          dist += (f_ip) * (f_ip);
-//          break;
-//        case InputInstance::MutSubclonal:
-//          {
-//            double obs_f_ip = input.getVaf(i, p);
-//            if (!std::isnan(obs_f_ip))
-//            {
-//              double diff = f_ip - obs_f_ip;
-//              diff *= diff;
-//              dist += diff;
-//            }
-//          }
-//          break;
-//      }
+      //
+      //      switch (input.getMutationStatus(i, p))
+      //      {
+      //        case InputInstance::MutClonal:
+      //          dist += (1 - f_ip) * (1 - f_ip);
+      //          break;
+      //        case InputInstance::MutAbsent:
+      //          dist += (f_ip) * (f_ip);
+      //          break;
+      //        case InputInstance::MutSubclonal:
+      //          {
+      //            double obs_f_ip = input.getVaf(i, p);
+      //            if (!std::isnan(obs_f_ip))
+      //            {
+      //              double diff = f_ip - obs_f_ip;
+      //              diff *= diff;
+      //              dist += diff;
+      //            }
+      //          }
+      //          break;
+      //      }
     }
   }
   
@@ -369,7 +369,7 @@ void Solution::writeSolF(const InputInstance& input,
     for (int p = 0; p < m; ++p)
     {
       out << "\t";
-
+      
       const double f_ip = _F[i][p];
       if (std::isnan(f_ip))
       {

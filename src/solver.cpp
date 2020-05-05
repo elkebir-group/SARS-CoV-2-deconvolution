@@ -23,15 +23,15 @@ Solver::Solver(const InputInstance& input,
 }
 
 Solver::Solver(const InputInstance& input,
-							 const Param& param,
-							 const int nrStrains)
-: _input(input)
-, _param(param)
-, _objectiveValue(-std::numeric_limits<double>::max())
-, _objectiveValueLB(-std::numeric_limits<double>::max())
-, _B(input.getNrMutations(), BoolVector(nrStrains, false))
-, _U(nrStrains, DoubleVector(input.getNrSamples(), 0.))
-, _BU(input.getNrMutations(), DoubleVector(input.getNrSamples(), 0.))
-, _env()
+               const Param& param,
+               const int nrStrains)
+  : _input(input)
+  , _param(param)
+  , _objectiveValue(-std::numeric_limits<double>::max())
+  , _objectiveValueLB(-std::numeric_limits<double>::max())
+  , _B(input.getNrMutations(), BoolVector(nrStrains, false))
+  , _U(nrStrains, DoubleVector(input.getNrSamples(), 0.))
+  , _BU(input.getNrMutations(), DoubleVector(input.getNrSamples(), 0.))
+  , _env()
 {
 }

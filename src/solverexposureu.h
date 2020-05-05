@@ -24,7 +24,7 @@ public:
   SolverExposureU(const BoostDoubleMatrix& F,
                   const BoostDoubleMatrix& B,
                   int nrThreads,
-									int nrStrains,
+                  int nrStrains,
                   GRBEnv env);
   
   BoostDoubleMatrix solve();
@@ -61,10 +61,10 @@ protected:
   VarMatrix _varBU;
   /// _varU[j][p] is the mixture proportion of strain j in sample p
   VarMatrix _varU;
-	/// _k is the maximum number of strains allowed
-	const int _k;
-	/// _varK is the indicator variable for a strain being used
-	VarArray _varK;
+  /// _k is the maximum number of strains allowed
+  const int _k;
+  /// _varK is the indicator variable for a strain being used
+  VarArray _varK;
 };
 
 #endif // SOLVEREXPOSUREU_H

@@ -18,7 +18,7 @@ public:
   struct Param : public Solver::Param
   {
     Param()
-      : Solver::Param()
+    : Solver::Param()
     {
     }
   };
@@ -28,19 +28,19 @@ public:
   /// @param param Parameters
   SolverExposure(const InputInstance& input,
                  const Param& param,
-								 std::string outputPrefix);
-
-	SolverExposure(const InputInstance& input,
-								 const Param& param,
-								 const int nrStrains,
-								 std::string outputPrefix);
-	
+                 std::string outputPrefix);
+  
+  SolverExposure(const InputInstance& input,
+                 const Param& param,
+                 const int nrStrains,
+                 std::string outputPrefix);
+  
   /// Solve
   bool solve();
   
   /// Initialize matrix B
   void initB(const DoubleMatrix& B);
-	
+  
   const DoubleMatrix& getDoubleB() const
   {
     return _doubleB;
@@ -48,7 +48,7 @@ public:
   
 protected:
   typedef boost::numeric::ublas::matrix<double> BoostDoubleMatrix;
-
+  
 protected:
   /// Parameters
   const Param& _param;
@@ -58,9 +58,9 @@ protected:
   BoostDoubleMatrix _boostU;
   /// Genotype matrix (double)
   DoubleMatrix _doubleB;
-	/// output prefix
-	std::string _outputPrefix;
-	
+  /// output prefix
+  std::string _outputPrefix;
+  
 };
 
 #endif // SOLVERGRADIENT_H

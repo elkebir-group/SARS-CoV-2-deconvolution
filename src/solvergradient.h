@@ -23,6 +23,7 @@ public:
       , _epsilon(0.01)
       , _lambda(1.05)
 			, _lambdaInit(1)
+      , _log(false)
     {
     }
 
@@ -34,6 +35,8 @@ public:
     double _lambda;
 		/// LambdaInit
 		double _lambdaInit;
+    /// Output additional logging
+    bool _log;
   };
   
   /// Constructor

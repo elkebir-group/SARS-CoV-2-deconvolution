@@ -12,13 +12,13 @@ SolverCaU::SolverCaU(const InputInstance& input,
                      int nrThreads,
                      const BoolMatrix& B,
                      GRBEnv env)
-  : _input(input)
-  , _nrStrains(nrStrains)
-  , _nrThreads(nrThreads)
-  , _B(B)
-  , _model(env)
-  , _varF()
-  , _varU()
+: _input(input)
+, _nrStrains(nrStrains)
+, _nrThreads(nrThreads)
+, _B(B)
+, _model(env)
+, _varF()
+, _varU()
 {
 }
 
@@ -34,7 +34,7 @@ bool SolverCaU::solve(DoubleMatrix& F, DoubleMatrix& U, double& objValue)
     _model.getEnv().set(GRB_IntParam_Threads, _nrThreads);
   }
   _model.optimize();
-
+  
   int status = _model.get(GRB_IntAttr_Status);
   if (status == GRB_INFEASIBLE)
   {

@@ -23,10 +23,10 @@ public:
                   const BoostDoubleMatrix& U,
                   const BoostDoubleMatrix& M,
                   double lambda,
-									const int nthreads);
+                  const int nthreads);
   
   BoostDoubleMatrix solve() const;
-	
+  
   
 protected:
   class Rosenbrock
@@ -37,7 +37,7 @@ protected:
     const BoostDoubleMatrix& _U;
     const BoostDoubleMatrix& _M;
     const double _lambda;
-		const int _nthreads;
+    const int _nthreads;
     BoostDoubleMatrix _Ut;
     BoostDoubleMatrix _F_Ut;
     BoostDoubleMatrix _U_Ut;
@@ -47,13 +47,13 @@ protected:
                const BoostDoubleMatrix& U,
                const BoostDoubleMatrix& M,
                double lambda,
-							 const int nthreads)
+               const int nthreads)
     : _n(F.size1() * U.size1())
     , _F(F)
     , _U(U)
     , _M(M)
     , _lambda(lambda)
-		, _nthreads(nthreads)
+    , _nthreads(nthreads)
     , _Ut(boost::numeric::ublas::trans(_U))
     , _F_Ut(boost::numeric::ublas::prod(_F, _Ut))
     , _U_Ut(boost::numeric::ublas::prod(_U, _Ut))
@@ -144,34 +144,34 @@ protected:
       
       double fb = norm_frobenius(M_BU_F);
       fb *= fb;
-			Eigen::VectorXd bb = b.cwiseProduct(b);
-			fb += _lambda * (bb - b).lpNorm<1>();
-			
-//			double l1norm = 0;
-//			for (int i = 0; i < nrMutations; ++i)
-//			{
-//				for (int j = 0; j < nrStrains; ++j)
-//				{
-//					double bij = B(i,j);
-//					//int ii = i*nrStrains + j;
-//					//std::cout << bb[ii] << "\t" << bij*bij << "\t" << b[ii]*b[ii] << "\n";
-//					l1norm += fabs(bij * bij - bij);
-//				}
-//			}
-//			
-//			std::cout << l1norm << "\t" << (bb - b).lpNorm<1>() << std::endl;
-//			
-//			exit(1);
-			
-//      #pragma omp parallel num_threads(_nthreads)
-//      {
-//         std::cout << "hello\n" << "number of threads is " << _nthreads << std::endl;
-//      }
-//
-//      exit(1);
-
+      Eigen::VectorXd bb = b.cwiseProduct(b);
+      fb += _lambda * (bb - b).lpNorm<1>();
+      
+      //			double l1norm = 0;
+      //			for (int i = 0; i < nrMutations; ++i)
+      //			{
+      //				for (int j = 0; j < nrStrains; ++j)
+      //				{
+      //					double bij = B(i,j);
+      //					//int ii = i*nrStrains + j;
+      //					//std::cout << bb[ii] << "\t" << bij*bij << "\t" << b[ii]*b[ii] << "\n";
+      //					l1norm += fabs(bij * bij - bij);
+      //				}
+      //			}
+      //			
+      //			std::cout << l1norm << "\t" << (bb - b).lpNorm<1>() << std::endl;
+      //			
+      //			exit(1);
+      
+      //      #pragma omp parallel num_threads(_nthreads)
+      //      {
+      //         std::cout << "hello\n" << "number of threads is " << _nthreads << std::endl;
+      //      }
+      //
+      //      exit(1);
+      
       ////double wtime = omp_get_wtime();
-      #pragma omp parallel for num_threads(_nthreads) collapse(2)
+#pragma omp parallel for num_threads(_nthreads) collapse(2)
       for (int i = 0; i < nrMutations; ++i)
       {
         for (int j = 0; j < nrStrains; ++j)
@@ -187,12 +187,12 @@ protected:
           //fb += _lambda * fabs(bij * bij - bij);
         }
       }
-
+      
       //wtime = omp_get_wtime() - wtime;
       //std::cout << "time taken for the loop with " << _nthreads << " threads is " << wtime << std::endl;
-
+      
       //exit(1);    
- 
+      
       return fb;
       
       static int count = 0;
@@ -201,12 +201,12 @@ protected:
       {
         for (int j = 0; j < nrStrains; ++j)
         {
-      
+          
           int ii = i * nrStrains + j;
-      
+          
           outGrad << grad[ii] << " ";
         }
-      
+        
         outGrad << "\n";
       }
       outGrad << "\n\n";
@@ -215,10 +215,10 @@ protected:
         for (int p = 0; p < nrSamples; ++p)
         {
           //int ii = i * nrStrains + j;
-      
+          
           outGrad << _U(j,p) << " ";
         }
-      
+        
         outGrad << "\n";
       }
       outGrad << "\n\n";
@@ -262,8 +262,8 @@ private:
   const BoostDoubleMatrix& _M;
   /// Lambda
   const double _lambda;
-	/// threads
-	const int _nthreads;
+  /// threads
+  const int _nthreads;
 };
 
 #endif // SOLVERGRADIENTB_H

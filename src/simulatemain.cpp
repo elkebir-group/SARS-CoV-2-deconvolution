@@ -29,8 +29,9 @@ int main(int argc, char** argv)
     ("mutations,n", po::value<int>()->default_value(100), "number of mutations")
     ("depth,d", po::value<int>()->default_value(1000), "number of reads")
     ("seed,s", po::value<int>()->default_value(0), "random number generator seed")
-    ("output,o", po::value<std::string>()->default_value("out"), "output prefix");
-
+    ("output,o", po::value<std::string>()->default_value("out"), "output prefix")
+  ;
+  
   po::positional_options_description p;
   p.add("input", -1);
   
@@ -60,7 +61,7 @@ int main(int argc, char** argv)
     
     // generate B
     std::uniform_real_distribution<> unif(0, 1);
-
+    
     ub::matrix<double> B(nrMutations, nrStrains);
     for (int j = 0; j < nrStrains; ++j)
     {
@@ -73,7 +74,7 @@ int main(int argc, char** argv)
     
     // generate U
     std::poisson_distribution<> pois(nrExpStrains - 1);
-
+    
     IntVector strains;
     for (int j = 0; j < nrStrains; ++j)
     {

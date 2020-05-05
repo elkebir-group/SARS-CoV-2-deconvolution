@@ -195,7 +195,7 @@ add_executable( deconvolve EXCLUDE_FROM_ALL ${deconvolve_src} ${deconvolve_hdr} 
 target_include_directories( deconvolve PUBLIC "src" ${Boost_INCLUDE_DIRS} ${GUROBI_INCLUDE_DIR} )
 target_link_libraries( deconvolve ${CommonLibs} ${GUROBI_LIBRARIES} )
 
-add_executable( merge ${merge_src} ${merge_hdr} )
+add_executable( merge EXCLUDE_FROM_ALL ${merge_src} ${merge_hdr} )
 target_include_directories( merge PUBLIC "src" ${Boost_INCLUDE_DIRS} )
 target_link_libraries( merge ${CommonLibs} )
 

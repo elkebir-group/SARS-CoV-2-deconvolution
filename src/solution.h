@@ -1,9 +1,9 @@
 /*
-* solution.h
-*
-*  Created on: 8-apr-2020
-*      Author: M. El-Kebir
-*/
+ * solution.h
+ *
+ *  Created on: 8-apr-2020
+ *      Author: M. El-Kebir
+ */
 
 #ifndef SOLUTION_H
 #define SOLUTION_H

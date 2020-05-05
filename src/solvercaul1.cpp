@@ -12,7 +12,7 @@ SolverCaUL1::SolverCaUL1(const InputInstance& input,
                          int nrThreads,
                          const BoolMatrix& B,
                          GRBEnv env)
-  : SolverCaU(input, nrStrains, nrThreads, B, env)
+: SolverCaU(input, nrStrains, nrThreads, B, env)
 {
 }
 
