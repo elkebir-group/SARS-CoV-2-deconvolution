@@ -4,7 +4,7 @@ In light of the current COVID-19 pandemic, there is an urgent need to accurately
 transmission history of the virus to inform real-time outbreak management, public health policies and mitigation strategies. Current phylogenetic and phylodynamic approaches typically use consensus sequences,
 essentially assuming the presence of a single viral strain per host. This code takes as input the variant allele frequencies of the mutations in multiple samples collected from infected hosts and finds the genotypes and proportions of the strains present in the hosts.
 
-  The summary of all the results generated for the paper are in `results/SRA_exposure_results_cummulative.xlsx`
+  > The summary of all the results generated for the paper are in `results/SRA_exposure_results_cummulative.xlsx`
 
 ![Overview of Strain Deconvolution Problem](deconvolution.png)
 
