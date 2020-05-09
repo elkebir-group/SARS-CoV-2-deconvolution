@@ -76,17 +76,17 @@ For the rest of the columns, each column is a sample and the entry in the refere
 
 ###  Sankoff Labeling (`simulate`)
 
-  Allowed options:
-    -h [ --help ]                  produce help message
-    -k [ --strains ] arg (=10)     number of strains
-    --missing arg (=0)             missing mutation rate
-    -m [ --samples ] arg (=50)     number of samples
-    -K [ --expstrains ] arg (=3)   number of expected strains per sample
-    -N [ --expmutations ] arg (=5) number of expected mutations per strain
-    -n [ --mutations ] arg (=100)  number of mutations
-    -d [ --depth ] arg (=1000)     number of reads
-    -s [ --seed ] arg (=0)         random number generator seed
-    -o [ --output ] arg (=out)     output prefix
+    Allowed options:
+      -h [ --help ]                  produce help message
+      -k [ --strains ] arg (=10)     number of strains
+      --missing arg (=0)             missing mutation rate
+      -m [ --samples ] arg (=50)     number of samples
+      -K [ --expstrains ] arg (=3)   number of expected strains per sample
+      -N [ --expmutations ] arg (=5) number of expected mutations per strain
+      -n [ --mutations ] arg (=100)  number of mutations
+      -d [ --depth ] arg (=1000)     number of reads
+      -s [ --seed ] arg (=0)         random number generator seed
+      -o [ --output ] arg (=out)     output prefix
 
 
 An example execution:
@@ -96,18 +96,18 @@ An example execution:
 <a name="gradient"></a>
 ### Deconvolution (`gradient`)
 
-  Allowed options:
-    -h [ --help ]               produce help message
-    -k [ --strains ] arg        number of strains
-    -l [ --lambda ] arg (=1.05) rate of increase of lambda
-    --lambdaInit arg (=1)       initial value of lambda
-    -B [ --initB ] arg          genotype matrix for initialization
-    -U [ --initU ] arg          mixture matrix for initialization
-    -m [ --maxIter ] arg (=100) maximum number of iterations
-    -e [ --eps ] arg (=0.01)    termination condition
-    -f [ --filter ]             filtering flag
-    -s [ --seed ] arg (=0)      random number generator seed
-    -T [ --threads ] arg (=1)   number of threads
-    --input arg                 input files (ref and alt read counts)
-    -o [ --output ] arg (=out)  output prefix
+    Allowed options:
+      -h [ --help ]               produce help message
+      -k [ --strains ] arg        number of strains
+      -l [ --lambda ] arg (=1.05) rate of increase of lambda
+      --lambdaInit arg (=1)       initial value of lambda
+      -B [ --initB ] arg          genotype matrix for initialization
+      -U [ --initU ] arg          mixture matrix for initialization
+      -m [ --maxIter ] arg (=100) maximum number of iterations
+      -e [ --eps ] arg (=0.01)    termination condition
+      -f [ --filter ]             filtering flag
+      -s [ --seed ] arg (=0)      random number generator seed
+      -T [ --threads ] arg (=1)   number of threads
+      --input arg                 input files (ref and alt read counts)
+      -o [ --output ] arg (=out)  output prefix
 
