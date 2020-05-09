@@ -56,7 +56,7 @@ EXECUTABLE       | DESCRIPTION
 -----------------|-------------
 `simulate`       | simuate perfect mixture data with missing entries for input
 `gradient`       | solve strain deconvolution problem using penalty thresholding approach
-`exposure'       | for a given set of strains, find the strain proportions in the sample
+`exposure`       | for a given set of strains, find the strain proportions in the sample
 
 <a name="usage"></a>
 ## Usage instructions
