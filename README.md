@@ -70,8 +70,44 @@ Both the files should be tab-seperated.
 The first 10 columns of the file have information about the mutations and its presence in the SRA and GISAID sequences. Only the position information is used in the algorithm to identify the mutation and the rest of the columns can be left empty.
 The first 10 columns in the input files are --- '\<position\> \<reference allele\> \<variant allele\> \<gene\> \<N/S (nonsynonymous/synonymous)\> \<Amino acid change\> \<number of subclonal SRA samples\> \<number of clonal SRA samples\> \<total number of SRA samples\> \<number of consensus sequences\>'.
 
-Example:
+For the rest of the columns, each column is a sample and the entry in the reference file is the number of reads in the sample that have the reference allele and the entry in the variant file is the number of reads in the sample that have the variant allele.
 
-```
-./deconvolve -k 20 ../../data/final_ref_results.tsv ../../data/final_alt_results.tsv -o lol -N 100
-```
+<a name="simulate"></a>
+
+###  Sankoff Labeling (`simulate`)
+
+  Allowed options:
+    -h [ --help ]                  produce help message
+    -k [ --strains ] arg (=10)     number of strains
+    --missing arg (=0)             missing mutation rate
+    -m [ --samples ] arg (=50)     number of samples
+    -K [ --expstrains ] arg (=3)   number of expected strains per sample
+    -N [ --expmutations ] arg (=5) number of expected mutations per strain
+    -n [ --mutations ] arg (=100)  number of mutations
+    -d [ --depth ] arg (=1000)     number of reads
+    -s [ --seed ] arg (=0)         random number generator seed
+    -o [ --output ] arg (=out)     output prefix
+
+
+An example execution:
+
+    $ ./simulate -s 5 --missing 0.1 -k 25 -o simuated_instance
+
+<a name="gradient"></a>
+### Deconvolution (`gradient`)
+
+  Allowed options:
+    -h [ --help ]               produce help message
+    -k [ --strains ] arg        number of strains
+    -l [ --lambda ] arg (=1.05) rate of increase of lambda
+    --lambdaInit arg (=1)       initial value of lambda
+    -B [ --initB ] arg          genotype matrix for initialization
+    -U [ --initU ] arg          mixture matrix for initialization
+    -m [ --maxIter ] arg (=100) maximum number of iterations
+    -e [ --eps ] arg (=0.01)    termination condition
+    -f [ --filter ]             filtering flag
+    -s [ --seed ] arg (=0)      random number generator seed
+    -T [ --threads ] arg (=1)   number of threads
+    --input arg                 input files (ref and alt read counts)
+    -o [ --output ] arg (=out)  output prefix
+
