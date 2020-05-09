@@ -1,0 +1,47 @@
+Academic license - for non-commercial use only
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Optimize a model with 355 rows, 353 columns and 1398 nonzeros
+Model fingerprint: 0x0172ba80
+Model has 95 quadratic objective terms
+Variable types: 224 continuous, 129 integer (129 binary)
+Coefficient statistics:
+  Matrix range     [5e-02, 1e+00]
+  Objective range  [1e-02, 2e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 5e+00]
+Found heuristic solution: objective 4.8483393
+Presolve removed 65 rows and 65 columns
+Presolve time: 0.01s
+Presolved: 290 rows, 288 columns, 1322 nonzeros
+Presolved model has 41 quadratic objective terms
+Variable types: 159 continuous, 129 integer (129 binary)
+
+Root relaxation: objective 4.713127e-04, 46 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    0.00047    0    4    4.84834    0.00047   100%     -    0s
+H    0     0                       0.0184135    0.00047  97.4%     -    0s
+H    0     0                       0.0063343    0.00047  92.6%     -    0s
+H    0     0                       0.0004812    0.00047  2.06%     -    0s
+     0     0    0.00047    0    3    0.00048    0.00047  2.06%     -    0s
+     0     0    0.00047    0    3    0.00048    0.00047  2.06%     -    0s
+     0     0    0.00047    0    1    0.00048    0.00047  1.58%     -    0s
+     0     0    0.00047    0    1    0.00048    0.00047  1.58%     -    0s
+     0     2    0.00047    0    1    0.00048    0.00047  1.58%     -    0s
+
+Explored 4 nodes (129 simplex iterations) in 0.02 seconds
+Thread count was 1 (of 28 available processors)
+
+Solution count 4: 0.000481209 0.00633431 0.0184135 4.84834 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 4.812094626274e-04, best bound 4.812094626274e-04, gap 0.0000%
+Frob norm 1 after updating U: 0.0219365
+nrStrains is 129
+size of _B is 95 x 129
+size of _U is 129 x 1
+size of boostB is 95 x 129
+size of boostU is 129 x 1

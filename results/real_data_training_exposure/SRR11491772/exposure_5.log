@@ -1,0 +1,46 @@
+Academic license - for non-commercial use only
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Optimize a model with 355 rows, 353 columns and 1398 nonzeros
+Model fingerprint: 0xd1b28e42
+Model has 94 quadratic objective terms
+Variable types: 224 continuous, 129 integer (129 binary)
+Coefficient statistics:
+  Matrix range     [5e-02, 1e+00]
+  Objective range  [8e-03, 2e+00]
+  QObjective range [2e+00, 2e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 5e+00]
+Found heuristic solution: objective 6.2554574
+Presolve removed 65 rows and 65 columns
+Presolve time: 0.01s
+Presolved: 290 rows, 288 columns, 1322 nonzeros
+Presolved model has 40 quadratic objective terms
+Variable types: 159 continuous, 129 integer (129 binary)
+
+Root relaxation: objective 1.068795e+00, 35 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    1.06880    0    3    6.25546    1.06880  82.9%     -    0s
+H    0     0                       1.1046446    1.06880  3.25%     -    0s
+H    0     0                       1.0712063    1.06880  0.23%     -    0s
+     0     0    1.06880    0    2    1.07121    1.06880  0.23%     -    0s
+     0     0    1.06880    0    3    1.07121    1.06880  0.23%     -    0s
+     0     0    1.06917    0    2    1.07121    1.06917  0.19%     -    0s
+     0     0    1.06931    0    3    1.07121    1.06931  0.18%     -    0s
+     0     0     cutoff    0         1.07121    1.07121  0.00%     -    0s
+
+Explored 1 nodes (89 simplex iterations) in 0.02 seconds
+Thread count was 1 (of 28 available processors)
+
+Solution count 3: 1.07121 1.10464 6.25546 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.071206253139e+00, best bound 1.071206253139e+00, gap 0.0000%
+Frob norm 1 after updating U: 1.03499
+nrStrains is 129
+size of _B is 95 x 129
+size of _U is 129 x 1
+size of boostB is 95 x 129
+size of boostU is 129 x 1
