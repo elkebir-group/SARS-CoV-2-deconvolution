@@ -5,6 +5,7 @@ transmission history of the virus to inform real-time outbreak management, publi
 essentially assuming the presence of a single viral strain per host. This code takes as input the variant allele frequencies of the mutations in multiple samples collected from infected hosts and finds the genotypes and proportions of the strains present in the hosts.
 
 ![Overview of Strain Deconvolution Problem](deconvolution.png)
+
 In the STRAIN DECONVOLUTION problem, we are given the variant allele frequency (VAF) matrix F, containing the VAF of every mutation in each sample, and a number k of strains to be inferred. Our goal is to infer the genotype matrix B and mixture matrix U such that F ≈ BU, thus elucidating strains that occur within and across COVID-19 hosts along with their sample-specific proportions.
 
 ## Contents
