@@ -1,1 +1,0 @@
-../../build/gradient input_ref.tsv input_alt.tsv -B input_B.tsv --lambda 0 -m 1 -o gradient_expansion_nanopore -k 44 > gradient_expansion_nanopore.log
