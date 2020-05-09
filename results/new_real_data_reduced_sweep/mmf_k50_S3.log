@@ -1,0 +1,1801 @@
+performing filtering
+Academic license - for non-commercial use only
+Frob norm 1 after updating U: 26.3427
+200 iterations
+f(b) = 110.48
+Frob norm 2 after updating B : 9.68833
+Iteration number -------- 1  -----------
+lambda : 1
+max_diff => 0.270577
+------------------------normalized = 0.364799 ----------------
+performed mixing
+Frob norm 1 after updating U: 6.9109
+200 iterations
+f(b) = 56.2058
+Frob norm 2 after updating B : 9.21787
+Iteration number -------- 2  -----------
+lambda : 0
+max_diff => 13786.5
+------------------------normalized = 0.347085 ----------------
+performed mixing
+Frob norm 1 after updating U: 6.11856
+200 iterations
+f(b) = 43.8201
+Frob norm 2 after updating B : 9.74008
+Iteration number -------- 3  -----------
+lambda : 0
+max_diff => 52434.4
+------------------------normalized = 0.366748 ----------------
+performed mixing
+Frob norm 1 after updating U: 5.75029
+200 iterations
+f(b) = 32.8267
+Frob norm 2 after updating B : 10.2741
+Iteration number -------- 4  -----------
+lambda : 0
+max_diff => 150291
+------------------------normalized = 0.386854 ----------------
+performed mixing
+Frob norm 1 after updating U: 5.63932
+200 iterations
+f(b) = 26.6263
+Frob norm 2 after updating B : 9.82107
+Iteration number -------- 5  -----------
+lambda : 0
+max_diff => 304864
+------------------------normalized = 0.369797 ----------------
+performed mixing
+Frob norm 1 after updating U: 5.28061
+200 iterations
+f(b) = 22.4
+Frob norm 2 after updating B : 9.16959
+Iteration number -------- 6  -----------
+lambda : 0
+max_diff => 1.10025e+06
+------------------------normalized = 0.345267 ----------------
+performed mixing
+Frob norm 1 after updating U: 4.89274
+200 iterations
+f(b) = 18.4117
+Frob norm 2 after updating B : 7.93954
+Iteration number -------- 7  -----------
+lambda : 0
+max_diff => 2.53363e+06
+------------------------normalized = 0.298951 ----------------
+performed mixing
+Frob norm 1 after updating U: 4.50585
+200 iterations
+f(b) = 15.2935
+Frob norm 2 after updating B : 6.7493
+Iteration number -------- 8  -----------
+lambda : 0
+max_diff => 3.57274e+06
+------------------------normalized = 0.254135 ----------------
+performed mixing
+Frob norm 1 after updating U: 4.21115
+200 iterations
+f(b) = 13.0554
+Frob norm 2 after updating B : 5.78759
+Iteration number -------- 9  -----------
+lambda : 0
+max_diff => 4.19469e+06
+------------------------normalized = 0.217923 ----------------
+performed mixing
+Frob norm 1 after updating U: 3.87159
+200 iterations
+f(b) = 10.7655
+Frob norm 2 after updating B : 5.2854
+Iteration number -------- 10  -----------
+lambda : 0
+max_diff => 5.0329e+06
+------------------------normalized = 0.199013 ----------------
+performed mixing
+Frob norm 1 after updating U: 3.61896
+200 iterations
+f(b) = 9.15061
+Frob norm 2 after updating B : 4.66891
+Iteration number -------- 11  -----------
+lambda : 0
+max_diff => 5.60227e+06
+------------------------normalized = 0.175801 ----------------
+performed mixing
+Frob norm 1 after updating U: 3.33257
+200 iterations
+f(b) = 7.80952
+Frob norm 2 after updating B : 4.18223
+Iteration number -------- 12  -----------
+lambda : 0
+max_diff => 5.99609e+06
+------------------------normalized = 0.157475 ----------------
+performed mixing
+Frob norm 1 after updating U: 3.12907
+200 iterations
+f(b) = 6.84008
+Frob norm 2 after updating B : 3.78157
+Iteration number -------- 13  -----------
+lambda : 0
+max_diff => 6.26865e+06
+------------------------normalized = 0.142389 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.9784
+200 iterations
+f(b) = 6.06897
+Frob norm 2 after updating B : 3.51016
+Iteration number -------- 14  -----------
+lambda : 0
+max_diff => 6.49241e+06
+------------------------normalized = 0.13217 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.86689
+200 iterations
+f(b) = 5.49923
+Frob norm 2 after updating B : 3.25507
+Iteration number -------- 15  -----------
+lambda : 0
+max_diff => 6.66381e+06
+------------------------normalized = 0.122564 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.76827
+200 iterations
+f(b) = 5.08845
+Frob norm 2 after updating B : 3.07544
+Iteration number -------- 16  -----------
+lambda : 0
+max_diff => 6.77618e+06
+------------------------normalized = 0.115801 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.68396
+200 iterations
+f(b) = 4.77984
+Frob norm 2 after updating B : 2.92941
+Iteration number -------- 17  -----------
+lambda : 0
+max_diff => 6.86604e+06
+------------------------normalized = 0.110303 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.61087
+200 iterations
+f(b) = 4.53918
+Frob norm 2 after updating B : 2.78974
+Iteration number -------- 18  -----------
+lambda : 0
+max_diff => 6.93919e+06
+------------------------normalized = 0.105043 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.54736
+200 iterations
+f(b) = 4.35467
+Frob norm 2 after updating B : 2.66841
+Iteration number -------- 19  -----------
+lambda : 0
+max_diff => 7.0057e+06
+------------------------normalized = 0.100475 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.49586
+200 iterations
+f(b) = 4.21729
+Frob norm 2 after updating B : 2.58696
+Iteration number -------- 20  -----------
+lambda : 0
+max_diff => 7.06343e+06
+------------------------normalized = 0.0974079 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.45007
+200 iterations
+f(b) = 4.11127
+Frob norm 2 after updating B : 2.51169
+Iteration number -------- 21  -----------
+lambda : 0
+max_diff => 7.1076e+06
+------------------------normalized = 0.0945737 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.40691
+200 iterations
+f(b) = 4.03129
+Frob norm 2 after updating B : 2.45514
+Iteration number -------- 22  -----------
+lambda : 0
+max_diff => 7.14495e+06
+------------------------normalized = 0.0924445 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.37358
+200 iterations
+f(b) = 3.96109
+Frob norm 2 after updating B : 2.40952
+Iteration number -------- 23  -----------
+lambda : 0
+max_diff => 7.18339e+06
+------------------------normalized = 0.0907267 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.3462
+200 iterations
+f(b) = 3.90204
+Frob norm 2 after updating B : 2.36889
+Iteration number -------- 24  -----------
+lambda : 0
+max_diff => 7.22058e+06
+------------------------normalized = 0.089197 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.32079
+200 iterations
+f(b) = 3.85107
+Frob norm 2 after updating B : 2.33194
+Iteration number -------- 25  -----------
+lambda : 0
+max_diff => 7.26115e+06
+------------------------normalized = 0.0878057 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.29635
+200 iterations
+f(b) = 3.80666
+Frob norm 2 after updating B : 2.31226
+Iteration number -------- 26  -----------
+lambda : 0
+max_diff => 7.29688e+06
+------------------------normalized = 0.0870648 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.28069
+200 iterations
+f(b) = 3.7671
+Frob norm 2 after updating B : 2.29913
+Iteration number -------- 27  -----------
+lambda : 0
+max_diff => 7.33805e+06
+------------------------normalized = 0.08657 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.27134
+200 iterations
+f(b) = 3.73326
+Frob norm 2 after updating B : 2.26953
+Iteration number -------- 28  -----------
+lambda : 0
+max_diff => 7.37305e+06
+------------------------normalized = 0.0854556 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.24905
+200 iterations
+f(b) = 3.70813
+Frob norm 2 after updating B : 2.26061
+Iteration number -------- 29  -----------
+lambda : 0
+max_diff => 7.41302e+06
+------------------------normalized = 0.0851197 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.2417
+200 iterations
+f(b) = 3.68195
+Frob norm 2 after updating B : 2.24284
+Iteration number -------- 30  -----------
+lambda : 0
+max_diff => 7.45322e+06
+------------------------normalized = 0.0844506 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.22848
+200 iterations
+f(b) = 3.66261
+Frob norm 2 after updating B : 2.22262
+Iteration number -------- 31  -----------
+lambda : 0
+max_diff => 7.49149e+06
+------------------------normalized = 0.0836892 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.21306
+200 iterations
+f(b) = 3.64647
+Frob norm 2 after updating B : 2.21917
+Iteration number -------- 32  -----------
+lambda : 0
+max_diff => 7.53406e+06
+------------------------normalized = 0.0835594 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.20956
+200 iterations
+f(b) = 3.62964
+Frob norm 2 after updating B : 2.2081
+Iteration number -------- 33  -----------
+lambda : 0
+max_diff => 7.56543e+06
+------------------------normalized = 0.0831427 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.20047
+200 iterations
+f(b) = 3.60837
+Frob norm 2 after updating B : 2.21204
+Iteration number -------- 34  -----------
+lambda : 0
+max_diff => 7.60269e+06
+------------------------normalized = 0.0832908 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.20155
+200 iterations
+f(b) = 3.59043
+Frob norm 2 after updating B : 2.20111
+Iteration number -------- 35  -----------
+lambda : 0
+max_diff => 7.64053e+06
+------------------------normalized = 0.0828795 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.18928
+200 iterations
+f(b) = 3.57187
+Frob norm 2 after updating B : 2.19237
+Iteration number -------- 36  -----------
+lambda : 0
+max_diff => 7.68225e+06
+------------------------normalized = 0.0825502 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.18004
+200 iterations
+f(b) = 3.54742
+Frob norm 2 after updating B : 2.20172
+Iteration number -------- 37  -----------
+lambda : 0
+max_diff => 7.72139e+06
+------------------------normalized = 0.0829025 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.18471
+200 iterations
+f(b) = 3.52526
+Frob norm 2 after updating B : 2.17842
+Iteration number -------- 38  -----------
+lambda : 0
+max_diff => 7.7528e+06
+------------------------normalized = 0.0820249 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.16077
+200 iterations
+f(b) = 3.50045
+Frob norm 2 after updating B : 2.18047
+Iteration number -------- 39  -----------
+lambda : 0
+max_diff => 7.80034e+06
+------------------------normalized = 0.0821024 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.15774
+200 iterations
+f(b) = 3.46365
+Frob norm 2 after updating B : 2.16935
+Iteration number -------- 40  -----------
+lambda : 0
+max_diff => 7.83996e+06
+------------------------normalized = 0.0816836 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.1458
+200 iterations
+f(b) = 3.43031
+Frob norm 2 after updating B : 2.14789
+Iteration number -------- 41  -----------
+lambda : 0
+max_diff => 7.88149e+06
+------------------------normalized = 0.0808753 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.12457
+200 iterations
+f(b) = 3.40651
+Frob norm 2 after updating B : 2.14728
+Iteration number -------- 42  -----------
+lambda : 0
+max_diff => 7.90912e+06
+------------------------normalized = 0.0808524 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.1227
+200 iterations
+f(b) = 3.36731
+Frob norm 2 after updating B : 2.12881
+Iteration number -------- 43  -----------
+lambda : 0
+max_diff => 7.94815e+06
+------------------------normalized = 0.0801571 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.10683
+200 iterations
+f(b) = 3.34235
+Frob norm 2 after updating B : 2.10843
+Iteration number -------- 44  -----------
+lambda : 0
+max_diff => 7.98396e+06
+------------------------normalized = 0.0793896 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.08938
+200 iterations
+f(b) = 3.31368
+Frob norm 2 after updating B : 2.10445
+Iteration number -------- 45  -----------
+lambda : 0
+max_diff => 8.02602e+06
+------------------------normalized = 0.0792399 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.08552
+200 iterations
+f(b) = 3.28262
+Frob norm 2 after updating B : 2.10055
+Iteration number -------- 46  -----------
+lambda : 0
+max_diff => 8.07302e+06
+------------------------normalized = 0.0790931 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.08377
+200 iterations
+f(b) = 3.26864
+Frob norm 2 after updating B : 2.10194
+Iteration number -------- 47  -----------
+lambda : 0
+max_diff => 8.10296e+06
+------------------------normalized = 0.0791455 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.08687
+200 iterations
+f(b) = 3.24753
+Frob norm 2 after updating B : 2.09135
+Iteration number -------- 48  -----------
+lambda : 0
+max_diff => 8.14502e+06
+------------------------normalized = 0.0787467 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.07821
+200 iterations
+f(b) = 3.22893
+Frob norm 2 after updating B : 2.07226
+Iteration number -------- 49  -----------
+lambda : 0
+max_diff => 8.18072e+06
+------------------------normalized = 0.0780276 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.06216
+200 iterations
+f(b) = 3.21227
+Frob norm 2 after updating B : 2.08032
+Iteration number -------- 50  -----------
+lambda : 0
+max_diff => 8.21814e+06
+------------------------normalized = 0.0783313 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.06885
+200 iterations
+f(b) = 3.19705
+Frob norm 2 after updating B : 2.07075
+Iteration number -------- 51  -----------
+lambda : 0
+max_diff => 8.25597e+06
+------------------------normalized = 0.077971 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.05928
+200 iterations
+f(b) = 3.17612
+Frob norm 2 after updating B : 2.06247
+Iteration number -------- 52  -----------
+lambda : 0
+max_diff => 8.29106e+06
+------------------------normalized = 0.0776592 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.04979
+200 iterations
+f(b) = 3.15365
+Frob norm 2 after updating B : 2.05898
+Iteration number -------- 53  -----------
+lambda : 0
+max_diff => 8.32616e+06
+------------------------normalized = 0.0775276 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.04553
+200 iterations
+f(b) = 3.12547
+Frob norm 2 after updating B : 2.05163
+Iteration number -------- 54  -----------
+lambda : 0
+max_diff => 8.37354e+06
+------------------------normalized = 0.0772511 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.03757
+200 iterations
+f(b) = 3.10619
+Frob norm 2 after updating B : 2.04995
+Iteration number -------- 55  -----------
+lambda : 0
+max_diff => 8.40944e+06
+------------------------normalized = 0.0771878 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.03718
+200 iterations
+f(b) = 3.09145
+Frob norm 2 after updating B : 2.04723
+Iteration number -------- 56  -----------
+lambda : 0
+max_diff => 8.45426e+06
+------------------------normalized = 0.0770853 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.03475
+200 iterations
+f(b) = 3.07541
+Frob norm 2 after updating B : 2.04272
+Iteration number -------- 57  -----------
+lambda : 0
+max_diff => 8.49139e+06
+------------------------normalized = 0.0769154 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.03226
+200 iterations
+f(b) = 3.06497
+Frob norm 2 after updating B : 2.02977
+Iteration number -------- 58  -----------
+lambda : 0
+max_diff => 8.53085e+06
+------------------------normalized = 0.0764278 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.02144
+200 iterations
+f(b) = 3.06083
+Frob norm 2 after updating B : 2.02131
+Iteration number -------- 59  -----------
+lambda : 0
+max_diff => 8.5578e+06
+------------------------normalized = 0.0761092 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.01548
+200 iterations
+f(b) = 3.04359
+Frob norm 2 after updating B : 2.02553
+Iteration number -------- 60  -----------
+lambda : 0
+max_diff => 8.60575e+06
+------------------------normalized = 0.0762682 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.0189
+200 iterations
+f(b) = 3.03535
+Frob norm 2 after updating B : 2.01865
+Iteration number -------- 61  -----------
+lambda : 0
+max_diff => 8.64268e+06
+------------------------normalized = 0.0760092 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.01343
+200 iterations
+f(b) = 3.02748
+Frob norm 2 after updating B : 2.01609
+Iteration number -------- 62  -----------
+lambda : 0
+max_diff => 8.68725e+06
+------------------------normalized = 0.0759126 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.01111
+200 iterations
+f(b) = 3.02214
+Frob norm 2 after updating B : 2.01659
+Iteration number -------- 63  -----------
+lambda : 0
+max_diff => 8.71859e+06
+------------------------normalized = 0.0759317 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.01233
+200 iterations
+f(b) = 3.02075
+Frob norm 2 after updating B : 2.0087
+Iteration number -------- 64  -----------
+lambda : 0
+max_diff => 8.74853e+06
+------------------------normalized = 0.0756346 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.00573
+200 iterations
+f(b) = 3.00891
+Frob norm 2 after updating B : 2.01328
+Iteration number -------- 65  -----------
+lambda : 0
+max_diff => 8.79848e+06
+------------------------normalized = 0.0758071 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.00948
+200 iterations
+f(b) = 3.00553
+Frob norm 2 after updating B : 2.00558
+Iteration number -------- 66  -----------
+lambda : 0
+max_diff => 8.83368e+06
+------------------------normalized = 0.0755168 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.00274
+200 iterations
+f(b) = 3.00075
+Frob norm 2 after updating B : 2.00609
+Iteration number -------- 67  -----------
+lambda : 0
+max_diff => 8.86828e+06
+------------------------normalized = 0.0755364 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.00335
+200 iterations
+f(b) = 2.99799
+Frob norm 2 after updating B : 2.00828
+Iteration number -------- 68  -----------
+lambda : 0
+max_diff => 8.90397e+06
+------------------------normalized = 0.0756185 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.00576
+200 iterations
+f(b) = 2.99019
+Frob norm 2 after updating B : 2.01093
+Iteration number -------- 69  -----------
+lambda : 0
+max_diff => 8.95312e+06
+------------------------normalized = 0.0757184 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.00776
+200 iterations
+f(b) = 2.99209
+Frob norm 2 after updating B : 1.99899
+Iteration number -------- 70  -----------
+lambda : 0
+max_diff => 8.9812e+06
+------------------------normalized = 0.0752691 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.99705
+200 iterations
+f(b) = 2.98358
+Frob norm 2 after updating B : 2.00381
+Iteration number -------- 71  -----------
+lambda : 0
+max_diff => 9.03006e+06
+------------------------normalized = 0.0754506 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.0011
+200 iterations
+f(b) = 2.98002
+Frob norm 2 after updating B : 2.00628
+Iteration number -------- 72  -----------
+lambda : 0
+max_diff => 9.06668e+06
+------------------------normalized = 0.0755435 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.00403
+200 iterations
+f(b) = 2.97701
+Frob norm 2 after updating B : 2.00695
+Iteration number -------- 73  -----------
+lambda : 0
+max_diff => 9.10647e+06
+------------------------normalized = 0.0755687 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.00418
+200 iterations
+f(b) = 2.9739
+Frob norm 2 after updating B : 2.00088
+Iteration number -------- 74  -----------
+lambda : 0
+max_diff => 9.14839e+06
+------------------------normalized = 0.07534 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.99853
+200 iterations
+f(b) = 2.96809
+Frob norm 2 after updating B : 2.00638
+Iteration number -------- 75  -----------
+lambda : 0
+max_diff => 9.51905e+06
+------------------------normalized = 0.0755472 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.00344
+200 iterations
+f(b) = 2.96693
+Frob norm 2 after updating B : 1.9962
+Iteration number -------- 76  -----------
+lambda : 0
+max_diff => 9.86706e+06
+------------------------normalized = 0.0751638 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.99473
+200 iterations
+f(b) = 2.96299
+Frob norm 2 after updating B : 1.99985
+Iteration number -------- 77  -----------
+lambda : 0
+max_diff => 1.02322e+07
+------------------------normalized = 0.0753013 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.99798
+200 iterations
+f(b) = 2.96031
+Frob norm 2 after updating B : 2.00252
+Iteration number -------- 78  -----------
+lambda : 0
+max_diff => 1.05937e+07
+------------------------normalized = 0.0754017 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.00013
+200 iterations
+f(b) = 2.95707
+Frob norm 2 after updating B : 1.99148
+Iteration number -------- 79  -----------
+lambda : 0
+max_diff => 1.09614e+07
+------------------------normalized = 0.0749861 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.9902
+200 iterations
+f(b) = 2.95432
+Frob norm 2 after updating B : 1.98685
+Iteration number -------- 80  -----------
+lambda : 0
+max_diff => 1.14027e+07
+------------------------normalized = 0.0748117 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.98573
+200 iterations
+f(b) = 2.95272
+Frob norm 2 after updating B : 1.98476
+Iteration number -------- 81  -----------
+lambda : 0
+max_diff => 1.17572e+07
+------------------------normalized = 0.0747332 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.98488
+200 iterations
+f(b) = 2.94602
+Frob norm 2 after updating B : 1.99916
+Iteration number -------- 82  -----------
+lambda : 0
+max_diff => 1.21627e+07
+------------------------normalized = 0.0752755 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.9979
+200 iterations
+f(b) = 2.94733
+Frob norm 2 after updating B : 1.97734
+Iteration number -------- 83  -----------
+lambda : 0
+max_diff => 1.25713e+07
+------------------------normalized = 0.0744538 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.97769
+200 iterations
+f(b) = 2.93999
+Frob norm 2 after updating B : 1.9903
+Iteration number -------- 84  -----------
+lambda : 0
+max_diff => 1.29478e+07
+------------------------normalized = 0.0749418 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.99014
+200 iterations
+f(b) = 2.93699
+Frob norm 2 after updating B : 1.98901
+Iteration number -------- 85  -----------
+lambda : 0
+max_diff => 1.33469e+07
+------------------------normalized = 0.0748932 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.98893
+200 iterations
+f(b) = 2.932
+Frob norm 2 after updating B : 1.98547
+Iteration number -------- 86  -----------
+lambda : 0
+max_diff => 1.37662e+07
+------------------------normalized = 0.0747597 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.98598
+200 iterations
+f(b) = 2.92705
+Frob norm 2 after updating B : 1.99074
+Iteration number -------- 87  -----------
+lambda : 0
+max_diff => 1.42665e+07
+------------------------normalized = 0.0749582 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.99034
+200 iterations
+f(b) = 2.92455
+Frob norm 2 after updating B : 1.98376
+Iteration number -------- 88  -----------
+lambda : 0
+max_diff => 1.46822e+07
+------------------------normalized = 0.0746956 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.98425
+200 iterations
+f(b) = 2.91979
+Frob norm 2 after updating B : 1.98938
+Iteration number -------- 89  -----------
+lambda : 0
+max_diff => 1.51307e+07
+------------------------normalized = 0.074907 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.98933
+200 iterations
+f(b) = 2.91797
+Frob norm 2 after updating B : 1.98132
+Iteration number -------- 90  -----------
+lambda : 0
+max_diff => 1.55316e+07
+------------------------normalized = 0.0746037 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.98206
+200 iterations
+f(b) = 2.91957
+Frob norm 2 after updating B : 1.97502
+Iteration number -------- 91  -----------
+lambda : 0
+max_diff => 1.58777e+07
+------------------------normalized = 0.0743662 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.97638
+200 iterations
+f(b) = 2.91319
+Frob norm 2 after updating B : 1.97379
+Iteration number -------- 92  -----------
+lambda : 0
+max_diff => 1.6293e+07
+------------------------normalized = 0.0743199 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.97457
+200 iterations
+f(b) = 2.90776
+Frob norm 2 after updating B : 1.9818
+Iteration number -------- 93  -----------
+lambda : 0
+max_diff => 1.67667e+07
+------------------------normalized = 0.0746217 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.98173
+200 iterations
+f(b) = 2.90696
+Frob norm 2 after updating B : 1.98731
+Iteration number -------- 94  -----------
+lambda : 0
+max_diff => 1.71023e+07
+------------------------normalized = 0.074829 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.9871
+200 iterations
+f(b) = 2.90284
+Frob norm 2 after updating B : 1.97615
+Iteration number -------- 95  -----------
+lambda : 0
+max_diff => 1.74909e+07
+------------------------normalized = 0.0744088 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.97651
+200 iterations
+f(b) = 2.89913
+Frob norm 2 after updating B : 1.99345
+Iteration number -------- 96  -----------
+lambda : 0
+max_diff => 1.78782e+07
+------------------------normalized = 0.0750604 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.9923
+200 iterations
+f(b) = 2.90543
+Frob norm 2 after updating B : 1.9739
+Iteration number -------- 97  -----------
+lambda : 0
+max_diff => 1.81331e+07
+------------------------normalized = 0.0743241 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.97481
+200 iterations
+f(b) = 2.89592
+Frob norm 2 after updating B : 1.99059
+Iteration number -------- 98  -----------
+lambda : 0
+max_diff => 1.84948e+07
+------------------------normalized = 0.0749524 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.98956
+200 iterations
+f(b) = 2.89126
+Frob norm 2 after updating B : 1.98209
+Iteration number -------- 99  -----------
+lambda : 0
+max_diff => 1.89212e+07
+------------------------normalized = 0.0746324 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.98133
+200 iterations
+f(b) = 2.89204
+Frob norm 2 after updating B : 1.98627
+Iteration number -------- 100  -----------
+lambda : 0
+max_diff => 1.92332e+07
+------------------------normalized = 0.07479 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.98531
+200 iterations
+f(b) = 2.88738
+Frob norm 2 after updating B : 1.97648
+Iteration number -------- 101  -----------
+lambda : 0
+max_diff => 1.95935e+07
+------------------------normalized = 0.0744213 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.97582
+200 iterations
+f(b) = 2.89032
+Frob norm 2 after updating B : 1.97458
+Iteration number -------- 102  -----------
+lambda : 0
+max_diff => 1.98545e+07
+------------------------normalized = 0.0743499 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.97445
+200 iterations
+f(b) = 2.88531
+Frob norm 2 after updating B : 1.97086
+Iteration number -------- 103  -----------
+lambda : 0
+max_diff => 2.01539e+07
+------------------------normalized = 0.0742099 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.97078
+200 iterations
+f(b) = 2.8809
+Frob norm 2 after updating B : 1.99557
+Iteration number -------- 104  -----------
+lambda : 0
+max_diff => 2.04951e+07
+------------------------normalized = 0.0751401 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.99307
+200 iterations
+f(b) = 2.88116
+Frob norm 2 after updating B : 1.97774
+Iteration number -------- 105  -----------
+lambda : 0
+max_diff => 2.07617e+07
+------------------------normalized = 0.0744686 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.97684
+200 iterations
+f(b) = 2.87669
+Frob norm 2 after updating B : 1.98662
+Iteration number -------- 106  -----------
+lambda : 0
+max_diff => 2.10916e+07
+------------------------normalized = 0.0748033 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.9844
+200 iterations
+f(b) = 2.87781
+Frob norm 2 after updating B : 1.99863
+Iteration number -------- 107  -----------
+lambda : 0
+max_diff => 2.14194e+07
+------------------------normalized = 0.0752553 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.99523
+200 iterations
+f(b) = 2.87444
+Frob norm 2 after updating B : 1.97251
+Iteration number -------- 108  -----------
+lambda : 0
+max_diff => 2.16683e+07
+------------------------normalized = 0.0742719 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.97166
+200 iterations
+f(b) = 2.87134
+Frob norm 2 after updating B : 1.97695
+Iteration number -------- 109  -----------
+lambda : 0
+max_diff => 2.19432e+07
+------------------------normalized = 0.074439 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.97575
+200 iterations
+f(b) = 2.87187
+Frob norm 2 after updating B : 1.99225
+Iteration number -------- 110  -----------
+lambda : 0
+max_diff => 2.21778e+07
+------------------------normalized = 0.0750152 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.98972
+200 iterations
+f(b) = 2.87008
+Frob norm 2 after updating B : 1.99895
+Iteration number -------- 111  -----------
+lambda : 0
+max_diff => 2.24502e+07
+------------------------normalized = 0.0752674 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.99573
+200 iterations
+f(b) = 2.86945
+Frob norm 2 after updating B : 1.9846
+Iteration number -------- 112  -----------
+lambda : 0
+max_diff => 2.26632e+07
+------------------------normalized = 0.0747272 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.98253
+200 iterations
+f(b) = 2.86818
+Frob norm 2 after updating B : 1.98687
+Iteration number -------- 113  -----------
+lambda : 0
+max_diff => 2.28945e+07
+------------------------normalized = 0.0748124 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.9846
+200 iterations
+f(b) = 2.8813
+Frob norm 2 after updating B : 1.96749
+Iteration number -------- 114  -----------
+lambda : 0
+max_diff => 2.30508e+07
+------------------------normalized = 0.074083 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.96765
+200 iterations
+f(b) = 2.86655
+Frob norm 2 after updating B : 1.98804
+Iteration number -------- 115  -----------
+lambda : 0
+max_diff => 2.32448e+07
+------------------------normalized = 0.0748565 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.98561
+200 iterations
+f(b) = 2.86705
+Frob norm 2 after updating B : 1.98382
+Iteration number -------- 116  -----------
+lambda : 0
+max_diff => 2.33998e+07
+------------------------normalized = 0.0746977 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.98187
+200 iterations
+f(b) = 2.86219
+Frob norm 2 after updating B : 2.00294
+Iteration number -------- 117  -----------
+lambda : 0
+max_diff => 2.36106e+07
+------------------------normalized = 0.0754176 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.99878
+200 iterations
+f(b) = 2.86526
+Frob norm 2 after updating B : 1.98924
+Iteration number -------- 118  -----------
+lambda : 0
+max_diff => 2.37514e+07
+------------------------normalized = 0.0749019 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.98676
+200 iterations
+f(b) = 2.86252
+Frob norm 2 after updating B : 1.99961
+Iteration number -------- 119  -----------
+lambda : 0
+max_diff => 2.39336e+07
+------------------------normalized = 0.0752924 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.99635
+200 iterations
+f(b) = 2.86085
+Frob norm 2 after updating B : 1.99042
+Iteration number -------- 120  -----------
+lambda : 0
+max_diff => 2.41062e+07
+------------------------normalized = 0.0749461 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.98759
+200 iterations
+f(b) = 2.86256
+Frob norm 2 after updating B : 1.9867
+Iteration number -------- 121  -----------
+lambda : 0
+max_diff => 2.42293e+07
+------------------------normalized = 0.0748061 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.98445
+200 iterations
+f(b) = 2.86312
+Frob norm 2 after updating B : 1.98004
+Iteration number -------- 122  -----------
+lambda : 0
+max_diff => 2.43424e+07
+------------------------normalized = 0.0745554 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.97877
+200 iterations
+f(b) = 2.86188
+Frob norm 2 after updating B : 2.0027
+Iteration number -------- 123  -----------
+lambda : 0
+max_diff => 2.44753e+07
+------------------------normalized = 0.0754085 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.9993
+200 iterations
+f(b) = 2.86062
+Frob norm 2 after updating B : 2.00197
+Iteration number -------- 124  -----------
+lambda : 0
+max_diff => 2.45919e+07
+------------------------normalized = 0.0753812 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.9989
+200 iterations
+f(b) = 2.86278
+Frob norm 2 after updating B : 1.98765
+Iteration number -------- 125  -----------
+lambda : 0
+max_diff => 2.47963e+07
+------------------------normalized = 0.074842 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.98586
+200 iterations
+f(b) = 2.8626
+Frob norm 2 after updating B : 1.99804
+Iteration number -------- 126  -----------
+lambda : 0
+max_diff => 2.54244e+07
+------------------------normalized = 0.0752333 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.99518
+200 iterations
+f(b) = 2.8611
+Frob norm 2 after updating B : 1.98358
+Iteration number -------- 127  -----------
+lambda : 0
+max_diff => 2.59429e+07
+------------------------normalized = 0.0746887 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.98216
+200 iterations
+f(b) = 2.85988
+Frob norm 2 after updating B : 1.98881
+Iteration number -------- 128  -----------
+lambda : 0
+max_diff => 2.64987e+07
+------------------------normalized = 0.0748854 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.98685
+200 iterations
+f(b) = 2.86027
+Frob norm 2 after updating B : 1.99832
+Iteration number -------- 129  -----------
+lambda : 0
+max_diff => 2.7157e+07
+------------------------normalized = 0.0752435 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.99557
+200 iterations
+f(b) = 2.8657
+Frob norm 2 after updating B : 1.9772
+Iteration number -------- 130  -----------
+lambda : 0
+max_diff => 2.75917e+07
+------------------------normalized = 0.0744484 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.97606
+200 iterations
+f(b) = 2.85971
+Frob norm 2 after updating B : 2.00458
+Iteration number -------- 131  -----------
+lambda : 0
+max_diff => 2.82756e+07
+------------------------normalized = 0.0754793 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.00143
+200 iterations
+f(b) = 2.86111
+Frob norm 2 after updating B : 1.99662
+Iteration number -------- 132  -----------
+lambda : 0
+max_diff => 2.88405e+07
+------------------------normalized = 0.0751796 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.99431
+200 iterations
+f(b) = 2.86095
+Frob norm 2 after updating B : 1.98801
+Iteration number -------- 133  -----------
+lambda : 0
+max_diff => 2.94002e+07
+------------------------normalized = 0.0748554 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.9863
+200 iterations
+f(b) = 2.85953
+Frob norm 2 after updating B : 1.99353
+Iteration number -------- 134  -----------
+lambda : 0
+max_diff => 3.00405e+07
+------------------------normalized = 0.0750631 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.99158
+200 iterations
+f(b) = 2.86099
+Frob norm 2 after updating B : 1.99753
+Iteration number -------- 135  -----------
+lambda : 0
+max_diff => 3.06693e+07
+------------------------normalized = 0.0752141 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.99533
+200 iterations
+f(b) = 2.86023
+Frob norm 2 after updating B : 2.00016
+Iteration number -------- 136  -----------
+lambda : 0
+max_diff => 3.13869e+07
+------------------------normalized = 0.0753128 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.99785
+200 iterations
+f(b) = 2.86363
+Frob norm 2 after updating B : 1.98799
+Iteration number -------- 137  -----------
+lambda : 0
+max_diff => 3.19071e+07
+------------------------normalized = 0.0748549 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.98676
+200 iterations
+f(b) = 2.86124
+Frob norm 2 after updating B : 1.99536
+Iteration number -------- 138  -----------
+lambda : 0
+max_diff => 3.25314e+07
+------------------------normalized = 0.0751323 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.99359
+200 iterations
+f(b) = 2.86131
+Frob norm 2 after updating B : 1.99594
+Iteration number -------- 139  -----------
+lambda : 0
+max_diff => 3.31984e+07
+------------------------normalized = 0.0751541 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.9942
+200 iterations
+f(b) = 2.86344
+Frob norm 2 after updating B : 1.98791
+Iteration number -------- 140  -----------
+lambda : 0
+max_diff => 3.37583e+07
+------------------------normalized = 0.0748517 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.98689
+200 iterations
+f(b) = 2.86116
+Frob norm 2 after updating B : 1.99664
+Iteration number -------- 141  -----------
+lambda : 0
+max_diff => 3.45097e+07
+------------------------normalized = 0.0751803 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.99478
+200 iterations
+f(b) = 2.85851
+Frob norm 2 after updating B : 2.0016
+Iteration number -------- 142  -----------
+lambda : 0
+max_diff => 3.53182e+07
+------------------------normalized = 0.075367 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.99929
+200 iterations
+f(b) = 2.86033
+Frob norm 2 after updating B : 2.00457
+Iteration number -------- 143  -----------
+lambda : 0
+max_diff => 3.60825e+07
+------------------------normalized = 0.0754791 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.0021
+200 iterations
+f(b) = 2.86961
+Frob norm 2 after updating B : 1.98588
+Iteration number -------- 144  -----------
+lambda : 0
+max_diff => 3.65854e+07
+------------------------normalized = 0.0747753 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.98523
+200 iterations
+f(b) = 2.86054
+Frob norm 2 after updating B : 2.00901
+Iteration number -------- 145  -----------
+lambda : 0
+max_diff => 3.74762e+07
+------------------------normalized = 0.0756463 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.00648
+200 iterations
+f(b) = 2.86061
+Frob norm 2 after updating B : 1.99959
+Iteration number -------- 146  -----------
+lambda : 0
+max_diff => 3.81994e+07
+------------------------normalized = 0.0752915 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.99768
+200 iterations
+f(b) = 2.86199
+Frob norm 2 after updating B : 1.99594
+Iteration number -------- 147  -----------
+lambda : 0
+max_diff => 3.88688e+07
+------------------------normalized = 0.075154 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.9944
+200 iterations
+f(b) = 2.86155
+Frob norm 2 after updating B : 1.99499
+Iteration number -------- 148  -----------
+lambda : 0
+max_diff => 3.96247e+07
+------------------------normalized = 0.0751184 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.99369
+200 iterations
+f(b) = 2.86221
+Frob norm 2 after updating B : 2.01807
+Iteration number -------- 149  -----------
+lambda : 0
+max_diff => 4.05645e+07
+------------------------normalized = 0.0759875 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.01491
+200 iterations
+f(b) = 2.86198
+Frob norm 2 after updating B : 2.01293
+Iteration number -------- 150  -----------
+lambda : 0
+max_diff => 4.14633e+07
+------------------------normalized = 0.0757936 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.01007
+200 iterations
+f(b) = 2.86694
+Frob norm 2 after updating B : 1.9892
+Iteration number -------- 151  -----------
+lambda : 0
+max_diff => 4.20448e+07
+------------------------normalized = 0.0749001 ----------------
+performed mixing
+Frob norm 1 after updating U: 1.98828
+200 iterations
+f(b) = 2.86181
+Frob norm 2 after updating B : 2.008
+Iteration number -------- 152  -----------
+lambda : 0
+max_diff => 4.28128e+07
+------------------------normalized = 0.0756081 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.00587
+200 iterations
+f(b) = 2.86086
+Frob norm 2 after updating B : 2.0065
+Iteration number -------- 153  -----------
+lambda : 0
+max_diff => 4.3757e+07
+------------------------normalized = 0.0755515 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.00441
+200 iterations
+f(b) = 2.86119
+Frob norm 2 after updating B : 2.00793
+Iteration number -------- 154  -----------
+lambda : 0
+max_diff => 4.46257e+07
+------------------------normalized = 0.0756056 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.00581
+200 iterations
+f(b) = 2.86206
+Frob norm 2 after updating B : 2.02075
+Iteration number -------- 155  -----------
+lambda : 0
+max_diff => 4.55556e+07
+------------------------normalized = 0.0760882 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.01762
+200 iterations
+f(b) = 2.86679
+Frob norm 2 after updating B : 2.00595
+Iteration number -------- 156  -----------
+lambda : 0
+max_diff => 4.62436e+07
+------------------------normalized = 0.0755309 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.00435
+200 iterations
+f(b) = 2.86342
+Frob norm 2 after updating B : 2.01431
+Iteration number -------- 157  -----------
+lambda : 0
+max_diff => 4.71565e+07
+------------------------normalized = 0.0758459 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.0119
+200 iterations
+f(b) = 2.86241
+Frob norm 2 after updating B : 2.01102
+Iteration number -------- 158  -----------
+lambda : 0
+max_diff => 4.80486e+07
+------------------------normalized = 0.075722 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.0091
+200 iterations
+f(b) = 2.86948
+Frob norm 2 after updating B : 2.00493
+Iteration number -------- 159  -----------
+lambda : 0
+max_diff => 4.87061e+07
+------------------------normalized = 0.0754924 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.00369
+200 iterations
+f(b) = 2.86475
+Frob norm 2 after updating B : 2.00311
+Iteration number -------- 160  -----------
+lambda : 0
+max_diff => 4.95342e+07
+------------------------normalized = 0.0754241 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.00199
+200 iterations
+f(b) = 2.86476
+Frob norm 2 after updating B : 2.02651
+Iteration number -------- 161  -----------
+lambda : 0
+max_diff => 5.06466e+07
+------------------------normalized = 0.076305 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.02356
+200 iterations
+f(b) = 2.86711
+Frob norm 2 after updating B : 2.0104
+Iteration number -------- 162  -----------
+lambda : 0
+max_diff => 5.13939e+07
+------------------------normalized = 0.0756987 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.00879
+200 iterations
+f(b) = 2.86787
+Frob norm 2 after updating B : 2.03649
+Iteration number -------- 163  -----------
+lambda : 0
+max_diff => 5.24126e+07
+------------------------normalized = 0.0766809 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.03271
+200 iterations
+f(b) = 2.86454
+Frob norm 2 after updating B : 2.01286
+Iteration number -------- 164  -----------
+lambda : 0
+max_diff => 5.34898e+07
+------------------------normalized = 0.0757913 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.01091
+200 iterations
+f(b) = 2.86637
+Frob norm 2 after updating B : 2.02043
+Iteration number -------- 165  -----------
+lambda : 0
+max_diff => 5.46496e+07
+------------------------normalized = 0.0760763 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.01766
+200 iterations
+f(b) = 2.86647
+Frob norm 2 after updating B : 2.03894
+Iteration number -------- 166  -----------
+lambda : 0
+max_diff => 5.59397e+07
+------------------------normalized = 0.0767733 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.03519
+200 iterations
+f(b) = 2.86718
+Frob norm 2 after updating B : 2.02971
+Iteration number -------- 167  -----------
+lambda : 0
+max_diff => 5.68567e+07
+------------------------normalized = 0.0764257 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.02663
+200 iterations
+f(b) = 2.86539
+Frob norm 2 after updating B : 2.02847
+Iteration number -------- 168  -----------
+lambda : 0
+max_diff => 5.79029e+07
+------------------------normalized = 0.0763788 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.02561
+200 iterations
+f(b) = 2.86477
+Frob norm 2 after updating B : 2.01988
+Iteration number -------- 169  -----------
+lambda : 0
+max_diff => 5.89155e+07
+------------------------normalized = 0.0760554 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.01775
+200 iterations
+f(b) = 2.86909
+Frob norm 2 after updating B : 2.04948
+Iteration number -------- 170  -----------
+lambda : 0
+max_diff => 6.01286e+07
+------------------------normalized = 0.0771702 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.04508
+200 iterations
+f(b) = 2.868
+Frob norm 2 after updating B : 2.03674
+Iteration number -------- 171  -----------
+lambda : 0
+max_diff => 6.11855e+07
+------------------------normalized = 0.0766904 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.03358
+200 iterations
+f(b) = 2.86732
+Frob norm 2 after updating B : 2.04013
+Iteration number -------- 172  -----------
+lambda : 0
+max_diff => 6.23495e+07
+------------------------normalized = 0.076818 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.03679
+200 iterations
+f(b) = 2.86815
+Frob norm 2 after updating B : 2.02516
+Iteration number -------- 173  -----------
+lambda : 0
+max_diff => 6.33538e+07
+------------------------normalized = 0.0762543 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.02294
+200 iterations
+f(b) = 2.87093
+Frob norm 2 after updating B : 2.01669
+Iteration number -------- 174  -----------
+lambda : 0
+max_diff => 6.43402e+07
+------------------------normalized = 0.0759354 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.01541
+200 iterations
+f(b) = 2.86706
+Frob norm 2 after updating B : 2.02444
+Iteration number -------- 175  -----------
+lambda : 0
+max_diff => 6.54096e+07
+------------------------normalized = 0.0762271 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.02259
+200 iterations
+f(b) = 2.86707
+Frob norm 2 after updating B : 2.02677
+Iteration number -------- 176  -----------
+lambda : 0
+max_diff => 6.6562e+07
+------------------------normalized = 0.076315 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.02478
+200 iterations
+f(b) = 2.86683
+Frob norm 2 after updating B : 2.03497
+Iteration number -------- 177  -----------
+lambda : 0
+max_diff => 6.7791e+07
+------------------------normalized = 0.0766238 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.03237
+200 iterations
+f(b) = 2.86946
+Frob norm 2 after updating B : 2.02728
+Iteration number -------- 178  -----------
+lambda : 0
+max_diff => 6.93187e+07
+------------------------normalized = 0.0763343 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.02511
+200 iterations
+f(b) = 2.86743
+Frob norm 2 after updating B : 2.03142
+Iteration number -------- 179  -----------
+lambda : 0
+max_diff => 7.06289e+07
+------------------------normalized = 0.0764899 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.02913
+200 iterations
+f(b) = 2.87473
+Frob norm 2 after updating B : 2.01965
+Iteration number -------- 180  -----------
+lambda : 0
+max_diff => 7.15144e+07
+------------------------normalized = 0.076047 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.01834
+200 iterations
+f(b) = 2.87067
+Frob norm 2 after updating B : 2.05037
+Iteration number -------- 181  -----------
+lambda : 0
+max_diff => 7.30217e+07
+------------------------normalized = 0.0772037 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.04697
+200 iterations
+f(b) = 2.87423
+Frob norm 2 after updating B : 2.02774
+Iteration number -------- 182  -----------
+lambda : 0
+max_diff => 7.4033e+07
+------------------------normalized = 0.0763515 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.02583
+200 iterations
+f(b) = 2.87027
+Frob norm 2 after updating B : 2.05176
+Iteration number -------- 183  -----------
+lambda : 0
+max_diff => 7.57163e+07
+------------------------normalized = 0.077256 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.04836
+200 iterations
+f(b) = 2.88008
+Frob norm 2 after updating B : 2.01803
+Iteration number -------- 184  -----------
+lambda : 0
+max_diff => 7.65288e+07
+------------------------normalized = 0.075986 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.01728
+200 iterations
+f(b) = 2.87083
+Frob norm 2 after updating B : 2.06054
+Iteration number -------- 185  -----------
+lambda : 0
+max_diff => 7.82915e+07
+------------------------normalized = 0.0775865 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.05654
+200 iterations
+f(b) = 2.87445
+Frob norm 2 after updating B : 2.03499
+Iteration number -------- 186  -----------
+lambda : 0
+max_diff => 7.96099e+07
+------------------------normalized = 0.0766244 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.03321
+200 iterations
+f(b) = 2.87189
+Frob norm 2 after updating B : 2.03191
+Iteration number -------- 187  -----------
+lambda : 0
+max_diff => 8.08195e+07
+------------------------normalized = 0.0765083 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.03019
+200 iterations
+f(b) = 2.86928
+Frob norm 2 after updating B : 2.03016
+Iteration number -------- 188  -----------
+lambda : 0
+max_diff => 8.23826e+07
+------------------------normalized = 0.0764425 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.02847
+200 iterations
+f(b) = 2.87006
+Frob norm 2 after updating B : 2.05177
+Iteration number -------- 189  -----------
+lambda : 0
+max_diff => 8.42124e+07
+------------------------normalized = 0.0772561 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.0488
+200 iterations
+f(b) = 2.87361
+Frob norm 2 after updating B : 2.0298
+Iteration number -------- 190  -----------
+lambda : 0
+max_diff => 8.55666e+07
+------------------------normalized = 0.0764291 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.02862
+200 iterations
+f(b) = 2.86922
+Frob norm 2 after updating B : 2.03938
+Iteration number -------- 191  -----------
+lambda : 0
+max_diff => 8.7077e+07
+------------------------normalized = 0.0767896 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.03724
+200 iterations
+f(b) = 2.87071
+Frob norm 2 after updating B : 2.04242
+Iteration number -------- 192  -----------
+lambda : 0
+max_diff => 8.85671e+07
+------------------------normalized = 0.0769042 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.04039
+200 iterations
+f(b) = 2.87209
+Frob norm 2 after updating B : 2.04258
+Iteration number -------- 193  -----------
+lambda : 0
+max_diff => 9.00449e+07
+------------------------normalized = 0.0769102 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.04029
+200 iterations
+f(b) = 2.87832
+Frob norm 2 after updating B : 2.03139
+Iteration number -------- 194  -----------
+lambda : 0
+max_diff => 9.11063e+07
+------------------------normalized = 0.0764888 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.03036
+200 iterations
+f(b) = 2.87238
+Frob norm 2 after updating B : 2.04135
+Iteration number -------- 195  -----------
+lambda : 0
+max_diff => 9.27307e+07
+------------------------normalized = 0.0768639 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.0394
+200 iterations
+f(b) = 2.87313
+Frob norm 2 after updating B : 2.04546
+Iteration number -------- 196  -----------
+lambda : 0
+max_diff => 9.43306e+07
+------------------------normalized = 0.0770188 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.04353
+200 iterations
+f(b) = 2.87109
+Frob norm 2 after updating B : 2.04192
+Iteration number -------- 197  -----------
+lambda : 0
+max_diff => 9.60016e+07
+------------------------normalized = 0.0768854 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.04027
+200 iterations
+f(b) = 2.87837
+Frob norm 2 after updating B : 2.03112
+Iteration number -------- 198  -----------
+lambda : 0
+max_diff => 9.71538e+07
+------------------------normalized = 0.0764789 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.03044
+200 iterations
+f(b) = 2.87452
+Frob norm 2 after updating B : 2.04686
+Iteration number -------- 199  -----------
+lambda : 0
+max_diff => 9.8992e+07
+------------------------normalized = 0.0770713 ----------------
+performed mixing
+Frob norm 1 after updating U: 2.04475
+200 iterations
+f(b) = 2.87248
+Frob norm 2 after updating B : 2.05408
+Iteration number -------- 200  -----------
+lambda : 0
+max_diff => 1.00738e+08
+------------------------normalized = 0.0773431 ----------------
